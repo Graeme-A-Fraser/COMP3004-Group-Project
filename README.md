@@ -1,5 +1,7 @@
-# COMP3004-Group-Project
+# COMP3004-Group-Project:Boondoggle
 Group project for Carleton COMP3004 fall 2016
+
+project name: Boondoggle
 
 members: 
 Graeme Fraser 1009539793 graeme.fraser.ca@gmail.com
