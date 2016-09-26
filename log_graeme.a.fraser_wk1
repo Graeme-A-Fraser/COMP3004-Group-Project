@@ -1,0 +1,15 @@
+Week 1 Dev log Graeme Fraser
+
+What I worked on:
+-learning the basics of android studio 
+-some java review and researching how to implement MVC pattern in android
+-coded the basic skeleton of MVC in android with main game, controller, panel, model, and renderer
+
+Issues:
+-underestimated the difference between standard java and android java
+-had difficulty uploading from android studio to existing github repository
+
+Working on next:
+-incorporating other members tasks into basic MVC structure
+-adding frame limiting, frame skipping to main loop
+-research how to use threads in android
