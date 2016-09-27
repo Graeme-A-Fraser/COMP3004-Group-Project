@@ -1,0 +1,15 @@
+Week 1 Dev log Telidy Ng (Hei Ting)
+
+What I worked on:
+  - Learning how to use Android Studio
+  - Researched how to implement the zoom-in and zoom-out camera option for android phones
+  - Created very simple .app to demonstrate this feature for an image
+  
+Issues:
+  - Unfamiliar with version control (when/how to commit, create new files etc.)
+  - Unable to find a way to make image fill the screen 
+  (researched and found methods like including the same image file in different pixels, or changing xml)
+  
+Working on next:
+  - Research how to make background fit for different android screens
+  - How to merge code with other member's work
