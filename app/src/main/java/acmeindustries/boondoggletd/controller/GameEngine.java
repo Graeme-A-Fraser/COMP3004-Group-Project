@@ -33,7 +33,7 @@ public class GameEngine {
     private void init() {
         bg = new Battleground();
 
-        player = new Player(BUILDING);
+        player = new Player(BATTLEGROUND);
 
         // views
         battlegroundRenderer = new BattlegroundRenderer(bg);
