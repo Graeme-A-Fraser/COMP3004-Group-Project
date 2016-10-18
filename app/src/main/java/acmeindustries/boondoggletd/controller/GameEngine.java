@@ -24,6 +24,11 @@ public class GameEngine {
     private float width;
     private float height;
 
+    private float ticks;
+    private float frames;
+    private float startTime;
+    private float totalTime;
+
     public GameEngine(float w, float h){
         this.width = w;
         this.height = h;
@@ -32,9 +37,7 @@ public class GameEngine {
 
     private void init() {
         bg = new Battleground();
-
         player = new Player(BATTLEGROUND);
-
         // views
         battlegroundRenderer = new BattlegroundRenderer(bg);
         buildRenderer = new BuildRenderer(bg);
@@ -43,6 +46,9 @@ public class GameEngine {
         // additional controllers for breaking out smaller tasks
         buildController = new BuildController(player, bg, width, height);
 
+        this.ticks = 1;
+        this.frames = 1;
+        this.startTime = System.nanoTime();
     }
 
     public void press(float x, float y){
@@ -77,9 +83,13 @@ public class GameEngine {
     }
 
     public void update(float delta){
+        this.ticks ++;
+        totalTime = (System.nanoTime() - startTime) / 1000000000f;
+        System.out.printf("FPS: %f, TICKS: %f\n",frames/totalTime,ticks/totalTime);
     }
 
     public void render(Canvas canvas){
+        this.frames++;
         switch(player.gm){
             case BATTLEGROUND:
                 battlegroundRenderer.render(canvas);
