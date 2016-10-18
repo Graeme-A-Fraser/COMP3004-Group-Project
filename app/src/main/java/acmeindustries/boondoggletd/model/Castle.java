@@ -5,45 +5,45 @@ package acmeindustries.boondoggletd.model;
  */
 
 public class Castle {
-    private int hp;
-    private int damage;
-    private int x;
-    private int y;
+    private float hp;
+    private float damage;
+    private float x;
+    private float y;
 
-    public Castle(int x, int y){
+    public Castle(float x, float y){
         this.x = x;
         this.y = y;
     }
 
-    public int getHp() {
+    public float getHp() {
         return hp;
     }
 
-    public void setHp(int hp) {
+    public void setHp(float hp) {
         this.hp = hp;
     }
 
-    public int getDamage() {
+    public float getDamage() {
         return damage;
     }
 
-    public void setDamage(int damage) {
+    public void setDamage(float damage) {
         this.damage = damage;
     }
 
-    public int getX() {
+    public float getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(float x) {
         this.x = x;
     }
 
-    public int getY() {
+    public float getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(float y) {
         this.y = y;
     }
 }

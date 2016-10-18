@@ -10,7 +10,7 @@ public class Player {
         BATTLEGROUND, BUILDING, RECRUITING
     }
 
-    private int gold;
+    private float gold;
     private Castle c;
     public GameMode gm;
 

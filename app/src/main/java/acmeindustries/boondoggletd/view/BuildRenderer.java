@@ -27,8 +27,8 @@ public class BuildRenderer implements Renderer{
         }
 
         Paint paint = new Paint();
-        int TILEWIDTH = c.getWidth()/8;
-        int TILEHEIGHT = c.getHeight()/6;
+        int TILEWIDTH = c.getWidth()/6;
+        int TILEHEIGHT = c.getHeight()/5;
 
         //bg
         c.drawRGB(100,100,100);
@@ -58,24 +58,24 @@ public class BuildRenderer implements Renderer{
 
         //btn1
         paint.setColor(Color.rgb(200,255,255));
-        c.drawRect(0, c.getHeight()/6*4, c.getWidth()/8,c.getHeight(), paint);
+        c.drawRect(0, c.getHeight()/5*4, c.getWidth()/6,c.getHeight(), paint);
         paint.setColor(Color.BLACK);
         c.drawText("Confirm", 0, c.getHeight(), paint);
 
         //btn2
         paint.setColor(Color.rgb(255,200,255));
-        c.drawRect(c.getWidth()/8, c.getHeight()/6*4, c.getWidth()/3,c.getHeight(), paint);
+        c.drawRect(c.getWidth()/6, c.getHeight()/5*4, c.getWidth()/3,c.getHeight(), paint);
         paint.setColor(Color.BLACK);
         c.drawText("Cancel", c.getWidth()/6, c.getHeight(), paint);
 
         //btn3
         paint.setColor(Color.rgb(255,255,200));
-        c.drawRect(c.getWidth()/8*2, c.getHeight()/6*4, c.getWidth()/6*3,c.getHeight(), paint);
+        c.drawRect(c.getWidth()/6*2, c.getHeight()/5*4, c.getWidth()/6*3,c.getHeight(), paint);
         paint.setColor(Color.BLACK);
         c.drawText("Upgrade", c.getWidth()/6*2, c.getHeight(), paint);
         // info text?
         paint.setColor(Color.rgb(200,200,200));
-        c.drawRect(c.getWidth()/2, c.getHeight()/6*4, c.getWidth(),c.getHeight(), paint);
+        c.drawRect(c.getWidth()/2, c.getHeight()/5*4, c.getWidth(),c.getHeight(), paint);
         paint.setColor(Color.BLACK);
         c.drawText("TEMPORARY BACK BUTTON", c.getWidth()/2, c.getHeight(), paint);
     }

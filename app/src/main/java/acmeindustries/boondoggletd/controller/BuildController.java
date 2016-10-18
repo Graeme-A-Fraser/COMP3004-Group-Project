@@ -27,9 +27,9 @@ public class BuildController {
         //System.out.printf("pressed at %f, %f - gridx: %d, gridy: %d\n", x, y, (int)((x/width)*8), (int)((y/height)*6));
 
 
-        if(bg.addPlayerTower((int)((x/width)*8), (int)((y/height)*6)) == true){
+        if(bg.addPlayerTower((int)((x/width)*6), (int)((y/height)*5)) == true){
             System.out.println("Tower created!");
-        }else if((x/width)*8>4 && (y/height)*6>4){
+        }else if((x/width)*6>3 && (y/height)*5>4){
             player.gm = BATTLEGROUND;
         }
 

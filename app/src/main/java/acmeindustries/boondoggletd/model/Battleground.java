@@ -38,6 +38,8 @@ public class Battleground {
     private List<Tower> playerTowers;
     private List<Tower> enemyTowers;
 
+    private List<Creep> enemyCreeps;
+
     public Battleground(){
 
         // set x, y to 0 and scale
@@ -81,6 +83,9 @@ public class Battleground {
         playerTowers.add((Tower)playerGrid[1][1]);
         enemyTowers.add((Tower)enemyGrid[2][4]);
         */
+
+        //create creep list
+        enemyCreeps = new ArrayList<Creep>();
     }
 
     public boolean checkPlayerGridAvailable(int gridX, int gridY){

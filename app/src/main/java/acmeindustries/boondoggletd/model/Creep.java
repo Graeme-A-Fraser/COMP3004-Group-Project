@@ -5,6 +5,13 @@ package acmeindustries.boondoggletd.model;
  */
 
 public class Creep {
-    private int hp;
-    private int damage;
+    private float x;
+    private float y;
+    private float speed;
+    private float hp;
+    private float damage;
+    private float targetX;
+    private float targetY;
+
+    public Creep(float x, float y, float speed, float hp, float damage, float targetX, float targetY){}
 }
