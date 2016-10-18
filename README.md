@@ -7,16 +7,14 @@ _it's 3:30am so this is a little rough but I wanted to get some of my thoughts o
 1. Open a console and navigate to where your AndroidStudioProjects folder is. In my case it's C:\Users\Eric\AndroidStudioProjects\
 
 2. Do a git clone of the project so the folder structure ends up like C:\Users\Eric\AndroidStudioProjects\COMP3004-Group-Project-Boondoggle
-
-```
-git pull https://github.com/Graeme-A-Fraser/COMP3004-Group-Project-Boondoggle.git
-```
+	```
+	git pull https://github.com/Graeme-A-Fraser/COMP3004-Group-Project-Boondoggle.git
+	```
 
 3. Switch to the branch I've been working on
-
-```
-git checkout v2
-```
+	```
+	git checkout v2
+	```
 
 4. Now open android studio and press file -> open
 
