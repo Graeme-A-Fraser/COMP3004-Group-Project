@@ -83,9 +83,17 @@ public class GameEngine {
     }
 
     public void update(float delta){
+
+        // tracking how many ticks per second and fps - will fluctuate because of how i reset them
         this.ticks ++;
         totalTime = (System.nanoTime() - startTime) / 1000000000f;
-        System.out.printf("FPS: %f, TICKS: %f\n",frames/totalTime,ticks/totalTime);
+        if(totalTime>3){
+            this.ticks = 0;
+            this.frames = 0;
+            startTime = System.nanoTime();
+        }else {
+            System.out.printf("FPS: %f, TICKS: %f\n", frames / totalTime, ticks / totalTime);
+        }
     }
 
     public void render(Canvas canvas){
