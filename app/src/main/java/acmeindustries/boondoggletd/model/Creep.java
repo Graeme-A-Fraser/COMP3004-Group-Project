@@ -5,4 +5,6 @@ package acmeindustries.boondoggletd.model;
  */
 
 public class Creep {
+    private int hp;
+    private int damage;
 }

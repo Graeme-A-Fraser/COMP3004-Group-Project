@@ -79,7 +79,7 @@ public class GameLoop implements Runnable{
     }
 
     public void startup(){
-        this.engine = new GameEngine();
+        this.engine = new GameEngine(gamePanel.getWidth(), gamePanel.getHeight());
         running = true;
     };
     public void shutdown(){};

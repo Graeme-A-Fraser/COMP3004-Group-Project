@@ -4,20 +4,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Eric on 10/16/2016.
+ * this is a model of the actual game's battleground - locations in relations to a 1x1 grid
  */
 
 public class Battleground {
 
-    public static final int WIDTH = 5;
-    public static final int HEIGHT = 4;
+    public static final int WIDTH = 8;
+    public static final int HEIGHT = 8;
+    public static final int GRIDWIDTH = 6;
+    public static final int GRIDHEIGHT = 4;
 
     private int x;
     private int y;
-    private int scale;
+    private float scale;
+
+    // for creeps to know where to start / finish
+    private int startX;
+    private int startY;
+    private int finishX;
+    private int finishY;
+
+    // where the grids are in relation to the rest of the battleground
+    private int playerGridX;
+    private int playerGridY;
+    private int enemyGridX;
+    private int enemyGridY;
+
+    private Castle playerCastle;
+    private Castle enemyCastle;
 
     private Object[][] playerGrid;
-    private List<Tower> towers;
+    private Object[][] enemyGrid;
+    private List<Tower> playerTowers;
+    private List<Tower> enemyTowers;
 
     public Battleground(){
 
@@ -27,27 +46,73 @@ public class Battleground {
         this.y = 0;
         this.scale = 1;
 
+        startX = 0;
+        startY = 1;
+        finishX = 10;
+        finishY = 1;
+
+        playerGridX = 2;
+        playerGridY = 4;
+        enemyGridX = 2;
+        enemyGridY = 0;
+
+        playerCastle = new Castle(0,4);
+        enemyCastle = new Castle(8,0);
+
         // init the player grid
-        playerGrid = new Object[HEIGHT][WIDTH];
-        towers = new ArrayList<Tower>();
-        for (int i = 0; i < WIDTH; i++) {
-            for (int j = 0; j < HEIGHT; j++) {
+        playerGrid = new Object[GRIDHEIGHT][GRIDWIDTH];
+        playerTowers = new ArrayList<Tower>();
+        for (int i = 0; i <GRIDWIDTH; i++) {
+            for (int j = 0; j <GRIDHEIGHT; j++) {
                 playerGrid[j][i] = null;
             }
         }
-        //fill in 2 spots with towers
-        playerGrid[1][1] = new Tower(1, 1);
-        playerGrid[3][1] = new Tower(1, 3);
-        towers.add((Tower)playerGrid[1][1]);
-        towers.add((Tower)playerGrid[3][1]);
+        // init the enemy grid
+        enemyGrid = new Object[GRIDHEIGHT][GRIDWIDTH];
+        enemyTowers = new ArrayList<Tower>();
+        for (int i = 0; i <GRIDWIDTH; i++) {
+            for (int j = 0; j <GRIDHEIGHT; j++) {
+                enemyGrid[j][i] = null;
+            }
+        }
+        /*fill in 2 spots with towers
+        playerGrid[1][1] = new Tower(1, 1, 0, 1, 1);
+        enemyGrid[2][4] = new Tower(4, 2, 0, 1, 1);
+        playerTowers.add((Tower)playerGrid[1][1]);
+        enemyTowers.add((Tower)enemyGrid[2][4]);
+        */
     }
 
+    public boolean checkPlayerGridAvailable(int gridX, int gridY){
+        if(gridX < 0 || gridX >= GRIDWIDTH){
+            return false;
+        }
+        if(gridY < 0 || gridY >= GRIDHEIGHT){
+            return false;
+        }
+        return playerGrid[gridY][gridX] == null;
+    }
+
+    // can later customize this for different types etc.
+    public boolean addPlayerTower(int gridX, int gridY){
+        if(checkPlayerGridAvailable(gridX, gridY) == false){
+            return false;
+        }
+        playerGrid[gridY][gridX] = new Tower(gridX,gridY,0,1,1);
+        playerTowers.add((Tower)playerGrid[gridY][gridX]);
+        return true;
+    }
+
+    //getters and setters
     public Object[][] getPlayerGrid() {
         return playerGrid;
     }
 
-    public List<Tower> getTowers() {
-        return towers;
+    public List<Tower> getPlayerTowers() {
+        return playerTowers;
+    }
+    public List<Tower> getEnemyTowers() {
+        return enemyTowers;
     }
 
     public int getY() {
@@ -64,5 +129,89 @@ public class Battleground {
 
     public void setX(int x) {
         this.x = x;
+    }
+
+    public float getScale() {
+        return scale;
+    }
+
+    public void setScale(float scale) {
+        this.scale = scale;
+    }
+
+    public int getStartX() {
+        return startX;
+    }
+
+    public void setStartX(int startX) {
+        this.startX = startX;
+    }
+
+    public int getStartY() {
+        return startY;
+    }
+
+    public void setStartY(int startY) {
+        this.startY = startY;
+    }
+
+    public int getFinishX() {
+        return finishX;
+    }
+
+    public void setFinishX(int finishX) {
+        this.finishX = finishX;
+    }
+
+    public int getFinishY() {
+        return finishY;
+    }
+
+    public void setFinishY(int finishY) {
+        this.finishY = finishY;
+    }
+
+    public int getPlayerGridX() {
+        return playerGridX;
+    }
+
+    public void setPlayerGridX(int playerGridX) {
+        this.playerGridX = playerGridX;
+    }
+
+    public int getPlayerGridY() {
+        return playerGridY;
+    }
+
+    public void setPlayerGridY(int playerGridY) {
+        this.playerGridY = playerGridY;
+    }
+
+    public int getEnemyGridX() {
+        return enemyGridX;
+    }
+
+    public void setEnemyGridX(int enemyGridX) {
+        this.enemyGridX = enemyGridX;
+    }
+
+    public int getEnemyGridY() {
+        return enemyGridY;
+    }
+
+    public void setEnemyGridY(int enemyGridY) {
+        this.enemyGridY = enemyGridY;
+    }
+
+    public Castle getPlayerCastle() {
+        return playerCastle;
+    }
+
+    public Castle getEnemyCastle() {
+        return enemyCastle;
+    }
+
+    public Object[][] getEnemyGrid() {
+        return enemyGrid;
     }
 }
