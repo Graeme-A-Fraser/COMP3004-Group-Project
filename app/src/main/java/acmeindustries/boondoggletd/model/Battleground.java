@@ -105,24 +105,20 @@ public class Battleground {
     }
 
     // can later customize this for different types etc.
-    public boolean addPlayerTower(int gridX, int gridY){
-        if(checkPlayerGridAvailable(gridX, gridY) == false){
-            return false;
-        }
-        playerGrid[gridY][gridX] = new Tower(gridX,gridY,0,1,1);
+    public void addPlayerTower(int gridX, int gridY){
+        playerGrid[gridY][gridX] = new Tower(gridX,gridY,20,1,1);
         playerTowers.add((Tower)playerGrid[gridY][gridX]);
-        return true;
     }
 
     //getters and setters
 
     public void addEnemyCreep(){
-        enemyCreeps.add(new Creep(enemyCastle.getX()+2,playerCastle.getY()+2,10,5,
+        enemyCreeps.add(new Creep(enemyCastle.getX()+2,playerCastle.getY()+2,10,1,
                 playerCastle.getX()+2,playerCastle.getY()+2));
     }
 
     public void addPlayerCreep(){
-        playerCreeps.add(new Creep(playerCastle.getX(),enemyCastle.getY()+2,10,5,
+        playerCreeps.add(new Creep(playerCastle.getX(),enemyCastle.getY()+2,10,1,
                 enemyCastle.getX(),enemyCastle.getY()+2));
     }
 

@@ -54,10 +54,12 @@ public class BattlegroundController {
                 c.setY(c.getY() + c.getSpeed());
             }
             if(c.getX()-c.getTargetX() >= -0.1f && c.getX()-c.getTargetX() <= 0.1f){
+                player.setHp(player.getHp()-(int)c.getDamage());
                 it.remove();
                 break;
             }
             if(c.getHp() <= 0){
+                player.setGold(player.getGold()+c.getGoldValue());
                 it.remove();
             }
         }
@@ -76,6 +78,7 @@ public class BattlegroundController {
             }
             if(c.getX()-c.getTargetX() >= -0.1f && c.getX()-c.getTargetX() <= 0.1f){
                 it.remove();
+                break;
             }
             if(c.getHp() <= 0){
                 it.remove();

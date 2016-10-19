@@ -13,6 +13,7 @@ public class Castle {
     public Castle(float x, float y){
         this.x = x;
         this.y = y;
+        this.hp = 40;
     }
 
     public float getHp() {

@@ -27,8 +27,10 @@ public class BuildController {
         //System.out.printf("pressed at %f, %f - gridx: %d, gridy: %d\n", x, y, (int)((x/width)*8), (int)((y/height)*6));
 
 
-        if(bg.addPlayerTower((int)((x/width)*6), (int)((y/height)*5)) == true){
-            //System.out.println("Tower created!");
+        if(bg.checkPlayerGridAvailable((int)((x/width)*6), (int)((y/height)*5)) == true){
+            bg.addPlayerTower((int)((x/width)*6), (int)((y/height)*5));
+            //TODO: implement this gold system correctly
+            player.setGold(player.getGold()-50);
         }else if((x/width)*6>3 && (y/height)*5>4){
             player.gm = BATTLEGROUND;
         }

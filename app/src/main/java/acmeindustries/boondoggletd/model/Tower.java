@@ -9,6 +9,7 @@ public class Tower {
     private float x;
     private float y;
     private float rotation;
+    private int cost;
     private float damage;
     private float speed; // projectile speed
     private float range; // projectile speed
@@ -17,12 +18,13 @@ public class Tower {
     private int currentLoading;
     private boolean loaded;
 
-    public Tower(float x, float y, float rotation, float damage, float speed){
+    public Tower(float x, float y, int cost, float damage, float speed){
         this.x = x;
         this.y = y;
-        this.rotation = rotation;
+        this.cost = cost;
         this.damage = damage;
         this.speed = speed;
+        this.rotation =0;
         this.range = 2f;
         this.target = null;
         this.loadTime = 24;

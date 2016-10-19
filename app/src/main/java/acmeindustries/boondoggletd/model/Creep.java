@@ -14,6 +14,7 @@ public class Creep {
     private float targetX;
     private float targetY;
     private float radius;
+    private int goldValue;
 
     public Creep(float x, float y, float hp, float damage, float targetX, float targetY){
 
@@ -26,7 +27,7 @@ public class Creep {
         this.targetY = targetY;
         this.radius = 0.25f;
         this.speed = 0.05f;
-
+        this.goldValue = 10;
     }
 
     public float getX() {
@@ -99,5 +100,13 @@ public class Creep {
 
     public void setMaxHP(float maxHP) {
         this.maxHP = maxHP;
+    }
+
+    public int getGoldValue() {
+        return goldValue;
+    }
+
+    public void setGoldValue(int goldValue) {
+        this.goldValue = goldValue;
     }
 }

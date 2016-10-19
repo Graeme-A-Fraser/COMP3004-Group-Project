@@ -40,7 +40,7 @@ public class GameEngine {
         bg = new Battleground();
         player = new Player(BATTLEGROUND);
         // views
-        battlegroundRenderer = new BattlegroundRenderer(bg);
+        battlegroundRenderer = new BattlegroundRenderer(bg, player);
         buildRenderer = new BuildRenderer(bg);
         recruitRenderer = new RecruitRenderer();
 

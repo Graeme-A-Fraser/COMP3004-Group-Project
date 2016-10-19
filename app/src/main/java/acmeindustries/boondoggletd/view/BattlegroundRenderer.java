@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import acmeindustries.boondoggletd.model.Battleground;
 import acmeindustries.boondoggletd.model.Bullet;
 import acmeindustries.boondoggletd.model.Creep;
+import acmeindustries.boondoggletd.model.Player;
 import acmeindustries.boondoggletd.model.Tower;
 
 /**
@@ -15,12 +16,14 @@ import acmeindustries.boondoggletd.model.Tower;
 
 public class BattlegroundRenderer implements Renderer{
 
+    private Player player;
     private Battleground bg;
     private int TILEWIDTH;
     private int TILEHEIGHT;
 
-    public BattlegroundRenderer(Battleground bg){
+    public BattlegroundRenderer(Battleground bg, Player player){
         this.bg = bg;
+        this.player = player;
     }
 
     @Override
@@ -124,24 +127,25 @@ public class BattlegroundRenderer implements Renderer{
         paint.setColor(Color.rgb(200,255,255));
         c.drawRect(0, c.getHeight()/10*8, c.getWidth()/10*2,c.getHeight(), paint);
         paint.setColor(Color.BLACK);
-        c.drawText("Build", 0, c.getHeight(), paint);
+        c.drawText("Build", 0, c.getHeight()/40*37, paint);
 
         //btn2
         paint.setColor(Color.rgb(255,200,255));
         c.drawRect(c.getWidth()/10*2, c.getHeight()/10*8, c.getWidth()/10*4,c.getHeight(), paint);
         paint.setColor(Color.BLACK);
-        c.drawText("Recruit", c.getWidth()/10*2, c.getHeight(), paint);
+        c.drawText("Recruit", c.getWidth()/10*2, c.getHeight()/40*37, paint);
 
         //btn3
         paint.setColor(Color.rgb(255,255,200));
         c.drawRect(c.getWidth()/10*4, c.getHeight()/10*8, c.getWidth()/10*6,c.getHeight(), paint);
         paint.setColor(Color.BLACK);
-        c.drawText("Start Wave", c.getWidth()/10*4, c.getHeight(), paint);
+        c.drawText("Start Wave", c.getWidth()/10*4, c.getHeight()/40*37, paint);
         // info text?
-        paint.setColor(Color.rgb(200,200,200));
-        c.drawRect(c.getWidth()/10*6, c.getHeight()/10*8, c.getWidth(),c.getHeight(), paint);
         paint.setColor(Color.BLACK);
-        c.drawText("Maybe gold, HP, possibly time", c.getWidth()/10*6, c.getHeight(), paint);
+        c.drawRect(c.getWidth()/10*6, c.getHeight()/10*8, c.getWidth(),c.getHeight(), paint);
+        paint.setColor(Color.YELLOW);
+        c.drawText(String.format("Gold: %d", player.getGold()), c.getWidth()/10*6, c.getHeight()/20*18, paint);
+        c.drawText(String.format("Lives: %d", player.getHp()), c.getWidth()/10*6, c.getHeight()/20*19, paint);
 
         //line for top of ui
         paint.setColor(Color.BLACK);
