@@ -34,7 +34,7 @@ public class BattlegroundController {
         if(spawnTimer<=0){
             bg.addEnemyCreep();
             bg.addPlayerCreep();
-            spawnTimer = 96;
+            spawnTimer = 72;
         }
 
 
@@ -54,6 +54,10 @@ public class BattlegroundController {
                 c.setY(c.getY() + c.getSpeed());
             }
             if(c.getX()-c.getTargetX() >= -0.1f && c.getX()-c.getTargetX() <= 0.1f){
+                it.remove();
+                break;
+            }
+            if(c.getHp() <= 0){
                 it.remove();
             }
         }
@@ -101,7 +105,6 @@ public class BattlegroundController {
                     bg.getBullets().add(new Bullet(t.getTarget(),t.getX()+0.5f+bg.getPlayerGridX(),
                             t.getY()+0.5f+bg.getPlayerGridY(),1,0.25f));
                     t.setLoaded(false);
-                    System.out.println("SHOTS FIRED");
                 }
             }
             if(!t.isLoaded()){
@@ -117,12 +120,17 @@ public class BattlegroundController {
         Iterator<Bullet> itBullet = bg.getBullets().iterator();
         while(itBullet.hasNext()){
             Bullet b = itBullet.next();
+            if(b.getTarget().getHp()<=0){
+                itBullet.remove();
+                break;
+            }
             float xdist = b.getTarget().getX() - b.getX();
             float ydist = b.getTarget().getY() - b.getY();
             float angle = (float)Math.atan2(ydist, xdist);
             b.setX(b.getX() + (float)Math.cos(angle)*b.getSpeed());
             b.setY(b.getY() + (float)Math.sin(angle)*b.getSpeed());
-            if(xdist + ydist <= 0.2f && xdist+ydist>=-0.2f){
+            if(xdist + ydist <= 0.1f && xdist+ydist>=-0.1f){
+                b.getTarget().setHp(b.getTarget().getHp()-b.getDamage());
                 itBullet.remove();
             }
         }

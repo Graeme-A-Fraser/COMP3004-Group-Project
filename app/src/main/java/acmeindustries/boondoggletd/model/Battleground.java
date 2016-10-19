@@ -118,12 +118,12 @@ public class Battleground {
 
     public void addEnemyCreep(){
         enemyCreeps.add(new Creep(enemyCastle.getX()+2,playerCastle.getY()+2,10,5,
-                playerCastle.getX(),playerCastle.getY()+2));
+                playerCastle.getX()+2,playerCastle.getY()+2));
     }
 
     public void addPlayerCreep(){
         playerCreeps.add(new Creep(playerCastle.getX(),enemyCastle.getY()+2,10,5,
-                enemyCastle.getX()+2,enemyCastle.getY()+2));
+                enemyCastle.getX(),enemyCastle.getY()+2));
     }
 
     public List<Creep> getEnemyCreeps() {

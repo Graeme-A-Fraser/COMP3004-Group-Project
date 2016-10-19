@@ -28,7 +28,7 @@ public class BuildController {
 
 
         if(bg.addPlayerTower((int)((x/width)*6), (int)((y/height)*5)) == true){
-            System.out.println("Tower created!");
+            //System.out.println("Tower created!");
         }else if((x/width)*6>3 && (y/height)*5>4){
             player.gm = BATTLEGROUND;
         }

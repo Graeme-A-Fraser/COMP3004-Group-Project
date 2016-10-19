@@ -36,7 +36,7 @@ public class BattlegroundRenderer implements Renderer{
         //bg
         c.drawRGB(100,100,100);
 
-        // drawing player grid
+        /* drawing player grid
         paint.setColor(Color.GREEN);
         paint.setStrokeWidth(5);
         for (int i = 0; i <= 6; i++) {
@@ -57,6 +57,9 @@ public class BattlegroundRenderer implements Renderer{
             c.drawLine(bg.getX()+ TILEWIDTH*bg.getEnemyGridX(),bg.getY() + TILEHEIGHT*i + TILEHEIGHT*bg.getEnemyGridY(),
                     bg.getX() +TILEWIDTH*bg.getEnemyGridX()+ TILEWIDTH*6,bg.getY() + TILEHEIGHT*i + TILEHEIGHT*bg.getEnemyGridY(),paint);
         }
+        */
+
+
 
         // player towers
         paint.setColor(Color.rgb(255,203,5));
@@ -74,19 +77,25 @@ public class BattlegroundRenderer implements Renderer{
         }
 
         //player castle
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.GREEN);
         c.drawRect(bg.getPlayerCastle().getX()*TILEWIDTH, bg.getPlayerCastle().getY()*TILEHEIGHT,
                 bg.getPlayerCastle().getX()*TILEWIDTH + 2*TILEWIDTH, bg.getPlayerCastle().getY()*TILEHEIGHT+4*TILEHEIGHT, paint);
 
         //enemy castle
-        paint.setColor(Color.BLACK);
+        paint.setColor(Color.RED);
         c.drawRect(bg.getEnemyCastle().getX()*TILEWIDTH, bg.getEnemyCastle().getY()*TILEHEIGHT,
                 bg.getEnemyCastle().getX()*TILEWIDTH + 2*TILEWIDTH, bg.getEnemyCastle().getY()*TILEHEIGHT+4*TILEHEIGHT, paint);
+        // line between bases
+        paint.setColor(Color.BLACK);
+        paint.setStrokeWidth(5);
+        c.drawLine(bg.getPlayerCastle().getX()*TILEWIDTH, bg.getPlayerCastle().getY()*TILEHEIGHT, (bg.getEnemyCastle().getX()+2)*TILEWIDTH, bg.getPlayerCastle().getY()*TILEHEIGHT, paint);
 
-        //enemycreeps
-        paint.setColor(Color.RED);
+        //enemy creeps
         for (Creep creep:bg.getEnemyCreeps()
                 ) {
+            paint.setColor(Color.GREEN);
+            c.drawRect(creep.getX()*TILEWIDTH - TILEWIDTH/6,creep.getY()*TILEHEIGHT - TILEHEIGHT/4-14, creep.getX()*TILEWIDTH - TILEWIDTH/6 + TILEWIDTH*(creep.getHp()/creep.getMaxHP())/3, creep.getY()*TILEHEIGHT - TILEHEIGHT/4-8, paint);
+            paint.setColor(Color.RED);
             c.drawCircle(creep.getX()*TILEWIDTH, creep.getY()*TILEHEIGHT,
                     creep.getRadius()*TILEHEIGHT, paint);
         }
@@ -94,6 +103,7 @@ public class BattlegroundRenderer implements Renderer{
         paint.setColor(Color.GREEN);
         for (Creep creep:bg.getPlayerCreeps()
                 ) {
+            c.drawRect(creep.getX()*TILEWIDTH - TILEWIDTH/6,creep.getY()*TILEHEIGHT - TILEHEIGHT/4-14, creep.getX()*TILEWIDTH - TILEWIDTH/6 + TILEWIDTH*(creep.getHp()/creep.getMaxHP())/3, creep.getY()*TILEHEIGHT - TILEHEIGHT/4-8, paint);
             c.drawCircle(creep.getX()*TILEWIDTH, creep.getY()*TILEHEIGHT,
                     creep.getRadius()*TILEHEIGHT, paint);
         }
@@ -106,6 +116,7 @@ public class BattlegroundRenderer implements Renderer{
                     0.1f*TILEHEIGHT, paint);
         }
         //action bar/gui TODO: maybe seperate this into its own class?
+
 
         paint.setTextSize(c.getHeight()/20);
 
@@ -131,5 +142,12 @@ public class BattlegroundRenderer implements Renderer{
         c.drawRect(c.getWidth()/10*6, c.getHeight()/10*8, c.getWidth(),c.getHeight(), paint);
         paint.setColor(Color.BLACK);
         c.drawText("Maybe gold, HP, possibly time", c.getWidth()/10*6, c.getHeight(), paint);
+
+        //line for top of ui
+        paint.setColor(Color.BLACK);
+        paint.setStrokeWidth(5);
+        c.drawLine(0,TILEHEIGHT*8, TILEWIDTH*10,TILEHEIGHT*8, paint);
+        //line for right side
+        c.drawRect(TILEWIDTH*10,0,TILEWIDTH*11,TILEHEIGHT*10, paint);
     }
 }

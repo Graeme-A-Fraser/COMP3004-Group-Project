@@ -9,6 +9,7 @@ public class Creep {
     private float y;
     private float speed;
     private float hp;
+    private float maxHP;
     private float damage;
     private float targetX;
     private float targetY;
@@ -19,6 +20,7 @@ public class Creep {
         this.x = x;
         this.y = y;
         this.hp = hp;
+        this.maxHP = hp;
         this.damage = damage;
         this.targetX = targetX;
         this.targetY = targetY;
@@ -89,5 +91,13 @@ public class Creep {
 
     public void setRadius(float radius) {
         this.radius = radius;
+    }
+
+    public float getMaxHP() {
+        return maxHP;
+    }
+
+    public void setMaxHP(float maxHP) {
+        this.maxHP = maxHP;
     }
 }
