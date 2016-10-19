@@ -34,4 +34,7 @@ public class BuildController {
         }
 
     }
+
+
+    public void update(float delta){}
 }

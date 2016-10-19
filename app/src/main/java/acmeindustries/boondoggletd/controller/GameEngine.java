@@ -18,6 +18,7 @@ public class GameEngine {
     private BuildRenderer buildRenderer;
     private RecruitRenderer recruitRenderer;
 
+    private BattlegroundController battlegroundController;
     private BuildController buildController;
 
     private Battleground bg;
@@ -44,6 +45,7 @@ public class GameEngine {
         recruitRenderer = new RecruitRenderer();
 
         // additional controllers for breaking out smaller tasks
+        battlegroundController = new BattlegroundController(player, bg, width, height);
         buildController = new BuildController(player, bg, width, height);
 
         this.ticks = 1;
@@ -83,11 +85,21 @@ public class GameEngine {
     }
 
     public void update(float delta){
-
+        switch(player.gm){
+            case BATTLEGROUND:
+                battlegroundController.update(delta);
+                break;
+            case BUILDING:
+                buildController.update(delta);
+                break;
+            case RECRUITING:
+                battlegroundController.update(delta);
+                break;
+        }
         // tracking how many ticks per second and fps - will fluctuate because of how i reset them
         this.ticks ++;
         totalTime = (System.nanoTime() - startTime) / 1000000000f;
-        if(totalTime>3){
+        if(totalTime>10){
             this.ticks = 0;
             this.frames = 0;
             startTime = System.nanoTime();

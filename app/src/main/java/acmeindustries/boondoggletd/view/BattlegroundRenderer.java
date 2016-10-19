@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import acmeindustries.boondoggletd.model.Battleground;
+import acmeindustries.boondoggletd.model.Creep;
 import acmeindustries.boondoggletd.model.Tower;
 
 /**
@@ -80,6 +81,21 @@ public class BattlegroundRenderer implements Renderer{
         paint.setColor(Color.BLACK);
         c.drawRect(bg.getEnemyCastle().getX()*TILEWIDTH, bg.getEnemyCastle().getY()*TILEHEIGHT,
                 bg.getEnemyCastle().getX()*TILEWIDTH + 2*TILEWIDTH, bg.getEnemyCastle().getY()*TILEHEIGHT+4*TILEHEIGHT, paint);
+
+        //enemycreeps
+        paint.setColor(Color.RED);
+        for (Creep creep:bg.getEnemyCreeps()
+                ) {
+            c.drawCircle(creep.getX()*TILEWIDTH, creep.getY()*TILEHEIGHT,
+                    creep.getRadius()*TILEHEIGHT, paint);
+        }
+        //player creeps
+        paint.setColor(Color.GREEN);
+        for (Creep creep:bg.getPlayerCreeps()
+                ) {
+            c.drawCircle(creep.getX()*TILEWIDTH, creep.getY()*TILEHEIGHT,
+                    creep.getRadius()*TILEHEIGHT, paint);
+        }
 
         //action bar/gui TODO: maybe seperate this into its own class?
 
