@@ -29,9 +29,9 @@ Ryan David 100946431 RyanDavid@cmail.carleton.ca
 * Rough prototype
 * Game loop, frame limiting and skipping
 * Model, View, Controller Heirarchy
-* Different views (currently just an overall view and the build view)
-z Grid (my task woo)
-* Buidling towers
+* Different views
+* Grid
+* Building towers
 * Creeps with hp bars
 
 ## Todo
