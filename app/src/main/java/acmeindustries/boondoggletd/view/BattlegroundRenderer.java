@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import acmeindustries.boondoggletd.model.Battleground;
+import acmeindustries.boondoggletd.model.Bullet;
 import acmeindustries.boondoggletd.model.Creep;
 import acmeindustries.boondoggletd.model.Tower;
 
@@ -97,6 +98,13 @@ public class BattlegroundRenderer implements Renderer{
                     creep.getRadius()*TILEHEIGHT, paint);
         }
 
+        //bullets
+        paint.setColor(Color.MAGENTA);
+        for (Bullet b:bg.getBullets()
+                ) {
+            c.drawCircle(b.getX()*TILEWIDTH,b.getY()*TILEHEIGHT,
+                    0.1f*TILEHEIGHT, paint);
+        }
         //action bar/gui TODO: maybe seperate this into its own class?
 
         paint.setTextSize(c.getHeight()/20);

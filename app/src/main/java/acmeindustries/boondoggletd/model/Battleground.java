@@ -41,6 +41,8 @@ public class Battleground {
     private List<Creep> enemyCreeps;
     private List<Creep> playerCreeps;
 
+    private List<Bullet> bullets;
+
     public Battleground(){
 
         // set x, y to 0 and scale
@@ -88,6 +90,8 @@ public class Battleground {
         //create creep list
         enemyCreeps = new ArrayList<Creep>();
         playerCreeps = new ArrayList<Creep>();
+
+        bullets = new ArrayList<Bullet>();
     }
 
     public boolean checkPlayerGridAvailable(int gridX, int gridY){
@@ -113,11 +117,13 @@ public class Battleground {
     //getters and setters
 
     public void addEnemyCreep(){
-        enemyCreeps.add(new Creep(enemyCastle.getX()+2,playerCastle.getY()+2,10,5,playerCastle.getX(),playerCastle.getY()+2));
+        enemyCreeps.add(new Creep(enemyCastle.getX()+2,playerCastle.getY()+2,10,5,
+                playerCastle.getX(),playerCastle.getY()+2));
     }
 
     public void addPlayerCreep(){
-        playerCreeps.add(new Creep(playerCastle.getX(),enemyCastle.getY()+2,10,5,enemyCastle.getX()+2,enemyCastle.getY()+2));
+        playerCreeps.add(new Creep(playerCastle.getX(),enemyCastle.getY()+2,10,5,
+                enemyCastle.getX()+2,enemyCastle.getY()+2));
     }
 
     public List<Creep> getEnemyCreeps() {
@@ -236,5 +242,9 @@ public class Battleground {
 
     public Object[][] getEnemyGrid() {
         return enemyGrid;
+    }
+
+    public List<Bullet> getBullets() {
+        return bullets;
     }
 }

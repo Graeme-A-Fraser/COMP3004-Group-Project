@@ -96,7 +96,7 @@ public class GameEngine {
                 battlegroundController.update(delta);
                 break;
         }
-        // tracking how many ticks per second and fps - will fluctuate because of how i reset them
+        /* tracking how many ticks per second and fps - will fluctuate because of how i reset them
         this.ticks ++;
         totalTime = (System.nanoTime() - startTime) / 1000000000f;
         if(totalTime>10){
@@ -106,6 +106,7 @@ public class GameEngine {
         }else {
             System.out.printf("FPS: %f, TICKS: %f\n", frames / totalTime, ticks / totalTime);
         }
+        */
     }
 
     public void render(Canvas canvas){

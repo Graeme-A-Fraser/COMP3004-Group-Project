@@ -11,6 +11,11 @@ public class Tower {
     private float rotation;
     private float damage;
     private float speed; // projectile speed
+    private float range; // projectile speed
+    private Creep target;
+    private int loadTime;
+    private int currentLoading;
+    private boolean loaded;
 
     public Tower(float x, float y, float rotation, float damage, float speed){
         this.x = x;
@@ -18,6 +23,11 @@ public class Tower {
         this.rotation = rotation;
         this.damage = damage;
         this.speed = speed;
+        this.range = 2f;
+        this.target = null;
+        this.loadTime = 24;
+        this.currentLoading = 0;
+        this.loaded = true;
     }
 
     public float getX() {
@@ -60,4 +70,43 @@ public class Tower {
         this.speed = speed;
     }
 
+    public float getRange() {
+        return range;
+    }
+
+    public void setRange(float range) {
+        this.range = range;
+    }
+
+    public Creep getTarget() {
+        return target;
+    }
+
+    public void setTarget(Creep target) {
+        this.target = target;
+    }
+
+    public int getLoadTime() {
+        return loadTime;
+    }
+
+    public void setLoadTime(int loadTime) {
+        this.loadTime = loadTime;
+    }
+
+    public int getCurrentLoading() {
+        return currentLoading;
+    }
+
+    public void setCurrentLoading(int currentLoading) {
+        this.currentLoading = currentLoading;
+    }
+
+    public boolean isLoaded() {
+        return loaded;
+    }
+
+    public void setLoaded(boolean loaded) {
+        this.loaded = loaded;
+    }
 }
