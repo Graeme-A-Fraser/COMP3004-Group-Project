@@ -18,16 +18,11 @@ Ryan David 100946431 RyanDavid@cmail.carleton.ca
 	git pull https://github.com/Graeme-A-Fraser/COMP3004-Group-Project-Boondoggle.git
 	```
 
-3. Switch to the branch I've been working on
-	```
-	git checkout v2
-	```
+3. Now open android studio and press file -> open
 
-4. Now open android studio and press file -> open
+4. You should be able to open COMP3004-Group-Project-Boondoggle directly
 
-5. You should be able to open COMP3004-Group-Project-Boondoggle directly
-
-6. Now test it out by pressing run
+5. Now test it out by pressing run
 
 ## What's done?
 
