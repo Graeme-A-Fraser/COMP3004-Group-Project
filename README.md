@@ -1,7 +1,5 @@
 # Boondoggle V2
 
-_it's 3:30am so this is a little rough but I wanted to get some of my thoughts out there._
-
 ## How-to
 
 1. Open a console and navigate to where your AndroidStudioProjects folder is. In my case it's C:\Users\Eric\AndroidStudioProjects\
@@ -29,12 +27,15 @@ _it's 3:30am so this is a little rough but I wanted to get some of my thoughts o
 * Model, View, Controller Heirarchy
 * Different views (currently just an overall view and the build view)
 * Grid (my task woo)
-* Buidling towers - very primitive just shows a box on the grid
+* Buidling towers
+* Creeps with hp bars
 
 ## Todo
 
 * Refactor/Cleanup code - a little messy at the moment but that's what prototypes are supposed to be
 * Need to discuss design decisions (how many towers, creeps, what the building section should look like)
 * Adding images/sprites
-* Creep spawning system, pathfinding, dank memes
-* So much more
+* Properly implement gold system, live system
+* Create recruiting 'view'
+* Possibly a more detailed build 'view'... maybe have the grid so when you click on it if there is no tower taking you to a page to select a brand new tower, and if ones already there to upgrade a tower
+* Tons more
