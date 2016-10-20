@@ -42,7 +42,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public GamePanel(Context context) {
         super(context);
         getHolder().addCallback(this);
-        gameLoop = new GameLoop(getHolder(), this, 1 / 24);
+        gameLoop = new GameLoop(getHolder(), this, 1 / 24f); //THIS NEEDS TO BE A FLOAT!
         gameThread = new Thread(gameLoop);
         gestureDetector = new GestureDetector(context, new Gesture());
         matrix = new Matrix();
