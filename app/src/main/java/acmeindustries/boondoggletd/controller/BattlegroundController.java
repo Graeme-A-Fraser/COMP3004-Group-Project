@@ -1,5 +1,7 @@
 package acmeindustries.boondoggletd.controller;
 
+import android.graphics.Canvas;
+
 import java.util.Iterator;
 
 import acmeindustries.boondoggletd.model.Battleground;
@@ -7,6 +9,9 @@ import acmeindustries.boondoggletd.model.Bullet;
 import acmeindustries.boondoggletd.model.Creep;
 import acmeindustries.boondoggletd.model.Player;
 import acmeindustries.boondoggletd.model.Tower;
+import acmeindustries.boondoggletd.view.BattlegroundRenderer;
+
+import static acmeindustries.boondoggletd.model.Player.GameMode.BUILDING;
 
 /**
  * Created by Eric on 10/18/2016.
@@ -16,9 +21,11 @@ public class BattlegroundController {
 
     private Player player;
     private Battleground bg;
+    private BattlegroundRenderer battlegroundRenderer;
     private float width, height;
 
     private int spawnTimer;
+    private boolean spawning;
 
 
     public BattlegroundController(Player p, Battleground bg,float width,float height){
@@ -26,15 +33,19 @@ public class BattlegroundController {
         this.bg = bg;
         this.width = width;
         this.height = height;
-        this.spawnTimer = 0;
+        this.spawnTimer = bg.TPS*2;
+        this.spawning = false;
+        this.battlegroundRenderer = new BattlegroundRenderer(bg, player);
     }
 
     public void update(float delta){
-        spawnTimer--;
+        if(spawning) {
+            spawnTimer--;
+        }
         if(spawnTimer<=0){
-            bg.addEnemyCreep();
-            bg.addPlayerCreep();
-            spawnTimer = 72;
+            bg.addEnemyCreep(10, 5);
+            bg.addPlayerCreep(10, 5);
+            spawnTimer = bg.TPS*2;
         }
 
 
@@ -141,8 +152,19 @@ public class BattlegroundController {
     }
 
     public void press(float x, float y){
+        if((x/width)*10<2 && (y/height)*10>8){
+            player.gm = BUILDING;
+        }
+        if((x/width)*10<2 && (y/height)*10>8){
+            player.gm = BUILDING;
+        }
+        if((x/width)*10>=4 && (x/width)*10<6 && (y/height)*10>8){
+            spawning=true;
+        }
+    }
 
-
+    public void render(Canvas canvas){
+        this.battlegroundRenderer.render(canvas);
     }
 
 }

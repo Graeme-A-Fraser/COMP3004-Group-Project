@@ -6,10 +6,10 @@ package acmeindustries.boondoggletd.model;
 
 public class Tower {
 
+    private float TPS;
     private float x;
     private float y;
     private float rotation;
-    private int cost;
     private float damage;
     private float speed; // projectile speed
     private float range; // projectile speed
@@ -18,16 +18,16 @@ public class Tower {
     private int currentLoading;
     private boolean loaded;
 
-    public Tower(float x, float y, int cost, float damage, float speed){
+    public Tower(float TPS, float x, float y, int cost, float damage, float speed){
+        this.TPS = TPS;
         this.x = x;
         this.y = y;
-        this.cost = cost;
         this.damage = damage;
         this.speed = speed;
         this.rotation =0;
         this.range = 2f;
         this.target = null;
-        this.loadTime = 24;
+        this.loadTime = (int)TPS;
         this.currentLoading = 0;
         this.loaded = true;
     }
@@ -36,48 +36,12 @@ public class Tower {
         return x;
     }
 
-    public void setX(float x) {
-        this.x = x;
-    }
-
     public float getY() {
         return y;
     }
 
-    public void setY(float y) {
-        this.y = y;
-    }
-
-    public float getRotation() {
-        return rotation;
-    }
-
-    public void setRotation(float rotation) {
-        this.rotation = rotation;
-    }
-
-    public float getDamage() {
-        return damage;
-    }
-
-    public void setDamage(float damage) {
-        this.damage = damage;
-    }
-
-    public float getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(float speed) {
-        this.speed = speed;
-    }
-
     public float getRange() {
         return range;
-    }
-
-    public void setRange(float range) {
-        this.range = range;
     }
 
     public Creep getTarget() {
@@ -90,10 +54,6 @@ public class Tower {
 
     public int getLoadTime() {
         return loadTime;
-    }
-
-    public void setLoadTime(int loadTime) {
-        this.loadTime = loadTime;
     }
 
     public int getCurrentLoading() {

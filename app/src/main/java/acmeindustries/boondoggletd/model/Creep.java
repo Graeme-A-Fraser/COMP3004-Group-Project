@@ -50,10 +50,6 @@ public class Creep {
         return speed;
     }
 
-    public void setSpeed(float speed) {
-        this.speed = speed;
-    }
-
     public float getHp() {
         return hp;
     }
@@ -66,47 +62,24 @@ public class Creep {
         return damage;
     }
 
-    public void setDamage(float damage) {
-        this.damage = damage;
-    }
-
     public float getTargetX() {
         return targetX;
-    }
-
-    public void setTargetX(float targetX) {
-        this.targetX = targetX;
     }
 
     public float getTargetY() {
         return targetY;
     }
 
-    public void setTargetY(float targetY) {
-        this.targetY = targetY;
-    }
-
     public float getRadius() {
         return radius;
-    }
-
-    public void setRadius(float radius) {
-        this.radius = radius;
     }
 
     public float getMaxHP() {
         return maxHP;
     }
 
-    public void setMaxHP(float maxHP) {
-        this.maxHP = maxHP;
-    }
-
     public int getGoldValue() {
         return goldValue;
     }
 
-    public void setGoldValue(int goldValue) {
-        this.goldValue = goldValue;
-    }
 }

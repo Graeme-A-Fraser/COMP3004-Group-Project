@@ -26,7 +26,6 @@ public class BattlegroundRenderer implements Renderer{
         this.player = player;
     }
 
-    @Override
     public void render(Canvas c) {
         // if this isn't here sometimes tries to write to a non-existent canvas throwing a null error
         if(c == null){
@@ -65,11 +64,14 @@ public class BattlegroundRenderer implements Renderer{
 
 
         // player towers
-        paint.setColor(Color.rgb(255,203,5));
         for (Tower t:bg.getPlayerTowers()
              ) {
+            paint.setColor(Color.rgb(255,203,5));
             c.drawRect(t.getX()* TILEWIDTH + TILEWIDTH*bg.getPlayerGridX(), t.getY()*TILEHEIGHT + TILEHEIGHT*bg.getPlayerGridY(),
                     t.getX()* TILEWIDTH + TILEWIDTH*bg.getPlayerGridX() + TILEWIDTH, t.getY()* TILEHEIGHT+TILEHEIGHT*bg.getPlayerGridY() + TILEHEIGHT, paint);
+            paint.setColor(Color.GREEN);
+            c.drawCircle(t.getX()* TILEWIDTH + TILEWIDTH*bg.getPlayerGridX()+TILEWIDTH/2, t.getY()*TILEHEIGHT + TILEHEIGHT*bg.getPlayerGridY()+TILEHEIGHT/2,
+                    TILEHEIGHT/6, paint);
         }
         // enemy towers
         paint.setColor(Color.rgb(255,203,5));

@@ -9,10 +9,9 @@ import java.util.List;
 
 public class Battleground {
 
-    public static final int WIDTH = 8;
-    public static final int HEIGHT = 8;
     public static final int GRIDWIDTH = 6;
     public static final int GRIDHEIGHT = 4;
+    public static final int TPS = 24;
 
     private int x;
     private int y;
@@ -105,20 +104,20 @@ public class Battleground {
     }
 
     // can later customize this for different types etc.
-    public void addPlayerTower(int gridX, int gridY){
-        playerGrid[gridY][gridX] = new Tower(gridX,gridY,20,1,1);
+    public void addPlayerTower(int gridX, int gridY, float damage, float speed){
+        playerGrid[gridY][gridX] = new Tower(TPS, gridX,gridY,20,damage,speed);
         playerTowers.add((Tower)playerGrid[gridY][gridX]);
     }
 
     //getters and setters
 
-    public void addEnemyCreep(){
-        enemyCreeps.add(new Creep(enemyCastle.getX()+2,playerCastle.getY()+2,10,1,
+    public void addEnemyCreep(float damage, float health){
+        enemyCreeps.add(new Creep(enemyCastle.getX()+2,playerCastle.getY()+2,health,damage,
                 playerCastle.getX()+2,playerCastle.getY()+2));
     }
 
-    public void addPlayerCreep(){
-        playerCreeps.add(new Creep(playerCastle.getX(),enemyCastle.getY()+2,10,1,
+    public void addPlayerCreep(float damage, float health){
+        playerCreeps.add(new Creep(playerCastle.getX(),enemyCastle.getY()+2,health,damage,
                 enemyCastle.getX(),enemyCastle.getY()+2));
     }
 
@@ -127,10 +126,6 @@ public class Battleground {
     }
     public List<Creep> getPlayerCreeps() {
         return playerCreeps;
-    }
-
-    public Object[][] getPlayerGrid() {
-        return playerGrid;
     }
 
     public List<Tower> getPlayerTowers() {
@@ -144,88 +139,24 @@ public class Battleground {
         return y;
     }
 
-    public void setY(int y) {
-        this.y = y;
-    }
-
     public int getX() {
         return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public float getScale() {
-        return scale;
-    }
-
-    public void setScale(float scale) {
-        this.scale = scale;
-    }
-
-    public int getStartX() {
-        return startX;
-    }
-
-    public void setStartX(int startX) {
-        this.startX = startX;
-    }
-
-    public int getStartY() {
-        return startY;
-    }
-
-    public void setStartY(int startY) {
-        this.startY = startY;
-    }
-
-    public int getFinishX() {
-        return finishX;
-    }
-
-    public void setFinishX(int finishX) {
-        this.finishX = finishX;
-    }
-
-    public int getFinishY() {
-        return finishY;
-    }
-
-    public void setFinishY(int finishY) {
-        this.finishY = finishY;
     }
 
     public int getPlayerGridX() {
         return playerGridX;
     }
 
-    public void setPlayerGridX(int playerGridX) {
-        this.playerGridX = playerGridX;
-    }
-
     public int getPlayerGridY() {
         return playerGridY;
-    }
-
-    public void setPlayerGridY(int playerGridY) {
-        this.playerGridY = playerGridY;
     }
 
     public int getEnemyGridX() {
         return enemyGridX;
     }
 
-    public void setEnemyGridX(int enemyGridX) {
-        this.enemyGridX = enemyGridX;
-    }
-
     public int getEnemyGridY() {
         return enemyGridY;
-    }
-
-    public void setEnemyGridY(int enemyGridY) {
-        this.enemyGridY = enemyGridY;
     }
 
     public Castle getPlayerCastle() {
@@ -234,10 +165,6 @@ public class Battleground {
 
     public Castle getEnemyCastle() {
         return enemyCastle;
-    }
-
-    public Object[][] getEnemyGrid() {
-        return enemyGrid;
     }
 
     public List<Bullet> getBullets() {

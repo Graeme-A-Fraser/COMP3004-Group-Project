@@ -14,7 +14,6 @@ public class GameEngine {
 
     private Player player; //keeps track of stuff like mode, gold, hp
 
-    private BattlegroundRenderer battlegroundRenderer;
     private BuildRenderer buildRenderer;
     private RecruitRenderer recruitRenderer;
 
@@ -40,8 +39,7 @@ public class GameEngine {
         bg = new Battleground();
         player = new Player(BATTLEGROUND);
         // views
-        battlegroundRenderer = new BattlegroundRenderer(bg, player);
-        buildRenderer = new BuildRenderer(bg);
+        buildRenderer = new BuildRenderer(bg,player);
         recruitRenderer = new RecruitRenderer();
 
         // additional controllers for breaking out smaller tasks
@@ -66,10 +64,9 @@ public class GameEngine {
         switch(player.gm){
             case BATTLEGROUND:
                 // bg contro
-                if((x/width)*10<2 && (y/height)*10>8){
-                    player.gm = BUILDING;
-                }
+                battlegroundController.press(x, y);
                 break;
+            case SELECTING_TOWER:
             case BUILDING:
                 // build controller?
                 buildController.press(x,y);
@@ -89,6 +86,7 @@ public class GameEngine {
             case BATTLEGROUND:
                 battlegroundController.update(delta);
                 break;
+            case SELECTING_TOWER:
             case BUILDING:
                 buildController.update(delta);
                 break;
@@ -113,10 +111,11 @@ public class GameEngine {
         this.frames++;
         switch(player.gm){
             case BATTLEGROUND:
-                battlegroundRenderer.render(canvas);
+                battlegroundController.render(canvas);
                 break;
+            case SELECTING_TOWER:
             case BUILDING:
-                buildRenderer.render(canvas);
+                buildController.render(canvas);
                 break;
             case RECRUITING:
                 recruitRenderer.render(canvas);

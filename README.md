@@ -24,22 +24,11 @@ Ryan David 100946431 RyanDavid@cmail.carleton.ca
 
 5. Now test it out by pressing run
 
-## What's done?
+## My vision
 
-* Rough prototype
-* Game loop, frame limiting and skipping
-* Model, View, Controller Heirarchy
-* Different views
-* Grid
-* Building towers
-* Creeps with hp bars
+_I think for simplicity's sake this is the most simple way to break it down_
 
-## Todo
-
-* Refactor/Cleanup code - a little messy at the moment but that's what prototypes are supposed to be
-* Need to discuss design decisions (how many towers, creeps, what the building section should look like)
-* Adding images/sprites
-* Properly implement gold system, live system
-* Create recruiting 'view'
-* Possibly a more detailed build 'view'... maybe have the grid so when you click on it if there is no tower taking you to a page to select a brand new tower, and if ones already there to upgrade a tower
-* Tons more
+1. Splash Screen
+2. Battleground View
+	* Can navigate to build or recruit
+	* Once wave recruited, can start wave sending your creeps at them and their creeps at you

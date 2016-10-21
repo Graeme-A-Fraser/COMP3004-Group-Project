@@ -7,7 +7,7 @@ package acmeindustries.boondoggletd.model;
 public class Player {
 
     public enum GameMode {
-        BATTLEGROUND, BUILDING, RECRUITING
+        BATTLEGROUND, BUILDING, RECRUITING, SELECTING_TOWER
     }
 
     private int gold;

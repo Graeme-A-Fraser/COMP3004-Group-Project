@@ -7,7 +7,6 @@ import android.graphics.Canvas;
  */
 
 public class RecruitRenderer implements Renderer {
-    @Override
     public void render(Canvas c) {
         // if this isn't here sometimes tries to write to a non-existent canvas throwing a null error
         if(c == null){

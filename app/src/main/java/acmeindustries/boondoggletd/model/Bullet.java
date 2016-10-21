@@ -25,10 +25,6 @@ public class Bullet {
         return target;
     }
 
-    public void setTarget(Creep target) {
-        this.target = target;
-    }
-
     public float getX() {
         return x;
     }
@@ -49,15 +45,8 @@ public class Bullet {
         return damage;
     }
 
-    public void setDamage(float damage) {
-        this.damage = damage;
-    }
-
     public float getSpeed() {
         return speed;
     }
 
-    public void setSpeed(float speed) {
-        this.speed = speed;
-    }
 }
