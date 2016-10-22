@@ -47,9 +47,11 @@ _please follow the below when adding new features or making big changes to the c
 	git checkout master
 	git merge new_feature_name
 	```
+
 5. Now push it to the repository and delete your old branch.
 	```
 	git push
 	git push origin --delete new_feature_name
 	```
+
 
