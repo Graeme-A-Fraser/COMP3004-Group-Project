@@ -9,7 +9,7 @@ Telidy Ng 100923829 TelidyNg@cmail.carleton.ca
 Eric McCarthy 100944658 EricMcCarthy@cmail.carleton.ca
 Ryan David 100946431 RyanDavid@cmail.carleton.ca
 
-## How-to
+## Installation
 
 1. Open a console and navigate to where your AndroidStudioProjects folder is. In my case it's C:\Users\Eric\AndroidStudioProjects\
 
@@ -24,11 +24,36 @@ Ryan David 100946431 RyanDavid@cmail.carleton.ca
 
 5. Now test it out by pressing run
 
-## My vision
+## Contributing
 
-_I think for simplicity's sake this is the most simple way to break it down_
+_please follow the below when adding new features or making big changes to the code base_
 
-1. Splash Screen
-2. Battleground View
-	* Can navigate to build or recruit
-	* Once wave recruited, can start wave sending your creeps at them and their creeps at you
+1. Please create a new branch!!
+	```
+	git checkout -b new_feature_name
+	```
+
+2. Edit/Add your files
+
+3. Add changes, commit, and push them
+	```
+	git add -A
+	git commit -m "detailed info about feature / changes"
+	git push --set-upstream origin new_feature_name
+	```
+
+4. Then if you're confident in your feature being complete, merge it into master.
+	* checkout master
+		```
+		git checkout master
+		```
+	* merge your feature
+		```
+		git merge new_feature_name
+		```
+5. Now push it to the repository and delete your old branch.
+	```
+	git push
+	git push origin --delete new_feature_name
+	```
+
