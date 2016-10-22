@@ -12,7 +12,7 @@ public class Tower {
     private float rotation;
     private float damage;
     private float speed; // projectile speed
-    private float range; // projectile speed
+    private float range;
     private Creep target;
     private int loadTime;
     private int currentLoading;
@@ -70,5 +70,13 @@ public class Tower {
 
     public void setLoaded(boolean loaded) {
         this.loaded = loaded;
+    }
+
+    public float getDamage() {
+        return damage;
+    }
+
+    public float getSpeed() {
+        return speed;
     }
 }

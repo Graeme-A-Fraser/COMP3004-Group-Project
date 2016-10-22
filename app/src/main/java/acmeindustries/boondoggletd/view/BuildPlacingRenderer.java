@@ -12,12 +12,12 @@ import acmeindustries.boondoggletd.model.Tower;
  * this class should only show your side of the battlefield, making it very easy to build towers at certain locations
  */
 
-public class BuildRenderer implements Renderer{
+public class BuildPlacingRenderer implements Renderer{
 
     private Battleground bg;
     private Player player;
 
-    public BuildRenderer(Battleground bg, Player p){
+    public BuildPlacingRenderer(Battleground bg, Player p){
         this.bg = bg;
         this.player = p;
     }
@@ -75,7 +75,7 @@ public class BuildRenderer implements Renderer{
         paint.setColor(Color.rgb(255,255,200));
         c.drawRect(c.getWidth()/6*2, c.getHeight()/5*4, c.getWidth()/6*3,c.getHeight(), paint);
         paint.setColor(Color.BLACK);
-        c.drawText("Upgrade", c.getWidth()/6*2, c.getHeight()/40*37, paint);
+        c.drawText("Back", c.getWidth()/6*2, c.getHeight()/40*37, paint);
         // info text?
         paint.setColor(Color.BLACK);
         c.drawRect(c.getWidth()/2, c.getHeight()/5*4, c.getWidth(),c.getHeight(), paint);

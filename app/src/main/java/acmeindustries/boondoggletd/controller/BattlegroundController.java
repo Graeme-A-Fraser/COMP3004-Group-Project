@@ -11,7 +11,7 @@ import acmeindustries.boondoggletd.model.Player;
 import acmeindustries.boondoggletd.model.Tower;
 import acmeindustries.boondoggletd.view.BattlegroundRenderer;
 
-import static acmeindustries.boondoggletd.model.Player.GameMode.BUILDING;
+import static acmeindustries.boondoggletd.model.Player.GameMode.BUILDING_SELECTING;
 
 /**
  * Created by Eric on 10/18/2016.
@@ -117,7 +117,7 @@ public class BattlegroundController {
                 // fire at it
                 if(t.isLoaded()){
                     bg.getBullets().add(new Bullet(t.getTarget(),t.getX()+0.5f+bg.getPlayerGridX(),
-                            t.getY()+0.5f+bg.getPlayerGridY(),1,0.25f));
+                            t.getY()+0.5f+bg.getPlayerGridY(),t.getDamage(),t.getSpeed()));
                     t.setLoaded(false);
                 }
             }
@@ -153,10 +153,7 @@ public class BattlegroundController {
 
     public void press(float x, float y){
         if((x/width)*10<2 && (y/height)*10>8){
-            player.gm = BUILDING;
-        }
-        if((x/width)*10<2 && (y/height)*10>8){
-            player.gm = BUILDING;
+            player.gm = BUILDING_SELECTING;
         }
         if((x/width)*10>=4 && (x/width)*10<6 && (y/height)*10>8){
             spawning=true;

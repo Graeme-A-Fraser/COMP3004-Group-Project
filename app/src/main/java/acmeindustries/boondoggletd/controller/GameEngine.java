@@ -4,30 +4,27 @@ import android.graphics.Canvas;
 
 import acmeindustries.boondoggletd.model.Battleground;
 import acmeindustries.boondoggletd.model.Player;
-import acmeindustries.boondoggletd.view.BattlegroundRenderer;
-import acmeindustries.boondoggletd.view.BuildRenderer;
-import acmeindustries.boondoggletd.view.RecruitRenderer;
 
 import static acmeindustries.boondoggletd.model.Player.GameMode.*;
 
 public class GameEngine {
 
-    private Player player; //keeps track of stuff like mode, gold, hp
-
-    private BuildRenderer buildRenderer;
-    private RecruitRenderer recruitRenderer;
+    private Player player;
 
     private BattlegroundController battlegroundController;
     private BuildController buildController;
+    private RecruitController recruitController;
 
     private Battleground bg;
     private float width;
     private float height;
 
+    /*
     private float ticks;
     private float frames;
     private float startTime;
     private float totalTime;
+    */
 
     public GameEngine(float w, float h){
         this.width = w;
@@ -38,17 +35,11 @@ public class GameEngine {
     private void init() {
         bg = new Battleground();
         player = new Player(BATTLEGROUND);
-        // views
-        buildRenderer = new BuildRenderer(bg,player);
-        recruitRenderer = new RecruitRenderer();
 
         // additional controllers for breaking out smaller tasks
         battlegroundController = new BattlegroundController(player, bg, width, height);
         buildController = new BuildController(player, bg, width, height);
-
-        this.ticks = 1;
-        this.frames = 1;
-        this.startTime = System.nanoTime();
+        recruitController = new RecruitController(player, bg, width, height);
     }
 
     public void press(float x, float y){
@@ -66,13 +57,14 @@ public class GameEngine {
                 // bg contro
                 battlegroundController.press(x, y);
                 break;
-            case SELECTING_TOWER:
-            case BUILDING:
+            case BUILDING_SELECTING:
+            case BUILDING_PLACING:
                 // build controller?
                 buildController.press(x,y);
                 break;
             case RECRUITING:
                 // recruit controller?
+                recruitController.press(x,y);
                 break;
         }
     }
@@ -86,12 +78,12 @@ public class GameEngine {
             case BATTLEGROUND:
                 battlegroundController.update(delta);
                 break;
-            case SELECTING_TOWER:
-            case BUILDING:
+            case BUILDING_SELECTING:
+            case BUILDING_PLACING:
                 buildController.update(delta);
                 break;
             case RECRUITING:
-                battlegroundController.update(delta);
+                recruitController.update(delta);
                 break;
         }
         /* tracking how many ticks per second and fps - will fluctuate because of how i reset them
@@ -108,17 +100,17 @@ public class GameEngine {
     }
 
     public void render(Canvas canvas){
-        this.frames++;
+        //this.frames++;
         switch(player.gm){
             case BATTLEGROUND:
                 battlegroundController.render(canvas);
                 break;
-            case SELECTING_TOWER:
-            case BUILDING:
+            case BUILDING_SELECTING:
+            case BUILDING_PLACING:
                 buildController.render(canvas);
                 break;
             case RECRUITING:
-                recruitRenderer.render(canvas);
+                recruitController.render(canvas);
                 break;
         }
     }
