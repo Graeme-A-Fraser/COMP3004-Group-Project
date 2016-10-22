@@ -31,7 +31,7 @@ public class BuildController {
             //cost, damage, speed
             {20, 1,0.25f},
             {30, 2,0.25f},
-            {50, 5,0.5f},
+            {50, 5,0.25f},
             {75, 10,0.25f},
             {150,25,0.25f},
             {250,60,0.25f},
@@ -83,7 +83,7 @@ public class BuildController {
                     player.gm = BUILDING_SELECTING;
                 }
             }else
-            if (player.getGold() > towerTypes[towerSelection][0]) {
+            if (player.getGold() >= towerTypes[towerSelection][0]) {
                 player.setGold(player.getGold() - (int)towerTypes[towerSelection][0]);
                 bg.addPlayerTower(currentX, currentY, towerTypes[towerSelection][1], towerTypes[towerSelection][2]);
             }
@@ -92,7 +92,6 @@ public class BuildController {
                 player.gm = BUILDING_PLACING;
             }else{
                 this.towerSelection = currentY*2 + (currentX/3);
-                System.out.println(this.towerSelection);
             }
         }
 
@@ -103,9 +102,9 @@ public class BuildController {
 
     public void render(Canvas canvas){
         if(player.gm == BUILDING_PLACING) {
-            this.buildPlacingRenderer.render(canvas);
+            this.buildPlacingRenderer.render(canvas, this.towerTypes);
         }else if(player.gm == BUILDING_SELECTING){
-            this.buildSelectingRenderer.render(canvas, this.towerSelection);
+            this.buildSelectingRenderer.render(canvas, this.towerSelection, this.towerTypes);
         }
     }
 }

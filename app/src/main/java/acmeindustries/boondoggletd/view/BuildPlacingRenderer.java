@@ -12,7 +12,7 @@ import acmeindustries.boondoggletd.model.Tower;
  * this class should only show your side of the battlefield, making it very easy to build towers at certain locations
  */
 
-public class BuildPlacingRenderer implements Renderer{
+public class BuildPlacingRenderer{
 
     private Battleground bg;
     private Player player;
@@ -22,7 +22,7 @@ public class BuildPlacingRenderer implements Renderer{
         this.player = p;
     }
 
-    public void render(Canvas c) {
+    public void render(Canvas c, float[][] towers) {
         // if this isn't here sometimes tries to write to a non-existent canvas throwing a null error
         if(c == null){
             return;
