@@ -43,14 +43,10 @@ _please follow the below when adding new features or making big changes to the c
 	```
 
 4. Then if you're confident in your feature being complete, merge it into master.
-	* checkout master
-		```
-		git checkout master
-		```
-	* merge your feature
-		```
-		git merge new_feature_name
-		```
+	```
+	git checkout master
+	git merge new_feature_name
+	```
 5. Now push it to the repository and delete your old branch.
 	```
 	git push
