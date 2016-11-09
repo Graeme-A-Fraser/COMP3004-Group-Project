@@ -112,13 +112,13 @@ public class Battleground {
     //getters and setters
 
     public void addEnemyCreep(float damage, float health){
-        enemyCreeps.add(new Creep(enemyCastle.getX()+2,playerCastle.getY()+2,health,damage,
-                playerCastle.getX()+2,playerCastle.getY()+2));
+        enemyCreeps.add(new Creep(enemyCastle.getX()+2,playerCastle.getY()+2,health,damage
+                ,new float[][]{{playerCastle.getX()+2, playerCastle.getY()+2}}));
     }
 
     public void addPlayerCreep(float damage, float health){
         playerCreeps.add(new Creep(playerCastle.getX(),enemyCastle.getY()+2,health,damage,
-                enemyCastle.getX(),enemyCastle.getY()+2));
+                new float[][]{{enemyCastle.getX(),enemyCastle.getY()+2}}));
     }
 
     public List<Creep> getEnemyCreeps() {

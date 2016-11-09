@@ -54,22 +54,8 @@ public class BattlegroundController {
         Iterator<Creep> it = bg.getEnemyCreeps().iterator();
         while(it.hasNext()){
             Creep c = it.next();
-            if (c.getTargetX() < c.getX() - c.getRadius()/10f) {
-                c.setX(c.getX() - c.getSpeed());
-            }else if (c.getTargetX() > c.getX() + c.getRadius()/10f) {
-                c.setX(c.getX() + c.getSpeed());
-            }
-            if (c.getTargetY() < c.getY() - c.getRadius()/10f) {
-                c.setY(c.getY() - c.getSpeed());
-            }else if (c.getTargetY() > c.getY() + c.getRadius()/10f) {
-                c.setY(c.getY() + c.getSpeed());
-            }
-            if(c.getX()-c.getTargetX() >= -0.1f && c.getX()-c.getTargetX() <= 0.1f){
-                player.setHp(player.getHp()-(int)c.getDamage());
-                it.remove();
-                break;
-            }
-            if(c.getHp() <= 0){
+            c.move();
+            if(c.getHp() <= 0 || !c.alive){
                 player.setGold(player.getGold()+c.getGoldValue());
                 it.remove();
             }
@@ -77,21 +63,8 @@ public class BattlegroundController {
         it = bg.getPlayerCreeps().iterator();
         while(it.hasNext()){
             Creep c = it.next();
-            if (c.getTargetX() < c.getX() - c.getRadius()/10f) {
-                c.setX(c.getX() - c.getSpeed());
-            }else if (c.getTargetX() > c.getX() + c.getRadius()/10f) {
-                c.setX(c.getX() + c.getSpeed());
-            }
-            if (c.getTargetY() < c.getY() - c.getRadius()/10f) {
-                c.setY(c.getY() - c.getSpeed());
-            }else if (c.getTargetY() > c.getY() + c.getRadius()/10f) {
-                c.setY(c.getY() + c.getSpeed());
-            }
-            if(c.getX()-c.getTargetX() >= -0.1f && c.getX()-c.getTargetX() <= 0.1f){
-                it.remove();
-                break;
-            }
-            if(c.getHp() <= 0){
+            c.move();
+            if(c.getHp() <= 0 || !c.alive){
                 it.remove();
             }
         }
