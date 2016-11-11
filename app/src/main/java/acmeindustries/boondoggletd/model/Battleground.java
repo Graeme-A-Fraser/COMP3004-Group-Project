@@ -113,7 +113,7 @@ public class Battleground {
 
     public void addEnemyCreep(float damage, float health){
         enemyCreeps.add(new Creep(enemyCastle.getX()+2,playerCastle.getY()+2,health,damage
-                ,new float[][]{{playerCastle.getX()+2, playerCastle.getY()+2}}));
+                ,new float[][]{{playerCastle.getX()+2, playerCastle.getY()+2}, {playerCastle.getX()+2, playerCastle.getY()+10}}));
     }
 
     public void addPlayerCreep(float damage, float health){

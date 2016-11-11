@@ -55,8 +55,11 @@ public class BattlegroundController {
         while(it.hasNext()){
             Creep c = it.next();
             c.move();
-            if(c.getHp() <= 0 || !c.alive){
+            if(!c.alive){
                 player.setGold(player.getGold()+c.getGoldValue());
+                it.remove();
+            }
+            if(c.getHp() <= 0){
                 it.remove();
             }
         }
@@ -64,7 +67,11 @@ public class BattlegroundController {
         while(it.hasNext()){
             Creep c = it.next();
             c.move();
-            if(c.getHp() <= 0 || !c.alive){
+            if(!c.alive){
+                player.setGold(player.getGold()+c.getGoldValue());
+                it.remove();
+            }
+            if(c.getHp() <= 0){
                 it.remove();
             }
         }

@@ -37,11 +37,11 @@ public class Creep {
 
     public void move(){
         // check if on correct node, then increment position if so
-        if(this.x == this.path[position][0] && this.y == this.path[position][1]){
+        if(Math.sqrt(Math.pow(this.x - this.path[position][0], 2) + Math.pow(this.y - this.path[position][1], 2)) < 0.1f){
             this.position++;
         }
         // if at end of path die
-        if(this.position > path.length){
+        if(this.position >= path.length){
             this.alive = false;
         }
 
@@ -69,20 +69,8 @@ public class Creep {
         return x;
     }
 
-    public void setX(float x) {
-        this.x = x;
-    }
-
     public float getY() {
         return y;
-    }
-
-    public void setY(float y) {
-        this.y = y;
-    }
-
-    public float getSpeed() {
-        return speed;
     }
 
     public float getHp() {
@@ -91,10 +79,6 @@ public class Creep {
 
     public void setHp(float hp) {
         this.hp = hp;
-    }
-
-    public float getDamage() {
-        return damage;
     }
 
     public float getRadius() {
