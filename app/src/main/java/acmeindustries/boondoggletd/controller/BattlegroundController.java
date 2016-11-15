@@ -13,10 +13,6 @@ import acmeindustries.boondoggletd.view.BattlegroundRenderer;
 
 import static acmeindustries.boondoggletd.model.Player.GameMode.BUILDING_SELECTING;
 
-/**
- * Created by Eric on 10/18/2016.
- */
-
 public class BattlegroundController {
 
     private Player player;
@@ -48,33 +44,6 @@ public class BattlegroundController {
             spawnTimer = bg.TPS*2;
         }
 
-
-        // creep code - implement path finding etc here
-        // have to use iterators or else we get errors when deleting
-        Iterator<Creep> it = bg.getEnemyCreeps().iterator();
-        while(it.hasNext()){
-            Creep c = it.next();
-            c.move();
-            if(!c.alive){
-                player.setGold(player.getGold()+c.getGoldValue());
-                it.remove();
-            }
-            if(c.getHp() <= 0){
-                it.remove();
-            }
-        }
-        it = bg.getPlayerCreeps().iterator();
-        while(it.hasNext()){
-            Creep c = it.next();
-            c.move();
-            if(!c.alive){
-                player.setGold(player.getGold()+c.getGoldValue());
-                it.remove();
-            }
-            if(c.getHp() <= 0){
-                it.remove();
-            }
-        }
 
         // tower code
         //player
@@ -123,9 +92,36 @@ public class BattlegroundController {
             float angle = (float)Math.atan2(ydist, xdist);
             b.setX(b.getX() + (float)Math.cos(angle)*b.getSpeed());
             b.setY(b.getY() + (float)Math.sin(angle)*b.getSpeed());
-            if(xdist + ydist <= 0.1f && xdist+ydist>=-0.1f){
+            if(Math.abs(xdist+ydist) < 0.25f){
                 b.getTarget().setHp(b.getTarget().getHp()-b.getDamage());
                 itBullet.remove();
+            }
+        }
+
+        // creep code - implement path finding etc here
+        // have to use iterators or else we get errors when deleting
+        Iterator<Creep> it = bg.getEnemyCreeps().iterator();
+        while(it.hasNext()){
+            Creep c = it.next();
+            c.move();
+            if(!c.alive){
+                player.setGold(player.getGold()+c.getGoldValue());
+                it.remove();
+            }
+            if(c.getHp() <= 0){
+                it.remove();
+            }
+        }
+        it = bg.getPlayerCreeps().iterator();
+        while(it.hasNext()){
+            Creep c = it.next();
+            c.move();
+            if(!c.alive){
+                player.setGold(player.getGold()+c.getGoldValue());
+                it.remove();
+            }
+            if(c.getHp() <= 0){
+                it.remove();
             }
         }
 

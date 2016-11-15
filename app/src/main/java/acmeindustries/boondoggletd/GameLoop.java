@@ -18,11 +18,11 @@ public class GameLoop implements Runnable{
     private double delta;
     public static Canvas canvas;
 
-    public GameLoop(SurfaceHolder sh, GamePanel gh, double framerate){
+    public GameLoop(SurfaceHolder sh, GamePanel gh, double updateRate){
         super();
         this.surfaceHolder = sh;
         this.gamePanel = gh;
-        this.delta = framerate;
+        this.delta = updateRate;
     }
 
     // the loop -- taken from http://entropyinteractive.com/2011/02/game-engine-design-the-game-loop/

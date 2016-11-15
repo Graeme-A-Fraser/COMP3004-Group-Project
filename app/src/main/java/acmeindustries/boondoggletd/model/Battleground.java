@@ -15,13 +15,6 @@ public class Battleground {
 
     private int x;
     private int y;
-    private float scale;
-
-    // for creeps to know where to start / finish
-    private int startX;
-    private int startY;
-    private int finishX;
-    private int finishY;
 
     // where the grids are in relation to the rest of the battleground
     private int playerGridX;
@@ -32,8 +25,8 @@ public class Battleground {
     private Castle playerCastle;
     private Castle enemyCastle;
 
-    private Object[][] playerGrid;
-    private Object[][] enemyGrid;
+    private Object[][] playerGrid; //grid of null or tower objects
+    private Object[][] enemyGrid; // grid of null or tower objects
     private List<Tower> playerTowers;
     private List<Tower> enemyTowers;
 
@@ -42,19 +35,13 @@ public class Battleground {
 
     private List<Bullet> bullets;
 
+    private static float playerPath[][]; //player path
+    private static float enemyPath[][]; //enemy path
+
     public Battleground(){
 
-        // set x, y to 0 and scale
-        // TODO: implement this into the battleground renderer (use these values to translate and transform)
         this.x = 0;
         this.y = 0;
-        this.scale = 1;
-
-        startX = 0;
-        startY = 1;
-        finishX = 10;
-        finishY = 1;
-
         playerGridX = 2;
         playerGridY = 4;
         enemyGridX = 2;
@@ -113,7 +100,7 @@ public class Battleground {
 
     public void addEnemyCreep(float damage, float health){
         enemyCreeps.add(new Creep(enemyCastle.getX()+2,playerCastle.getY()+2,health,damage
-                ,new float[][]{{playerCastle.getX()+2, playerCastle.getY()+2}, {playerCastle.getX()+2, playerCastle.getY()+10}}));
+                ,new float[][]{{playerCastle.getX()+2, playerCastle.getY()+2}}));
     }
 
     public void addPlayerCreep(float damage, float health){
@@ -170,4 +157,10 @@ public class Battleground {
     public List<Bullet> getBullets() {
         return bullets;
     }
+
+    public boolean createPath(){
+
+        return false;
+    }
+
 }
