@@ -53,24 +53,11 @@ public class BuildController {
 
     public void press(float x, float y){
         //System.out.printf("pressed at %f, %f - gridx: %d, gridy: %d\n", x, y, (int)((x/width)*8), (int)((y/height)*6));
-
+        // TODO: CLEAN THIS UP AND IMPLEMENT CANCEL
         currentX = (int)((x/width)*6);
         currentY = (int)((y/height)*5);
-
-/*        if(player.gm == BUILDING) {
-            if (bg.checkPlayerGridAvailable(currentX,currentY) == true) {
-                // open screen for tower type with gold values, then if you can afford call below
-                player.gm = SELECTING_TOWER;
-
-                bg.addPlayerTower((int) ((x / width) * 6), (int) ((y / height) * 5), 2, 1);
-                player.setGold(player.getGold() - 10);
-            } else if ((x / width) * 6 < 1 && (y / height) * 5 > 4) {
-                player.gm = BATTLEGROUND;
-            }
-        }else { // if in tower selection
-            player.gm = BUILDING;
-        }
-        */
+        // if you click on the start / end nodes
+        if((currentX == 0 && currentY == 0) || (currentX == 5 && currentY == 3)) return;
         if(player.gm == BUILDING_PLACING) {
             if(currentY>=4){
                 if(currentX < 1) {

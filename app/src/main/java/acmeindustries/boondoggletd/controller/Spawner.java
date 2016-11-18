@@ -31,8 +31,8 @@ public class Spawner {
         }
         if(this.spawnTimer <= 0 ){
             // spawn creeps with 10hp - will need to customize this
-            bg.addEnemyCreep(10);
-            bg.addPlayerCreep(10);
+            bg.addEnemyCreep(100);
+            bg.addPlayerCreep(100);
             creepsRemaining--;
             this.spawnTimer = this.maxSpawnTimer;
         }

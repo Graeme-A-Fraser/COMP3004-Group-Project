@@ -42,6 +42,14 @@ public class BuildPlacingRenderer{
                     t.getX()* TILEWIDTH + TILEWIDTH, t.getY()* TILEHEIGHT+ TILEHEIGHT, paint);
         }
 
+        // START & END
+        paint.setColor(Color.GREEN);
+        c.drawRect(0* TILEWIDTH, 0*TILEHEIGHT,
+                0* TILEWIDTH + TILEWIDTH, 0* TILEHEIGHT+ TILEHEIGHT, paint);
+        paint.setColor(Color.RED);
+        c.drawRect(5* TILEWIDTH, 3*TILEHEIGHT,
+                5* TILEWIDTH + TILEWIDTH, 3* TILEHEIGHT+ TILEHEIGHT, paint);
+
         // drawing player grid
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(5);
