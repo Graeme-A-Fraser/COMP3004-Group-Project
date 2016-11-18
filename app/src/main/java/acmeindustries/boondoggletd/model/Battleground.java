@@ -3,9 +3,8 @@ package acmeindustries.boondoggletd.model;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * this is a model of the actual game's battleground - locations in relations to a 1x1 grid
- */
+import acmeindustries.boondoggletd.util.Cell;
+
 
 public class Battleground {
 
@@ -32,6 +31,8 @@ public class Battleground {
 
     private List<Creep> enemyCreeps;
     private List<Creep> playerCreeps;
+
+    public boolean spawning;
 
     private List<Bullet> bullets;
 
@@ -95,16 +96,20 @@ public class Battleground {
         playerGrid[gridY][gridX] = new Tower(TPS, gridX,gridY,20,damage,speed);
         playerTowers.add((Tower)playerGrid[gridY][gridX]);
     }
+    public void addEnemyTower(int gridX, int gridY, float damage, float speed){
+        enemyGrid[gridY][gridX] = new Tower(TPS, gridX,gridY,20,damage,speed);
+        enemyTowers.add((Tower)enemyGrid[gridY][gridX]);
+    }
 
     //getters and setters
 
-    public void addEnemyCreep(float damage, float health){
-        enemyCreeps.add(new Creep(enemyCastle.getX()+2,playerCastle.getY()+2,health,damage
+    public void addEnemyCreep(float health){
+        enemyCreeps.add(new Creep(enemyCastle.getX()+2,playerCastle.getY()+2,health
                 ,new float[][]{{playerCastle.getX()+2, playerCastle.getY()+2}}));
     }
 
-    public void addPlayerCreep(float damage, float health){
-        playerCreeps.add(new Creep(playerCastle.getX(),enemyCastle.getY()+2,health,damage,
+    public void addPlayerCreep(float health){
+        playerCreeps.add(new Creep(playerCastle.getX(),enemyCastle.getY()+2,health,
                 new float[][]{{enemyCastle.getX(),enemyCastle.getY()+2}}));
     }
 
@@ -159,6 +164,7 @@ public class Battleground {
     }
 
     public boolean createPath(){
+        Cell[][] grid = new Cell[GRIDHEIGHT][GRIDWIDTH];
 
         return false;
     }

@@ -33,7 +33,7 @@ public class RecruitController {
 
     }
 
-    public void update(float delta){}
+    public void update(){}
 
     public void render(Canvas canvas){
         this.recruitRenderer.render(canvas);

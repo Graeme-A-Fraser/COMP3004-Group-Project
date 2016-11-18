@@ -98,7 +98,7 @@ public class BuildController {
     }
 
 
-    public void update(float delta){}
+    public void update(){}
 
     public void render(Canvas canvas){
         if(player.gm == BUILDING_PLACING) {

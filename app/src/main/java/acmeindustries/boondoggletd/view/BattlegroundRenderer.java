@@ -141,7 +141,11 @@ public class BattlegroundRenderer implements Renderer{
         paint.setColor(Color.rgb(255,255,200));
         c.drawRect(c.getWidth()/10*4, c.getHeight()/10*8, c.getWidth()/10*6,c.getHeight(), paint);
         paint.setColor(Color.BLACK);
-        c.drawText("Start Wave", c.getWidth()/10*4, c.getHeight()/40*37, paint);
+        if(bg.spawning) {
+            c.drawText("Wave Started", c.getWidth() / 10 * 4, c.getHeight() / 40 * 37, paint);
+        }else{
+            c.drawText("Start Wave", c.getWidth() / 10 * 4, c.getHeight() / 40 * 37, paint);
+        }
         // info text?
         paint.setColor(Color.BLACK);
         c.drawRect(c.getWidth()/10*6, c.getHeight()/10*8, c.getWidth(),c.getHeight(), paint);

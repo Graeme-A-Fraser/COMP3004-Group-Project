@@ -25,7 +25,7 @@ public class GameLoop implements Runnable{
         this.delta = updateRate;
     }
 
-    // the loop -- taken from http://entropyinteractive.com/2011/02/game-engine-design-the-game-loop/
+    // the main game loop -- taken from http://entropyinteractive.com/2011/02/game-engine-design-the-game-loop/
     public void run() {
         startup();
         double nextTime = (double)System.nanoTime() / 1000000000.0;
@@ -41,7 +41,7 @@ public class GameLoop implements Runnable{
                 // assign the time for the next update
                 nextTime += delta;
                 // TODO: actually input a proper delta value...
-                update((float)delta);
+                update();
                 if((currTime < nextTime) || (skippedFrames > maxSkippedFrames))
                 {
                     draw();
@@ -83,9 +83,9 @@ public class GameLoop implements Runnable{
         running = true;
     };
     public void shutdown(){};
-    public void update(float delta){
+    public void update(){
         //
-        engine.update(delta);
+        engine.update();
     };
     public void draw(){
         try {

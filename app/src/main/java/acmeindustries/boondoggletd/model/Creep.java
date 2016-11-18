@@ -1,16 +1,11 @@
 package acmeindustries.boondoggletd.model;
 
-/**
- * represents creep
- */
-
 public class Creep {
     private float x;
     private float y;
     private float speed;
     private float hp;
     private float maxHP;
-    private float damage;
     private float radius;
     private int goldValue;
 
@@ -18,15 +13,14 @@ public class Creep {
     private float[][] path;
     private int position;
 
-    public boolean alive;
+    private boolean alive;
 
-    public Creep(float x, float y, float hp, float damage, float[][] path){
+    public Creep(float x, float y, float hp, float[][] path){
 
         this.x = x;
         this.y = y;
         this.hp = hp;
         this.maxHP = hp;
-        this.damage = damage;
         this.path = path;
         this.radius = 0.25f;
         this.speed = 0.05f;
@@ -91,6 +85,10 @@ public class Creep {
 
     public int getGoldValue() {
         return goldValue;
+    }
+
+    public boolean isAlive() {
+        return alive;
     }
 
 }

@@ -19,12 +19,10 @@ public class GameEngine {
     private float width;
     private float height;
 
-    /*
     private float ticks;
     private float frames;
     private float startTime;
     private float totalTime;
-    */
 
     public GameEngine(float w, float h){
         this.width = w;
@@ -73,20 +71,19 @@ public class GameEngine {
         System.out.printf("released at %f, %f\n", x, y);
     }
 
-    public void update(float delta){
+    public void update(){
         switch(player.gm){
             case BATTLEGROUND:
-                battlegroundController.update(delta);
+                battlegroundController.update();
                 break;
             case BUILDING_SELECTING:
             case BUILDING_PLACING:
-                buildController.update(delta);
+                buildController.update();
                 break;
             case RECRUITING:
-                recruitController.update(delta);
+                recruitController.update();
                 break;
         }
-        /* tracking how many ticks per second and fps - will fluctuate because of how i reset them
         this.ticks ++;
         totalTime = (System.nanoTime() - startTime) / 1000000000f;
         if(totalTime>10){
@@ -96,11 +93,10 @@ public class GameEngine {
         }else {
             System.out.printf("FPS: %f, TICKS: %f\n", frames / totalTime, ticks / totalTime);
         }
-        */
     }
 
     public void render(Canvas canvas){
-        //this.frames++;
+        this.frames++;
         switch(player.gm){
             case BATTLEGROUND:
                 battlegroundController.render(canvas);
