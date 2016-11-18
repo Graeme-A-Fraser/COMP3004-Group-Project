@@ -97,11 +97,12 @@ public class BattlegroundController {
     }
 
     public void press(float x, float y){
-        bg.createPath();
+        if(bg.spawning) return;
         if((x/width)*10<2 && (y/height)*10>8){
             player.gm = BUILDING_SELECTING;
         }
         if((x/width)*10>=4 && (x/width)*10<6 && (y/height)*10>8){
+            bg.createPath();
             spawner.startRound();
         }
     }

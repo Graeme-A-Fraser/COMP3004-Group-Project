@@ -125,25 +125,28 @@ public class BattlegroundRenderer implements Renderer{
 
         paint.setTextSize(c.getHeight()/20);
 
-        //btn1
-        paint.setColor(Color.rgb(200,255,255));
-        c.drawRect(0, c.getHeight()/10*8, c.getWidth()/10*2,c.getHeight(), paint);
-        paint.setColor(Color.BLACK);
-        c.drawText("Build", 0, c.getHeight()/40*37, paint);
-
-        //btn2
-        paint.setColor(Color.rgb(255,200,255));
-        c.drawRect(c.getWidth()/10*2, c.getHeight()/10*8, c.getWidth()/10*4,c.getHeight(), paint);
-        paint.setColor(Color.BLACK);
-        c.drawText("Recruit", c.getWidth()/10*2, c.getHeight()/40*37, paint);
-
-        //btn3
-        paint.setColor(Color.rgb(255,255,200));
-        c.drawRect(c.getWidth()/10*4, c.getHeight()/10*8, c.getWidth()/10*6,c.getHeight(), paint);
-        paint.setColor(Color.BLACK);
         if(bg.spawning) {
-            c.drawText("Wave Started", c.getWidth() / 10 * 4, c.getHeight() / 40 * 37, paint);
-        }else{
+            paint.setColor(Color.rgb(200, 255, 255));
+            c.drawRect(0, c.getHeight() / 10 * 8, c.getWidth() / 10 * 6, c.getHeight(), paint);
+            paint.setColor(Color.BLACK);
+            c.drawText("Wave Started", c.getWidth() / 10 * 2, c.getHeight() / 40 * 37, paint);
+        }else {
+            //btn1
+            paint.setColor(Color.rgb(200, 255, 255));
+            c.drawRect(0, c.getHeight() / 10 * 8, c.getWidth() / 10 * 2, c.getHeight(), paint);
+            paint.setColor(Color.BLACK);
+            c.drawText("Build", 0, c.getHeight() / 40 * 37, paint);
+
+            //btn2
+            paint.setColor(Color.rgb(255, 200, 255));
+            c.drawRect(c.getWidth() / 10 * 2, c.getHeight() / 10 * 8, c.getWidth() / 10 * 4, c.getHeight(), paint);
+            paint.setColor(Color.BLACK);
+            c.drawText("Recruit", c.getWidth() / 10 * 2, c.getHeight() / 40 * 37, paint);
+
+            //btn3
+            paint.setColor(Color.rgb(255, 255, 200));
+            c.drawRect(c.getWidth() / 10 * 4, c.getHeight() / 10 * 8, c.getWidth() / 10 * 6, c.getHeight(), paint);
+            paint.setColor(Color.BLACK);
             c.drawText("Start Wave", c.getWidth() / 10 * 4, c.getHeight() / 40 * 37, paint);
         }
         // info text?

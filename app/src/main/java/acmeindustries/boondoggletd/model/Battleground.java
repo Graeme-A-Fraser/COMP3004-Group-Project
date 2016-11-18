@@ -41,6 +41,7 @@ public class Battleground {
     private static float playerPath[][]; //player path
     private static float enemyPath[][]; //enemy path
     private AStar enemyPathfinder;
+    private AStar playerPathfinder;
 
     public Battleground(){
 
@@ -84,8 +85,10 @@ public class Battleground {
         bullets = new ArrayList<Bullet>();
 
         // player and enemy pathfinders
-        enemyPathfinder = new AStar(6,4,0,0,5,3,playerGrid);
+        enemyPathfinder = new AStar(6,4,5,3,0,0,playerGrid);
+        playerPathfinder= new AStar(6,4,0,0,5,3,enemyGrid);
         enemyPath = enemyPathfinder.getFinalPath();
+        playerPath = playerPathfinder.getFinalPath();
     }
 
     public boolean checkPlayerGridAvailable(int gridX, int gridY){
@@ -112,12 +115,12 @@ public class Battleground {
 
     public void addEnemyCreep(float health){
         enemyCreeps.add(new Creep(enemyCastle.getX()+2,playerCastle.getY()+2,health
-                , enemyPath));
+                , enemyPath, getPlayerGridX()+0.5f,getPlayerGridY()+0.5f));
     }
 
     public void addPlayerCreep(float health){
         playerCreeps.add(new Creep(playerCastle.getX(),enemyCastle.getY()+2,health,
-                new float[][]{{enemyCastle.getX(),enemyCastle.getY()+2}}));
+                playerPath, getEnemyGridX()+0.5f, getEnemyGridY()+0.5f));
     }
 
     public List<Creep> getEnemyCreeps() {
@@ -171,8 +174,9 @@ public class Battleground {
     }
 
     public boolean createPath(){
-        if(!enemyPathfinder.findPath()) return false;
+        if(!enemyPathfinder.findPath() || !playerPathfinder.findPath()) return false;
         enemyPath = enemyPathfinder.getFinalPath();
+        playerPath = playerPathfinder.getFinalPath();
         return true;
     }
 

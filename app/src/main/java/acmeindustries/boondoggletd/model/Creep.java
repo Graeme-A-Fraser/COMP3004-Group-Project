@@ -1,12 +1,7 @@
 package acmeindustries.boondoggletd.model;
 
 public class Creep {
-    private float x;
-    private float y;
-    private float speed;
-    private float hp;
-    private float maxHP;
-    private float radius;
+    private float x,y,speed,hp,maxHP,radius, gridX, gridY;
     private int goldValue;
 
 
@@ -15,7 +10,7 @@ public class Creep {
 
     private boolean alive;
 
-    public Creep(float x, float y, float hp, float[][] path){
+    public Creep(float x, float y, float hp, float[][] path, float gridX, float gridY){
 
         this.x = x;
         this.y = y;
@@ -27,11 +22,13 @@ public class Creep {
         this.goldValue = 10;
         this.alive = true;
         this.position = 0;
+        this.gridX = gridX;
+        this.gridY = gridY;
     }
 
     public void move(){
         // check if on correct node, then increment position if so
-        if(Math.sqrt(Math.pow(this.x - this.path[position][0], 2) + Math.pow(this.y - this.path[position][1], 2)) < 0.1f){
+        if(Math.sqrt(Math.pow(this.x - this.path[position][0] - gridX, 2) + Math.pow(this.y - this.path[position][1] - gridY, 2)) < 0.1f){
             this.position++;
         }
         // if at end of path die
@@ -45,16 +42,16 @@ public class Creep {
         }
 
         // move left if target is bigger etc...
-        if(this.x > this.path[position][0]){
+        if(this.x > this.path[position][0] + gridX){
             this.x -= speed;
         }
-        if(this.x < this.path[position][0]){
+        if(this.x < this.path[position][0] + gridX){
             this.x += speed;
         }
-        if(this.y > this.path[position][1]){
+        if(this.y > this.path[position][1] + gridY){
             this.y -= speed;
         }
-        if(this.y < this.path[position][1]){
+        if(this.y < this.path[position][1] + gridY){
             this.y += speed;
         }
     }

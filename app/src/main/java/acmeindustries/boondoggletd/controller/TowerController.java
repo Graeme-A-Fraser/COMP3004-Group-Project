@@ -31,6 +31,7 @@ public class TowerController {
         while(itTower.hasNext()){
             Tower t = itTower.next();
             // set target to null and find closest one
+            // this is inefficient as every update every tower finds a new target
             t.setTarget(null);
             for (Creep creep :
                     creeps) {
