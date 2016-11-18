@@ -97,6 +97,7 @@ public class BattlegroundController {
     }
 
     public void press(float x, float y){
+        bg.createPath();
         if((x/width)*10<2 && (y/height)*10>8){
             player.gm = BUILDING_SELECTING;
         }

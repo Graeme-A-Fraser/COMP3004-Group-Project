@@ -91,7 +91,7 @@ public class GameEngine {
             this.frames = 0;
             startTime = System.nanoTime();
         }else {
-            System.out.printf("FPS: %f, TICKS: %f\n", frames / totalTime, ticks / totalTime);
+            //System.out.printf("FPS: %f, TICKS: %f\n", frames / totalTime, ticks / totalTime);
         }
     }
 

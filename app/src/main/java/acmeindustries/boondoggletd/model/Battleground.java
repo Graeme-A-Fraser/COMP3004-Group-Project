@@ -2,7 +2,9 @@ package acmeindustries.boondoggletd.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
 
+import acmeindustries.boondoggletd.util.AStar;
 import acmeindustries.boondoggletd.util.Cell;
 
 
@@ -38,6 +40,7 @@ public class Battleground {
 
     private static float playerPath[][]; //player path
     private static float enemyPath[][]; //enemy path
+    private AStar enemyPathfinder;
 
     public Battleground(){
 
@@ -79,6 +82,10 @@ public class Battleground {
         playerCreeps = new ArrayList<Creep>();
 
         bullets = new ArrayList<Bullet>();
+
+        // player and enemy pathfinders
+        enemyPathfinder = new AStar(6,4,0,0,5,3,playerGrid);
+        enemyPath = enemyPathfinder.getFinalPath();
     }
 
     public boolean checkPlayerGridAvailable(int gridX, int gridY){
@@ -105,7 +112,7 @@ public class Battleground {
 
     public void addEnemyCreep(float health){
         enemyCreeps.add(new Creep(enemyCastle.getX()+2,playerCastle.getY()+2,health
-                ,new float[][]{{playerCastle.getX()+2, playerCastle.getY()+2}}));
+                , enemyPath));
     }
 
     public void addPlayerCreep(float health){
@@ -164,9 +171,9 @@ public class Battleground {
     }
 
     public boolean createPath(){
-        Cell[][] grid = new Cell[GRIDHEIGHT][GRIDWIDTH];
-
-        return false;
+        if(!enemyPathfinder.findPath()) return false;
+        enemyPath = enemyPathfinder.getFinalPath();
+        return true;
     }
 
 }
