@@ -84,12 +84,12 @@ public class BattlegroundRenderer implements Renderer{
         //player castle
         paint.setColor(Color.GREEN);
         c.drawRect(bg.getPlayerCastle().getX()*TILEWIDTH, bg.getPlayerCastle().getY()*TILEHEIGHT,
-                bg.getPlayerCastle().getX()*TILEWIDTH + 2*TILEWIDTH, bg.getPlayerCastle().getY()*TILEHEIGHT+4*TILEHEIGHT, paint);
+                bg.getPlayerCastle().getX()*TILEWIDTH + TILEWIDTH, bg.getPlayerCastle().getY()*TILEHEIGHT+TILEHEIGHT, paint);
 
         //enemy castle
         paint.setColor(Color.RED);
         c.drawRect(bg.getEnemyCastle().getX()*TILEWIDTH, bg.getEnemyCastle().getY()*TILEHEIGHT,
-                bg.getEnemyCastle().getX()*TILEWIDTH + 2*TILEWIDTH, bg.getEnemyCastle().getY()*TILEHEIGHT+4*TILEHEIGHT, paint);
+                bg.getEnemyCastle().getX()*TILEWIDTH + TILEWIDTH, bg.getEnemyCastle().getY()*TILEHEIGHT+TILEHEIGHT, paint);
         // line between bases
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(5);
@@ -125,7 +125,7 @@ public class BattlegroundRenderer implements Renderer{
 
         paint.setTextSize(c.getHeight()/20);
 
-        if(bg.spawning) {
+        if(bg.spawning || !bg.getEnemyCreeps().isEmpty()) {
             paint.setColor(Color.rgb(200, 255, 255));
             c.drawRect(0, c.getHeight() / 10 * 8, c.getWidth() / 10 * 6, c.getHeight(), paint);
             paint.setColor(Color.BLACK);

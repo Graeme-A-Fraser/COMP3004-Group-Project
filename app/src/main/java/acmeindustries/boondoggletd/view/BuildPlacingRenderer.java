@@ -29,7 +29,7 @@ public class BuildPlacingRenderer{
         }
 
         Paint paint = new Paint();
-        int TILEWIDTH = c.getWidth()/6;
+        int TILEWIDTH = c.getWidth()/10;
         int TILEHEIGHT = c.getHeight()/5;
 
         //bg
@@ -47,19 +47,19 @@ public class BuildPlacingRenderer{
         c.drawRect(0* TILEWIDTH, 0*TILEHEIGHT,
                 0* TILEWIDTH + TILEWIDTH, 0* TILEHEIGHT+ TILEHEIGHT, paint);
         paint.setColor(Color.RED);
-        c.drawRect(5* TILEWIDTH, 3*TILEHEIGHT,
-                5* TILEWIDTH + TILEWIDTH, 3* TILEHEIGHT+ TILEHEIGHT, paint);
+        c.drawRect(9* TILEWIDTH, 0*TILEHEIGHT,
+                9* TILEWIDTH + TILEWIDTH, 0* TILEHEIGHT+ TILEHEIGHT, paint);
 
         // drawing player grid
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(5);
-        for (int i = 0; i <= 6; i++) {
+        for (int i = 0; i <= 10; i++) {
             c.drawLine(bg.getX() + TILEWIDTH*i,bg.getY(),
                     bg.getX()+TILEWIDTH*i,bg.getY()+TILEHEIGHT*4,paint);
         }
         for (int i = 0; i <= 4; i++) {
             c.drawLine(bg.getX(),bg.getY() + TILEHEIGHT*i,
-                    bg.getX()+ TILEWIDTH*6,bg.getY() + TILEHEIGHT*i,paint);
+                    bg.getX()+ TILEWIDTH*10,bg.getY() + TILEHEIGHT*i,paint);
         }
 
 
@@ -69,27 +69,27 @@ public class BuildPlacingRenderer{
 
         //btn1
         paint.setColor(Color.rgb(200,255,255));
-        c.drawRect(0, c.getHeight()/5*4, c.getWidth()/6,c.getHeight(), paint);
+        c.drawRect(0, c.getHeight()/5*4, c.getWidth()/5,c.getHeight(), paint);
         paint.setColor(Color.BLACK);
         c.drawText("Confirm", 0, c.getHeight()/40*37, paint);
 
         //btn2
         paint.setColor(Color.rgb(255,200,255));
-        c.drawRect(c.getWidth()/6, c.getHeight()/5*4, c.getWidth()/3,c.getHeight(), paint);
+        c.drawRect(c.getWidth()/5, c.getHeight()/5*4, (c.getWidth()/5)*2,c.getHeight(), paint);
         paint.setColor(Color.BLACK);
-        c.drawText("Cancel", c.getWidth()/6, c.getHeight()/40*37, paint);
+        c.drawText("Undo", c.getWidth()/5, c.getHeight()/40*37, paint);
 
         //btn3
         paint.setColor(Color.rgb(255,255,200));
-        c.drawRect(c.getWidth()/6*2, c.getHeight()/5*4, c.getWidth()/6*3,c.getHeight(), paint);
+        c.drawRect((c.getWidth()/5)*2, c.getHeight()/5*4, (c.getWidth()/5)*3,c.getHeight(), paint);
         paint.setColor(Color.BLACK);
-        c.drawText("Back", c.getWidth()/6*2, c.getHeight()/40*37, paint);
+        c.drawText("Select", (c.getWidth()/5)*2, c.getHeight()/40*37, paint);
         // info text?
         paint.setColor(Color.BLACK);
-        c.drawRect(c.getWidth()/2, c.getHeight()/5*4, c.getWidth(),c.getHeight(), paint);
+        c.drawRect((c.getWidth()/5)*3, c.getHeight()/5*4, c.getWidth(),c.getHeight(), paint);
         paint.setColor(Color.YELLOW);
-        c.drawText(String.format("Gold: %d", player.getGold()), c.getWidth()/2, c.getHeight()/20*18, paint);
-        c.drawText(String.format("Lives: %d", player.getHp()), c.getWidth()/2, c.getHeight()/20*19, paint);
+        c.drawText(String.format("Gold: %d", player.getGold()), (c.getWidth()/5)*3, c.getHeight()/20*18, paint);
+        c.drawText(String.format("Lives: %d", player.getHp()), (c.getWidth()/5)*3, c.getHeight()/20*19, paint);
 
         //line for top of ui
         paint.setColor(Color.BLACK);

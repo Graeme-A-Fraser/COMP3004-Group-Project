@@ -10,7 +10,7 @@ import acmeindustries.boondoggletd.util.Cell;
 
 public class Battleground {
 
-    public static final int GRIDWIDTH = 6;
+    public static final int GRIDWIDTH = 10;
     public static final int GRIDHEIGHT = 4;
     public static final int TPS = 24;
 
@@ -47,13 +47,13 @@ public class Battleground {
 
         this.x = 0;
         this.y = 0;
-        playerGridX = 2;
+        playerGridX = 0;
         playerGridY = 4;
-        enemyGridX = 2;
+        enemyGridX = 0;
         enemyGridY = 0;
 
         playerCastle = new Castle(0,4);
-        enemyCastle = new Castle(8,0);
+        enemyCastle = new Castle(9,3);
 
         // init the player grid
         playerGrid = new Object[GRIDHEIGHT][GRIDWIDTH];
@@ -85,8 +85,8 @@ public class Battleground {
         bullets = new ArrayList<Bullet>();
 
         // player and enemy pathfinders
-        enemyPathfinder = new AStar(6,4,5,3,0,0,playerGrid);
-        playerPathfinder= new AStar(6,4,0,0,5,3,enemyGrid);
+        enemyPathfinder = new AStar(GRIDWIDTH,GRIDHEIGHT,9,0,0,0,playerGrid);
+        playerPathfinder= new AStar(GRIDWIDTH,GRIDHEIGHT,0,3,9,3,enemyGrid);
         enemyPath = enemyPathfinder.getFinalPath();
         playerPath = playerPathfinder.getFinalPath();
     }
@@ -102,24 +102,34 @@ public class Battleground {
     }
 
     // can later customize this for different types etc.
-    public void addPlayerTower(int gridX, int gridY, float damage, float speed){
-        playerGrid[gridY][gridX] = new Tower(TPS, gridX,gridY,20,damage,speed);
-        playerTowers.add((Tower)playerGrid[gridY][gridX]);
+    public void addPlayerTower(Tower t){
+        playerGrid[(int)t.getY()][(int)t.getX()] = t;
+        playerTowers.add(t);
     }
+
+    public void removePlayerTower(Tower t){
+        playerGrid[(int)t.getY()][(int)t.getX()] = null;
+        playerTowers.remove(t);
+    }
+
+    public Tower createPlayerTower(int gridX, int gridY, float damage, float speed, int cost){
+        return new Tower(TPS, gridX,gridY,damage,speed,cost);
+    }
+
     public void addEnemyTower(int gridX, int gridY, float damage, float speed){
-        enemyGrid[gridY][gridX] = new Tower(TPS, gridX,gridY,20,damage,speed);
+        enemyGrid[gridY][gridX] = new Tower(TPS, gridX,gridY,damage,speed, 0);
         enemyTowers.add((Tower)enemyGrid[gridY][gridX]);
     }
 
     //getters and setters
 
     public void addEnemyCreep(float health){
-        enemyCreeps.add(new Creep(enemyCastle.getX()+2,playerCastle.getY()+2,health
+        enemyCreeps.add(new Creep(enemyCastle.getX()+0.5f,playerCastle.getY()+0.5f,health
                 , enemyPath, getPlayerGridX()+0.5f,getPlayerGridY()+0.5f));
     }
 
     public void addPlayerCreep(float health){
-        playerCreeps.add(new Creep(playerCastle.getX(),enemyCastle.getY()+2,health,
+        playerCreeps.add(new Creep(playerCastle.getX()+0.5f,enemyCastle.getY()+0.5f,health,
                 playerPath, getEnemyGridX()+0.5f, getEnemyGridY()+0.5f));
     }
 

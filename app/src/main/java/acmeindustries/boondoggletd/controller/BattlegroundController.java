@@ -37,7 +37,17 @@ public class BattlegroundController {
 
         // testing
         bg.addEnemyTower(1,1,2,0.25f);
-        bg.addEnemyTower(2,1,2,0.25f);
+        bg.addEnemyTower(1,2,2,0.25f);
+        bg.addEnemyTower(1,3,2,0.25f);
+        bg.addEnemyTower(3,0,2,0.25f);
+        bg.addEnemyTower(3,1,2,0.25f);
+        bg.addEnemyTower(3,2,2,0.25f);
+        bg.addEnemyTower(5,1,2,0.25f);
+        bg.addEnemyTower(5,2,2,0.25f);
+        bg.addEnemyTower(5,3,2,0.25f);
+        bg.addEnemyTower(7,0,2,0.25f);
+        bg.addEnemyTower(7,1,2,0.25f);
+        bg.addEnemyTower(7,2,2,0.25f);
 
     }
 
@@ -97,7 +107,7 @@ public class BattlegroundController {
     }
 
     public void press(float x, float y){
-        if(bg.spawning) return;
+        if(bg.spawning || !bg.getEnemyCreeps().isEmpty()) return;
         if((x/width)*10<2 && (y/height)*10>8){
             player.gm = BUILDING_SELECTING;
         }

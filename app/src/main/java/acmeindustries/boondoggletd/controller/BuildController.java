@@ -2,8 +2,12 @@ package acmeindustries.boondoggletd.controller;
 
 import android.graphics.Canvas;
 
+import java.lang.reflect.Array;
+import java.util.ArrayDeque;
+
 import acmeindustries.boondoggletd.model.Battleground;
 import acmeindustries.boondoggletd.model.Player;
+import acmeindustries.boondoggletd.model.Tower;
 import acmeindustries.boondoggletd.view.BuildPlacingRenderer;
 import acmeindustries.boondoggletd.view.BuildSelectingRenderer;
 
@@ -25,8 +29,9 @@ public class BuildController {
     private float height;
     private int currentX, currentY;
     private int towerSelection;
+    private ArrayDeque<Tower> towers;
 
-    // consider moving these definitions to their own class so everyone can use
+    // TODO: REVAMP THIS HOW TOWER TYPES SHOULD BE IMPLEMENTED
     private float[][] towerTypes = {
             //cost, damage, speed
             {20, 1,0.25f},
@@ -49,36 +54,55 @@ public class BuildController {
         this.currentX = 0;
         this.currentY = 0;
         this.towerSelection = 0;
+        this.towers = new ArrayDeque<Tower>();
     }
 
     public void press(float x, float y){
         //System.out.printf("pressed at %f, %f - gridx: %d, gridy: %d\n", x, y, (int)((x/width)*8), (int)((y/height)*6));
-        // TODO: CLEAN THIS UP AND IMPLEMENT CANCEL
-        currentX = (int)((x/width)*6);
+        // TODO: CLEAN THIS UP AND IMPLEMENT UNDO
+        currentX = (int)((x/width)*10);
         currentY = (int)((y/height)*5);
         // if you click on the start / end nodes
-        if((currentX == 0 && currentY == 0) || (currentX == 5 && currentY == 3)) return;
+        if((currentX == 0 && currentY == 0) || (currentX == 9 && currentY == 0)) return;
         if(player.gm == BUILDING_PLACING) {
             if(currentY>=4){
-                if(currentX < 1) {
+                if(currentX < 2) {
                     // confirm
+                    // empty temporary stack
+                    while(!towers.isEmpty()){
+                        towers.pop();
+                    }
                     player.gm = BATTLEGROUND;
-                }else if(currentX < 2){
-                    // cancel
-                    player.gm = BATTLEGROUND;
-                }else if(currentX < 3){
+                }else if(currentX < 4){
+                    // undo
+                    if(!towers.isEmpty()){
+                        Tower t = towers.pop();
+                        player.setGold(player.getGold() + t.getCost());
+                        bg.removePlayerTower(t);
+                    }
+                }else if(currentX < 6){
+                    // select tower
                     player.gm = BUILDING_SELECTING;
                 }
             }else
-            if (player.getGold() >= towerTypes[towerSelection][0]) {
-                player.setGold(player.getGold() - (int)towerTypes[towerSelection][0]);
-                bg.addPlayerTower(currentX, currentY, towerTypes[towerSelection][1], towerTypes[towerSelection][2]);
+            if (player.getGold() >= towerTypes[towerSelection][0] && bg.checkPlayerGridAvailable(currentX, currentY)) {
+                // create tower and add to temporary stack
+                Tower t = bg.createPlayerTower(currentX,currentY,towerTypes[towerSelection][1], towerTypes[towerSelection][2], (int)towerTypes[towerSelection][0]);
+                towers.push(t);
+                bg.addPlayerTower(t);
+                player.setGold(player.getGold() - t.getCost());
+                // if no path is able to be made, undo changes
+                if(!bg.createPath()){
+                    towers.pop();
+                    bg.removePlayerTower(t);
+                    player.setGold(player.getGold() + t.getCost());
+                }
             }
         }else if(player.gm == BUILDING_SELECTING){
             if(currentY>=4){
                 player.gm = BUILDING_PLACING;
             }else{
-                this.towerSelection = currentY*2 + (currentX/3);
+                this.towerSelection = currentY*2 + (currentX/5);
             }
         }
 

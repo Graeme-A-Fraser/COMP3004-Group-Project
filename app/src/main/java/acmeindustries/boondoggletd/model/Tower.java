@@ -10,6 +10,7 @@ public class Tower {
     private float x;
     private float y;
     private float rotation;
+    private int cost;
     private float damage;
     private float speed; // projectile speed
     private float range;
@@ -18,7 +19,7 @@ public class Tower {
     private int currentLoading;
     private boolean loaded;
 
-    public Tower(float TPS, float x, float y, int cost, float damage, float speed){
+    public Tower(float TPS, float x, float y, float damage, float speed, int cost){
         this.TPS = TPS;
         this.x = x;
         this.y = y;
@@ -30,6 +31,7 @@ public class Tower {
         this.loadTime = (int)TPS;
         this.currentLoading = 0;
         this.loaded = true;
+        this.cost = cost;
     }
 
     public float getX() {
@@ -78,5 +80,13 @@ public class Tower {
 
     public float getSpeed() {
         return speed;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 }
