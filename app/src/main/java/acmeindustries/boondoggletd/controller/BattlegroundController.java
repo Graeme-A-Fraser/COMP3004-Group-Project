@@ -7,6 +7,7 @@ import java.util.Iterator;
 import acmeindustries.boondoggletd.model.Battleground;
 import acmeindustries.boondoggletd.model.Bullet;
 import acmeindustries.boondoggletd.model.Creep;
+import acmeindustries.boondoggletd.model.Notification;
 import acmeindustries.boondoggletd.model.Player;
 import acmeindustries.boondoggletd.view.BattlegroundRenderer;
 
@@ -16,6 +17,7 @@ public class BattlegroundController {
 
     private Player player;
     private Battleground bg;
+    private Notification notification;
     private Spawner spawner;
     private TowerController playerTC;
     private TowerController enemyTC;
@@ -23,7 +25,7 @@ public class BattlegroundController {
     private BattlegroundRenderer battlegroundRenderer;
     // width values of screen
     private float width, height;
-    public BattlegroundController(Player p, Battleground bg,float width,float height){
+    public BattlegroundController(Player p, Battleground bg, Notification n, float width,float height){
         this.player = p;
         this.bg = bg;
         this.width = width;
@@ -34,6 +36,7 @@ public class BattlegroundController {
                 this.bg.getBullets(), this.bg.getPlayerGridX(), this.bg.getPlayerGridY());
         this.enemyTC = new TowerController(this.bg.getEnemyTowers(), this.bg.getPlayerCreeps(),
                 this.bg.getBullets(), this.bg.getEnemyGridX(), this.bg.getEnemyGridY());
+        this.notification = n;
 
         // testing
         bg.addEnemyTower(1,1,2,0.25f);

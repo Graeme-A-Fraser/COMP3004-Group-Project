@@ -3,8 +3,6 @@ import android.graphics.Canvas;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
-import acmeindustries.boondoggletd.controller.GameEngine;
-
 /**
  * this class contains the main loop of the game, which we pass off to the 'engine' to handle at a higher level
  */

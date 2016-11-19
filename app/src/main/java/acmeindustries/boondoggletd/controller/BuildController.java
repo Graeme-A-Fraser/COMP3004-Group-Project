@@ -6,6 +6,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayDeque;
 
 import acmeindustries.boondoggletd.model.Battleground;
+import acmeindustries.boondoggletd.model.Notification;
 import acmeindustries.boondoggletd.model.Player;
 import acmeindustries.boondoggletd.model.Tower;
 import acmeindustries.boondoggletd.view.BuildPlacingRenderer;
@@ -30,6 +31,7 @@ public class BuildController {
     private int currentX, currentY;
     private int towerSelection;
     private ArrayDeque<Tower> towers;
+    private Notification notification;
 
     // TODO: REVAMP THIS HOW TOWER TYPES SHOULD BE IMPLEMENTED
     private float[][] towerTypes = {
@@ -44,7 +46,7 @@ public class BuildController {
             {500,200,0.25f}
     };
 
-    public BuildController(Player p, Battleground bg,float width,float height){
+    public BuildController(Player p, Battleground bg, Notification n, float width,float height){
         this.player = p;
         this.bg = bg;
         this.width = width;
@@ -55,6 +57,7 @@ public class BuildController {
         this.currentY = 0;
         this.towerSelection = 0;
         this.towers = new ArrayDeque<Tower>();
+        this.notification = n;
     }
 
     public void press(float x, float y){
@@ -93,6 +96,7 @@ public class BuildController {
                 player.setGold(player.getGold() - t.getCost());
                 // if no path is able to be made, undo changes
                 if(!bg.createPath()){
+                    notification.newNotification("Unable to build there.");
                     towers.pop();
                     bg.removePlayerTower(t);
                     player.setGold(player.getGold() + t.getCost());

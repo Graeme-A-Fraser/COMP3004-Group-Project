@@ -1,8 +1,13 @@
-package acmeindustries.boondoggletd.controller;
+package acmeindustries.boondoggletd;
 
 import android.graphics.Canvas;
 
+import acmeindustries.boondoggletd.controller.BattlegroundController;
+import acmeindustries.boondoggletd.controller.BuildController;
+import acmeindustries.boondoggletd.controller.NotificationController;
+import acmeindustries.boondoggletd.controller.RecruitController;
 import acmeindustries.boondoggletd.model.Battleground;
+import acmeindustries.boondoggletd.model.Notification;
 import acmeindustries.boondoggletd.model.Player;
 
 import static acmeindustries.boondoggletd.model.Player.GameMode.*;
@@ -10,10 +15,12 @@ import static acmeindustries.boondoggletd.model.Player.GameMode.*;
 public class GameEngine {
 
     private Player player;
+    private Notification notification;
 
     private BattlegroundController battlegroundController;
     private BuildController buildController;
     private RecruitController recruitController;
+    private NotificationController notificationController;
 
     private Battleground bg;
     private float width;
@@ -33,11 +40,13 @@ public class GameEngine {
     private void init() {
         bg = new Battleground();
         player = new Player(BATTLEGROUND);
+        notification = new Notification();
 
         // additional controllers for breaking out smaller tasks
-        battlegroundController = new BattlegroundController(player, bg, width, height);
-        buildController = new BuildController(player, bg, width, height);
-        recruitController = new RecruitController(player, bg, width, height);
+        battlegroundController = new BattlegroundController(player, bg, notification, width, height);
+        buildController = new BuildController(player, bg, notification, width, height);
+        recruitController = new RecruitController(player, bg, notification,  width, height);
+        notificationController = new NotificationController(notification);
     }
 
     public void press(float x, float y){
@@ -50,20 +59,24 @@ public class GameEngine {
             System.out.println("Problem creating tower.");
         }
         */
-        switch(player.gm){
-            case BATTLEGROUND:
-                // bg contro
-                battlegroundController.press(x, y);
-                break;
-            case BUILDING_SELECTING:
-            case BUILDING_PLACING:
-                // build controller?
-                buildController.press(x,y);
-                break;
-            case RECRUITING:
-                // recruit controller?
-                recruitController.press(x,y);
-                break;
+        if(notification.isActive()) {
+            notificationController.press(x,y);
+        }else {
+            switch (player.gm) {
+                case BATTLEGROUND:
+                    // bg contro
+                    battlegroundController.press(x, y);
+                    break;
+                case BUILDING_SELECTING:
+                case BUILDING_PLACING:
+                    // build controller?
+                    buildController.press(x, y);
+                    break;
+                case RECRUITING:
+                    // recruit controller?
+                    recruitController.press(x, y);
+                    break;
+            }
         }
     }
 
@@ -109,5 +122,6 @@ public class GameEngine {
                 recruitController.render(canvas);
                 break;
         }
+        notificationController.render(canvas);
     }
 }

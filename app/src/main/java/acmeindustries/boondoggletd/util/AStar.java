@@ -140,9 +140,10 @@ public class AStar {
                 finalPath[count][0] = current.getX();
                 finalPath[count][1] = current.getY();
             }
+            // path found!!!
             return true;
         }else{
-            System.out.println("no path found");
+            // no path found
             return false;
         }
     }

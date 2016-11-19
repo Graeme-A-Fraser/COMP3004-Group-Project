@@ -3,6 +3,7 @@ package acmeindustries.boondoggletd.controller;
 import android.graphics.Canvas;
 
 import acmeindustries.boondoggletd.model.Battleground;
+import acmeindustries.boondoggletd.model.Notification;
 import acmeindustries.boondoggletd.model.Player;
 import acmeindustries.boondoggletd.view.RecruitRenderer;
 
@@ -15,15 +16,17 @@ public class RecruitController {
     private Player player;
     private Battleground bg;
     private RecruitRenderer recruitRenderer;
+    private Notification notification;
     private float width;
     private float height;
 
-    public RecruitController(Player p, Battleground bg, float width, float height){
+    public RecruitController(Player p, Battleground bg, Notification n, float width, float height){
 
         this.player = p;
         this.bg = bg;
         this.width = width;
         this.height = height;
+        this.notification = n;
 
     }
 
