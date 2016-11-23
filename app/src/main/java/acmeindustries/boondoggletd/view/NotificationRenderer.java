@@ -22,14 +22,18 @@ public class NotificationRenderer  implements Renderer{
         if( c==null || !notification.isActive()) return;
 
         Paint paint = new Paint();
+        Paint paint2 = new Paint();
+        paint.setAntiAlias(true);
+        paint2.setAntiAlias(true);
         paint.setTextSize(c.getHeight()/20);
 
-        paint.setColor(Color.rgb(240,240,240));
-        c.drawRect(5, 5, c.getWidth() - 10,c.getHeight()/5 - 10, paint);
+        paint2.setColor(Color.rgb(240,240,240));
+        paint2.setShadowLayer(5f,0f,2f,Color.rgb(0,0,0));
+        c.drawRect(20, c.getHeight()/2 - c.getHeight()/7, c.getWidth() - 20,c.getHeight()/2 + c.getHeight()/7, paint2);
         paint.setColor(Color.BLACK);
-        c.drawText(notification.getText(), 10, c.getHeight()/10, paint);
+        c.drawText(notification.getText(), 50, c.getHeight()/2, paint);
         paint.setTextSize(c.getHeight()/30);
-        c.drawText("Tap to close.", 10, (c.getHeight()/10)+(c.getHeight()/20), paint);
+        c.drawText("Tap to close.", 50, (c.getHeight()/2)+(c.getHeight()/20), paint);
 
         /*
         paint.setStrokeWidth(5);

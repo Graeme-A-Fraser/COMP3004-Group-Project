@@ -7,6 +7,9 @@ import acmeindustries.boondoggletd.model.Notification;
 import acmeindustries.boondoggletd.model.Player;
 import acmeindustries.boondoggletd.view.RecruitRenderer;
 
+import static acmeindustries.boondoggletd.model.Player.GameMode.BATTLEGROUND;
+import static acmeindustries.boondoggletd.model.Player.GameMode.BUILDING_PLACING;
+
 /**
  * Created by ericm on 2016-10-21.
  */
@@ -27,13 +30,18 @@ public class RecruitController {
         this.width = width;
         this.height = height;
         this.notification = n;
+        this.recruitRenderer = new RecruitRenderer(bg, p);
 
     }
 
     public void press(float x, float y){
-        float currentX = (int)((x/width)*6);
-        float currentY = (int)((y/height)*5);
-
+        int currentX = (int)((x/width)*10);
+        int currentY = (int)((y/height)*5);
+        if(currentY>=4){
+            player.gm = BATTLEGROUND;
+        }else{
+            player.gm = BUILDING_PLACING;
+        }
     }
 
     public void update(){}

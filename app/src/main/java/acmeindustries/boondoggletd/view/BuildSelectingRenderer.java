@@ -30,6 +30,7 @@ public class BuildSelectingRenderer {
         }
 
         Paint paint = new Paint();
+        paint.setAntiAlias(true);
         int TILEWIDTH = c.getWidth()/6;
         int TILEHEIGHT = c.getHeight()/5;
 
@@ -41,15 +42,15 @@ public class BuildSelectingRenderer {
 
 
         //btn1
-        paint.setColor(Color.rgb(200,200,200));
-        c.drawRect(0, c.getHeight()/5*4, c.getWidth()/2,c.getHeight(), paint);
+        paint.setColor(Color.rgb(177, 189, 29));
+        c.drawRect(0, c.getHeight()/5*4, c.getWidth()/4,c.getHeight(), paint);
         paint.setColor(Color.BLACK);
-        c.drawText("Continue to Placement", 0, c.getHeight()/40*37, paint);
-        // info text?
+        c.drawText("Buy", 0, c.getHeight()/40*37, paint);
+        //btn2
+        paint.setColor(Color.rgb(73, 130, 133));
+        c.drawRect(c.getWidth()/4, c.getHeight()/5*4, c.getWidth()/2,c.getHeight(), paint);
         paint.setColor(Color.BLACK);
-        c.drawRect(c.getWidth()/2, c.getHeight()/5*4, c.getWidth(),c.getHeight(), paint);
-        paint.setColor(Color.YELLOW);
-        c.drawText("Info about tower selection.", c.getWidth()/2, c.getHeight()/40*37, paint);
+        c.drawText("Sell", c.getWidth()/4, c.getHeight()/40*37, paint);
         // HIGHLIGHT
         paint.setColor(Color.argb(100,0,255,255));
         c.drawRect(c.getWidth()/2*(selection%2), c.getHeight()/5*((int)(selection/2)), c.getWidth()/2 + c.getWidth()*((int)(selection%2)),c.getHeight()/5 + c.getHeight()/5*((int)(selection/2)), paint);
@@ -58,14 +59,17 @@ public class BuildSelectingRenderer {
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(5);
         c.drawLine(TILEWIDTH*6/2,0, TILEWIDTH*6/2,TILEHEIGHT*4, paint);
+        paint.setTextSize(c.getHeight()/30);
         for (int i = 0; i < 8; i+=2) {
             c.drawLine(0,TILEHEIGHT+TILEHEIGHT*i/2, TILEWIDTH*6,TILEHEIGHT + TILEHEIGHT*i/2, paint);
-            c.drawText(String.format("Cost: $%.0f", towers[i][0]), 0, TILEHEIGHT/3 + TILEHEIGHT*i/2, paint);
-            c.drawText(String.format("Damage: %.0f", towers[i][1]), 0, TILEHEIGHT/3*2 + TILEHEIGHT*i/2, paint);
-            c.drawText(String.format("Speed: %.0f", towers[i][2]), 0, TILEHEIGHT + TILEHEIGHT*i/2, paint);
-            c.drawText(String.format("Cost:  $%.0f", towers[i+1][0]), c.getWidth()/2, TILEHEIGHT/3 + TILEHEIGHT*i/2, paint);
-            c.drawText(String.format("Damage: %.0f", towers[i+1][1]), c.getWidth()/2, TILEHEIGHT/3*2 + TILEHEIGHT*i/2, paint);
-            c.drawText(String.format("Speed: %.0f", towers[i+1][2]), c.getWidth()/2, TILEHEIGHT + TILEHEIGHT*i/2, paint);
+            c.drawText("Name of Tower", 0, TILEHEIGHT/12*4 + TILEHEIGHT*i/2, paint);
+            c.drawText(String.format("Cost: $%.0f", towers[i][0]), 0, TILEHEIGHT/12*7 + TILEHEIGHT*i/2, paint);
+            c.drawText(String.format("Damage: %.0f", towers[i][1]), 0, TILEHEIGHT/12*9 + TILEHEIGHT*i/2, paint);
+            c.drawText(String.format("Speed: %.0f", towers[i][2]), 0, TILEHEIGHT/12*11 + TILEHEIGHT*i/2, paint);
+            c.drawText("Name of Tower", c.getWidth()/2, TILEHEIGHT/12*4 + TILEHEIGHT*i/2, paint);
+            c.drawText(String.format("Cost:  $%.0f", towers[i+1][0]), c.getWidth()/2, TILEHEIGHT/12*7 + TILEHEIGHT*i/2, paint);
+            c.drawText(String.format("Damage: %.0f", towers[i+1][1]), c.getWidth()/2, TILEHEIGHT/12*9 + TILEHEIGHT*i/2, paint);
+            c.drawText(String.format("Speed: %.0f", towers[i+1][2]), c.getWidth()/2, TILEHEIGHT/12*11 + TILEHEIGHT*i/2, paint);
         }
         paint.setColor(Color.BLACK);
         c.drawRect(c.getWidth()/2, c.getHeight()/5*4, c.getWidth(),c.getHeight(), paint);

@@ -69,6 +69,7 @@ public class GameEngine {
                     break;
                 case BUILDING_SELECTING:
                 case BUILDING_PLACING:
+                case SELLING:
                     // build controller?
                     buildController.press(x, y);
                     break;
@@ -116,6 +117,7 @@ public class GameEngine {
                 break;
             case BUILDING_SELECTING:
             case BUILDING_PLACING:
+            case SELLING:
                 buildController.render(canvas);
                 break;
             case RECRUITING:

@@ -53,7 +53,7 @@ public class Battleground {
         enemyGridY = 0;
 
         playerCastle = new Castle(0,4);
-        enemyCastle = new Castle(9,3);
+        enemyCastle = new Castle(8,0);
 
         // init the player grid
         playerGrid = new Object[GRIDHEIGHT][GRIDWIDTH];
@@ -86,7 +86,7 @@ public class Battleground {
 
         // player and enemy pathfinders
         enemyPathfinder = new AStar(GRIDWIDTH,GRIDHEIGHT,9,0,0,0,playerGrid);
-        playerPathfinder= new AStar(GRIDWIDTH,GRIDHEIGHT,0,3,9,3,enemyGrid);
+        playerPathfinder= new AStar(GRIDWIDTH,GRIDHEIGHT,0,0,9,1,enemyGrid);
         enemyPath = enemyPathfinder.getFinalPath();
         playerPath = playerPathfinder.getFinalPath();
     }
@@ -116,20 +116,25 @@ public class Battleground {
         return new Tower(TPS, gridX,gridY,damage,speed,cost);
     }
 
+    public Tower getPlayerTower(int x, int y){
+        return (Tower)playerGrid[y][x];
+    }
+
     public void addEnemyTower(int gridX, int gridY, float damage, float speed){
         enemyGrid[gridY][gridX] = new Tower(TPS, gridX,gridY,damage,speed, 0);
         enemyTowers.add((Tower)enemyGrid[gridY][gridX]);
     }
 
+
     //getters and setters
 
     public void addEnemyCreep(float health){
-        enemyCreeps.add(new Creep(enemyCastle.getX()+0.5f,playerCastle.getY()+0.5f,health
+        enemyCreeps.add(new Creep(9.5f,4.5f,health
                 , enemyPath, getPlayerGridX()+0.5f,getPlayerGridY()+0.5f));
     }
 
     public void addPlayerCreep(float health){
-        playerCreeps.add(new Creep(playerCastle.getX()+0.5f,enemyCastle.getY()+0.5f,health,
+        playerCreeps.add(new Creep(0.5f,3.5f,health,
                 playerPath, getEnemyGridX()+0.5f, getEnemyGridY()+0.5f));
     }
 

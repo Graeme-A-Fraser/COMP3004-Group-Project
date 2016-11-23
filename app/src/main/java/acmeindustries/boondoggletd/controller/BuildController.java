@@ -15,6 +15,7 @@ import acmeindustries.boondoggletd.view.BuildSelectingRenderer;
 import static acmeindustries.boondoggletd.model.Player.GameMode.BATTLEGROUND;
 import static acmeindustries.boondoggletd.model.Player.GameMode.BUILDING_PLACING;
 import static acmeindustries.boondoggletd.model.Player.GameMode.BUILDING_SELECTING;
+import static acmeindustries.boondoggletd.model.Player.GameMode.SELLING;
 
 /**
  * class for controlling the build view
@@ -63,12 +64,12 @@ public class BuildController {
     public void press(float x, float y){
         //System.out.printf("pressed at %f, %f - gridx: %d, gridy: %d\n", x, y, (int)((x/width)*8), (int)((y/height)*6));
         // TODO: CLEAN THIS UP AND IMPLEMENT UNDO
-        currentX = (int)((x/width)*10);
+        currentX = (int)((x/width)*8)+2;
         currentY = (int)((y/height)*5);
         // if you click on the start / end nodes
-        if((currentX == 0 && currentY == 0) || (currentX == 9 && currentY == 0)) return;
         if(player.gm == BUILDING_PLACING) {
             if(currentY>=4){
+                currentX = (int)((x/width)*10);
                 if(currentX < 2) {
                     // confirm
                     // empty temporary stack
@@ -82,31 +83,86 @@ public class BuildController {
                         Tower t = towers.pop();
                         player.setGold(player.getGold() + t.getCost());
                         bg.removePlayerTower(t);
+                    } else {
+                        notification.newNotification("Nothing to undo.");
                     }
                 }else if(currentX < 6){
                     // select tower
+                    while(!towers.isEmpty()){
+                        Tower t = towers.pop();
+                        player.setGold(player.getGold() + t.getCost());
+                        bg.removePlayerTower(t);
+                    }
                     player.gm = BUILDING_SELECTING;
                 }
             }else
             if (player.getGold() >= towerTypes[towerSelection][0] && bg.checkPlayerGridAvailable(currentX, currentY)) {
                 // create tower and add to temporary stack
+                if(currentX == 9 && currentY == 0){
+                    notification.newNotification("Unable to build on enemy spawn.");
+                    return;
+                };
                 Tower t = bg.createPlayerTower(currentX,currentY,towerTypes[towerSelection][1], towerTypes[towerSelection][2], (int)towerTypes[towerSelection][0]);
                 towers.push(t);
                 bg.addPlayerTower(t);
                 player.setGold(player.getGold() - t.getCost());
                 // if no path is able to be made, undo changes
                 if(!bg.createPath()){
-                    notification.newNotification("Unable to build there.");
+                    notification.newNotification("Cannot place in path of creeps.");
                     towers.pop();
                     bg.removePlayerTower(t);
                     player.setGold(player.getGold() + t.getCost());
                 }
             }
         }else if(player.gm == BUILDING_SELECTING){
+            currentX = (int)((x/width)*10);
             if(currentY>=4){
-                player.gm = BUILDING_PLACING;
+                if(currentX < 2) {
+                    player.gm = BUILDING_PLACING;
+                }else {
+                    player.gm = SELLING;
+                }
             }else{
                 this.towerSelection = currentY*2 + (currentX/5);
+            }
+        }else if(player.gm == SELLING){
+            if(currentY>=4){
+                currentX = (int)((x/width)*10);
+                if(currentX < 2) {
+                    // confirm
+                    // empty temporary stack
+                    while(!towers.isEmpty()){
+                        towers.pop();
+                    }
+                    player.gm = BATTLEGROUND;
+                }else if(currentX < 4){
+                    // undo
+                    if(!towers.isEmpty()){
+                        Tower t = towers.pop();
+                        player.setGold(player.getGold() - t.getCost()/2);
+                        bg.addPlayerTower(t);
+                    } else {
+                        notification.newNotification("Nothing to undo.");
+                    }
+                }else if(currentX < 6){
+                    // select tower
+                    while(!towers.isEmpty()){
+                        Tower t = towers.pop();
+                        player.setGold(player.getGold() - t.getCost()/2);
+                        bg.addPlayerTower(t);
+                    }
+                    player.gm = BUILDING_SELECTING;
+                }
+            }else
+            if (currentX > 0 && currentY >= 0 && currentX < 10 && currentY < 5) {
+                Tower t = bg.getPlayerTower(currentX,currentY);
+                if(t == null){
+                    notification.newNotification("Tower not found at selected location.");
+                } else {
+                    towers.push(t);
+                    bg.removePlayerTower(t);
+                    player.setGold(player.getGold() + t.getCost()/2);
+                }
             }
         }
 
@@ -116,7 +172,7 @@ public class BuildController {
     public void update(){}
 
     public void render(Canvas canvas){
-        if(player.gm == BUILDING_PLACING) {
+        if(player.gm == BUILDING_PLACING || player.gm == SELLING) {
             this.buildPlacingRenderer.render(canvas, this.towerTypes);
         }else if(player.gm == BUILDING_SELECTING){
             this.buildSelectingRenderer.render(canvas, this.towerSelection, this.towerTypes);

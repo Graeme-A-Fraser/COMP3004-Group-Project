@@ -29,7 +29,8 @@ public class BuildPlacingRenderer{
         }
 
         Paint paint = new Paint();
-        int TILEWIDTH = c.getWidth()/10;
+        paint.setAntiAlias(true);
+        int TILEWIDTH = c.getWidth()/8;
         int TILEHEIGHT = c.getHeight()/5;
 
         //bg
@@ -38,17 +39,14 @@ public class BuildPlacingRenderer{
         paint.setColor(Color.rgb(255,203,5));
         for (Tower t:bg.getPlayerTowers()
                 ) {
-            c.drawRect(t.getX()* TILEWIDTH, t.getY()*TILEHEIGHT,
-                    t.getX()* TILEWIDTH + TILEWIDTH, t.getY()* TILEHEIGHT+ TILEHEIGHT, paint);
+            c.drawRect(t.getX()* TILEWIDTH - (2*TILEWIDTH), t.getY()*TILEHEIGHT,
+                    t.getX()* TILEWIDTH + TILEWIDTH - (2*TILEWIDTH), t.getY()* TILEHEIGHT+ TILEHEIGHT, paint);
         }
 
         // START & END
-        paint.setColor(Color.GREEN);
-        c.drawRect(0* TILEWIDTH, 0*TILEHEIGHT,
-                0* TILEWIDTH + TILEWIDTH, 0* TILEHEIGHT+ TILEHEIGHT, paint);
         paint.setColor(Color.RED);
-        c.drawRect(9* TILEWIDTH, 0*TILEHEIGHT,
-                9* TILEWIDTH + TILEWIDTH, 0* TILEHEIGHT+ TILEHEIGHT, paint);
+        c.drawRect(7* TILEWIDTH, 0*TILEHEIGHT,
+                7* TILEWIDTH + TILEWIDTH, 0* TILEHEIGHT+ TILEHEIGHT, paint);
 
         // drawing player grid
         paint.setColor(Color.BLACK);
@@ -83,7 +81,7 @@ public class BuildPlacingRenderer{
         paint.setColor(Color.rgb(255,255,200));
         c.drawRect((c.getWidth()/5)*2, c.getHeight()/5*4, (c.getWidth()/5)*3,c.getHeight(), paint);
         paint.setColor(Color.BLACK);
-        c.drawText("Select", (c.getWidth()/5)*2, c.getHeight()/40*37, paint);
+        c.drawText("Back", (c.getWidth()/5)*2, c.getHeight()/40*37, paint);
         // info text?
         paint.setColor(Color.BLACK);
         c.drawRect((c.getWidth()/5)*3, c.getHeight()/5*4, c.getWidth(),c.getHeight(), paint);

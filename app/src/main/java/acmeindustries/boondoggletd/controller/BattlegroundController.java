@@ -12,6 +12,7 @@ import acmeindustries.boondoggletd.model.Player;
 import acmeindustries.boondoggletd.view.BattlegroundRenderer;
 
 import static acmeindustries.boondoggletd.model.Player.GameMode.BUILDING_SELECTING;
+import static acmeindustries.boondoggletd.model.Player.GameMode.RECRUITING;
 
 public class BattlegroundController {
 
@@ -33,9 +34,9 @@ public class BattlegroundController {
         this.battlegroundRenderer = new BattlegroundRenderer(bg, player);
         this.spawner = new Spawner(this.bg);
         this.playerTC = new TowerController(this.bg.getPlayerTowers(), this.bg.getEnemyCreeps(),
-                this.bg.getBullets(), this.bg.getPlayerGridX(), this.bg.getPlayerGridY());
+                this.bg.getBullets(), this.bg.getPlayerGridX(), this.bg.getPlayerGridY(), true);
         this.enemyTC = new TowerController(this.bg.getEnemyTowers(), this.bg.getPlayerCreeps(),
-                this.bg.getBullets(), this.bg.getEnemyGridX(), this.bg.getEnemyGridY());
+                this.bg.getBullets(), this.bg.getEnemyGridX(), this.bg.getEnemyGridY(), false);
         this.notification = n;
 
         // testing
@@ -88,6 +89,7 @@ public class BattlegroundController {
             Creep c = it.next();
             c.move();
             if(!c.isAlive()){
+                player.setHp(player.getHp()-1);
                 it.remove();
             }
             if(c.getHp() <= 0){
@@ -110,11 +112,12 @@ public class BattlegroundController {
     }
 
     public void press(float x, float y){
-        if(bg.spawning || !bg.getEnemyCreeps().isEmpty()) return;
-        if((x/width)*10<2 && (y/height)*10>8){
+        if(bg.spawning || !bg.getEnemyCreeps().isEmpty() || (y/height)*5 < 4) return;
+        if((x/width)*10<2){
             player.gm = BUILDING_SELECTING;
-        }
-        if((x/width)*10>=4 && (x/width)*10<6 && (y/height)*10>8){
+        } else if((x/width)*10<4){
+            player.gm = RECRUITING;
+        } else if((x/width)*10>=4){
             bg.createPath();
             spawner.startRound();
         }

@@ -32,6 +32,7 @@ public class BattlegroundRenderer implements Renderer{
             return;
         }
         Paint paint = new Paint();
+        paint.setAntiAlias(true);
         TILEWIDTH = c.getWidth()/10;
         TILEHEIGHT = c.getHeight()/10;
 
@@ -74,26 +75,15 @@ public class BattlegroundRenderer implements Renderer{
                     TILEHEIGHT/6, paint);
         }
         // enemy towers
-        paint.setColor(Color.rgb(255,203,5));
         for (Tower t:bg.getEnemyTowers()
                 ) {
+            paint.setColor(Color.rgb(255,203,5));
             c.drawRect(t.getX()* TILEWIDTH + TILEWIDTH*bg.getEnemyGridX(), t.getY()*TILEHEIGHT + TILEHEIGHT*bg.getEnemyGridY(),
                     t.getX()* TILEWIDTH + TILEWIDTH*bg.getEnemyGridX() + TILEWIDTH, t.getY()* TILEHEIGHT+TILEHEIGHT*bg.getEnemyGridY() + TILEHEIGHT, paint);
+            paint.setColor(Color.GREEN);
+            c.drawCircle(t.getX()* TILEWIDTH + TILEWIDTH*bg.getEnemyGridX()+TILEWIDTH/2, t.getY()*TILEHEIGHT + TILEHEIGHT*bg.getEnemyGridY()+TILEHEIGHT/2,
+                    TILEHEIGHT/6, paint);
         }
-
-        //player castle
-        paint.setColor(Color.GREEN);
-        c.drawRect(bg.getPlayerCastle().getX()*TILEWIDTH, bg.getPlayerCastle().getY()*TILEHEIGHT,
-                bg.getPlayerCastle().getX()*TILEWIDTH + TILEWIDTH, bg.getPlayerCastle().getY()*TILEHEIGHT+TILEHEIGHT, paint);
-
-        //enemy castle
-        paint.setColor(Color.RED);
-        c.drawRect(bg.getEnemyCastle().getX()*TILEWIDTH, bg.getEnemyCastle().getY()*TILEHEIGHT,
-                bg.getEnemyCastle().getX()*TILEWIDTH + TILEWIDTH, bg.getEnemyCastle().getY()*TILEHEIGHT+TILEHEIGHT, paint);
-        // line between bases
-        paint.setColor(Color.BLACK);
-        paint.setStrokeWidth(5);
-        c.drawLine(bg.getPlayerCastle().getX()*TILEWIDTH, bg.getPlayerCastle().getY()*TILEHEIGHT, (bg.getEnemyCastle().getX()+2)*TILEWIDTH, bg.getPlayerCastle().getY()*TILEHEIGHT, paint);
 
         //enemy creeps
         for (Creep creep:bg.getEnemyCreeps()
@@ -120,6 +110,20 @@ public class BattlegroundRenderer implements Renderer{
             c.drawCircle(b.getX()*TILEWIDTH,b.getY()*TILEHEIGHT,
                     0.1f*TILEHEIGHT, paint);
         }
+        //player castle
+        paint.setColor(Color.GREEN);
+        c.drawRect(bg.getPlayerCastle().getX()*TILEWIDTH, bg.getPlayerCastle().getY()*TILEHEIGHT,
+                bg.getPlayerCastle().getX()*TILEWIDTH + TILEWIDTH*2, bg.getPlayerCastle().getY()*TILEHEIGHT+TILEHEIGHT*4, paint);
+
+        //enemy castle
+        paint.setColor(Color.RED);
+        c.drawRect(bg.getEnemyCastle().getX()*TILEWIDTH, bg.getEnemyCastle().getY()*TILEHEIGHT,
+                bg.getEnemyCastle().getX()*TILEWIDTH + TILEWIDTH*2, bg.getEnemyCastle().getY()*TILEHEIGHT+TILEHEIGHT*4, paint);
+        // line between bases
+        paint.setColor(Color.BLACK);
+        paint.setStrokeWidth(5);
+        c.drawLine(bg.getPlayerCastle().getX()*TILEWIDTH, bg.getPlayerCastle().getY()*TILEHEIGHT, (bg.getEnemyCastle().getX()+2)*TILEWIDTH, bg.getPlayerCastle().getY()*TILEHEIGHT, paint);
+
         //action bar/gui TODO: maybe seperate this into its own class?
 
 
