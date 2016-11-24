@@ -20,7 +20,7 @@ public class Spawner {
     }
 
     public void startRound(){
-        this.creepsRemaining= 10;
+        this.creepsRemaining= 1;
         bg.spawning = true;
     }
 

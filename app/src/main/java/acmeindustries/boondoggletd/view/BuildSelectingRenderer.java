@@ -22,7 +22,7 @@ public class BuildSelectingRenderer {
         this.player = player;
     }
 
-    public void render(Canvas c, int selection, float[][] towers) {
+    public void render(Canvas c, int selection, Tower[] towers) {
 
         // if this isn't here sometimes tries to write to a non-existent canvas throwing a null error
         if(c == null){
@@ -62,14 +62,12 @@ public class BuildSelectingRenderer {
         paint.setTextSize(c.getHeight()/30);
         for (int i = 0; i < 8; i+=2) {
             c.drawLine(0,TILEHEIGHT+TILEHEIGHT*i/2, TILEWIDTH*6,TILEHEIGHT + TILEHEIGHT*i/2, paint);
-            c.drawText("Name of Tower", 0, TILEHEIGHT/12*4 + TILEHEIGHT*i/2, paint);
-            c.drawText(String.format("Cost: $%.0f", towers[i][0]), 0, TILEHEIGHT/12*7 + TILEHEIGHT*i/2, paint);
-            c.drawText(String.format("Damage: %.0f", towers[i][1]), 0, TILEHEIGHT/12*9 + TILEHEIGHT*i/2, paint);
-            c.drawText(String.format("Speed: %.0f", towers[i][2]), 0, TILEHEIGHT/12*11 + TILEHEIGHT*i/2, paint);
-            c.drawText("Name of Tower", c.getWidth()/2, TILEHEIGHT/12*4 + TILEHEIGHT*i/2, paint);
-            c.drawText(String.format("Cost:  $%.0f", towers[i+1][0]), c.getWidth()/2, TILEHEIGHT/12*7 + TILEHEIGHT*i/2, paint);
-            c.drawText(String.format("Damage: %.0f", towers[i+1][1]), c.getWidth()/2, TILEHEIGHT/12*9 + TILEHEIGHT*i/2, paint);
-            c.drawText(String.format("Speed: %.0f", towers[i+1][2]), c.getWidth()/2, TILEHEIGHT/12*11 + TILEHEIGHT*i/2, paint);
+            c.drawText(String.format("%s", towers[i]), 0, TILEHEIGHT/12*4 + TILEHEIGHT*i/2, paint);
+            c.drawText(String.format("Cost: $%d", towers[i].getCost()), 0, TILEHEIGHT/12*7 + TILEHEIGHT*i/2, paint);
+            c.drawText(String.format("Damage: %.0f", towers[i].getDamage()), 0, TILEHEIGHT/12*9 + TILEHEIGHT*i/2, paint);
+            c.drawText(String.format("%s", towers[i].toString()), c.getWidth()/2, TILEHEIGHT/12*4 + TILEHEIGHT*i/2, paint);
+            c.drawText(String.format("Cost:  $%d", towers[i+1].getCost()), c.getWidth()/2, TILEHEIGHT/12*7 + TILEHEIGHT*i/2, paint);
+            c.drawText(String.format("Damage: %.0f", towers[i+1].getDamage()), c.getWidth()/2, TILEHEIGHT/12*9 + TILEHEIGHT*i/2, paint);
         }
         paint.setColor(Color.BLACK);
         c.drawRect(c.getWidth()/2, c.getHeight()/5*4, c.getWidth(),c.getHeight(), paint);

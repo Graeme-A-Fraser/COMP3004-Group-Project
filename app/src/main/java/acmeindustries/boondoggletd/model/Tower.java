@@ -1,37 +1,46 @@
 package acmeindustries.boondoggletd.model;
 
+import android.graphics.Color;
+
+import java.util.PriorityQueue;
+
 /**
  * tower class - more abstract as it generally wont be used
  */
 
 public class Tower {
 
-    private float TPS;
+    public enum DamageType {
+        STANDARD, SLOW, BURN
+    }
+
     private float x;
     private float y;
     private float rotation;
+    private float reloadMultiplier;
     private int cost;
     private float damage;
-    private float speed; // projectile speed
     private float range;
     private Creep target;
-    private int loadTime;
-    private int currentLoading;
+    private float loadTime;
+    private float currentLoading;
     private boolean loaded;
+    private DamageType damageType;
 
-    public Tower(float TPS, float x, float y, float damage, float speed, int cost){
-        this.TPS = TPS;
+    public Tower(float TPS, float x, float y, float damage, float reloadMultiplier, int cost, DamageType type){
         this.x = x;
         this.y = y;
         this.damage = damage;
-        this.speed = speed;
         this.rotation =0;
         this.range = 2f;
         this.target = null;
-        this.loadTime = (int)TPS;
+        this.loadTime = TPS*reloadMultiplier;
         this.currentLoading = 0;
         this.loaded = true;
         this.cost = cost;
+        this.damageType = type;
+        this.reset();
+        this.reloadMultiplier = reloadMultiplier;
     }
 
     public float getX() {
@@ -54,15 +63,11 @@ public class Tower {
         this.target = target;
     }
 
-    public int getLoadTime() {
-        return loadTime;
-    }
-
-    public int getCurrentLoading() {
+    public float getCurrentLoading() {
         return currentLoading;
     }
 
-    public void setCurrentLoading(int currentLoading) {
+    public void setCurrentLoading(float currentLoading) {
         this.currentLoading = currentLoading;
     }
 
@@ -74,19 +79,49 @@ public class Tower {
         this.loaded = loaded;
     }
 
-    public float getDamage() {
-        return damage;
+    public void reset(){
+        this.loaded = false;
+        this.currentLoading = this.loadTime;
     }
 
-    public float getSpeed() {
-        return speed;
+    public float getDamage() {
+        return damage;
     }
 
     public int getCost() {
         return cost;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
+    public DamageType getDamageType() {
+        return damageType;
+    }
+
+    public int getColor() {
+        switch(damageType){
+            case BURN:
+                return Color.RED;
+            case SLOW:
+                return Color.BLUE;
+            default:
+                return Color.BLACK;
+        }
+    }
+
+    public float getReloadMultiplier() {
+        return reloadMultiplier;
+    }
+
+    @Override
+    public String toString() {
+        switch(damageType){
+            case STANDARD:
+                return "Standard Tower";
+            case BURN:
+                return "Burn Tower";
+            case SLOW:
+                return "Slow Tower";
+            default:
+                return "I don't know what type this is.";
+        }
     }
 }

@@ -35,16 +35,15 @@ public class BuildController {
     private Notification notification;
 
     // TODO: REVAMP THIS HOW TOWER TYPES SHOULD BE IMPLEMENTED
-    private float[][] towerTypes = {
-            //cost, damage, speed
-            {20, 1,0.25f},
-            {30, 2,0.25f},
-            {50, 5,0.25f},
-            {75, 10,0.25f},
-            {150,25,0.25f},
-            {250,60,0.25f},
-            {400,100,0.25f},
-            {500,200,0.25f}
+    private Tower[] towerTypes = {
+            new Tower(0, 0, 0, 5, 1, 25, Tower.DamageType.STANDARD),
+            new Tower(0, 0, 0, 10, 1, 50, Tower.DamageType.STANDARD),
+            new Tower(0, 0, 0, 25, 0.5f, 75, Tower.DamageType.STANDARD),
+            new Tower(0, 0, 0, 50, 0.5f, 100, Tower.DamageType.STANDARD),
+            new Tower(0, 0, 0, 10, 2, 25, Tower.DamageType.SLOW),
+            new Tower(0, 0, 0, 40, 2, 50, Tower.DamageType.SLOW),
+            new Tower(0, 0, 0, 25, 1, 25, Tower.DamageType.BURN),
+            new Tower(0, 0, 0, 50, 0.5f, 50, Tower.DamageType.BURN)
     };
 
     public BuildController(Player p, Battleground bg, Notification n, float width,float height){
@@ -96,13 +95,13 @@ public class BuildController {
                     player.gm = BUILDING_SELECTING;
                 }
             }else
-            if (player.getGold() >= towerTypes[towerSelection][0] && bg.checkPlayerGridAvailable(currentX, currentY)) {
+            if (player.getGold() >= towerTypes[towerSelection].getCost() && bg.checkPlayerGridAvailable(currentX, currentY)) {
                 // create tower and add to temporary stack
                 if(currentX == 9 && currentY == 0){
                     notification.newNotification("Unable to build on enemy spawn.");
                     return;
                 };
-                Tower t = bg.createPlayerTower(currentX,currentY,towerTypes[towerSelection][1], towerTypes[towerSelection][2], (int)towerTypes[towerSelection][0]);
+                Tower t = bg.createPlayerTower(currentX,currentY,towerTypes[towerSelection].getDamage(), towerTypes[towerSelection].getReloadMultiplier(), (int)towerTypes[towerSelection].getCost(), towerTypes[towerSelection].getDamageType());
                 towers.push(t);
                 bg.addPlayerTower(t);
                 player.setGold(player.getGold() - t.getCost());
@@ -173,7 +172,7 @@ public class BuildController {
 
     public void render(Canvas canvas){
         if(player.gm == BUILDING_PLACING || player.gm == SELLING) {
-            this.buildPlacingRenderer.render(canvas, this.towerTypes);
+            this.buildPlacingRenderer.render(canvas);
         }else if(player.gm == BUILDING_SELECTING){
             this.buildSelectingRenderer.render(canvas, this.towerSelection, this.towerTypes);
         }

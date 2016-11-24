@@ -9,6 +9,7 @@ import acmeindustries.boondoggletd.model.Bullet;
 import acmeindustries.boondoggletd.model.Creep;
 import acmeindustries.boondoggletd.model.Notification;
 import acmeindustries.boondoggletd.model.Player;
+import acmeindustries.boondoggletd.model.Tower;
 import acmeindustries.boondoggletd.view.BattlegroundRenderer;
 
 import static acmeindustries.boondoggletd.model.Player.GameMode.BUILDING_SELECTING;
@@ -39,19 +40,11 @@ public class BattlegroundController {
                 this.bg.getBullets(), this.bg.getEnemyGridX(), this.bg.getEnemyGridY(), false);
         this.notification = n;
 
-        // testing
-        bg.addEnemyTower(1,1,2,0.25f);
-        bg.addEnemyTower(1,2,2,0.25f);
-        bg.addEnemyTower(1,3,2,0.25f);
-        bg.addEnemyTower(3,0,2,0.25f);
-        bg.addEnemyTower(3,1,2,0.25f);
-        bg.addEnemyTower(3,2,2,0.25f);
-        bg.addEnemyTower(5,1,2,0.25f);
-        bg.addEnemyTower(5,2,2,0.25f);
-        bg.addEnemyTower(5,3,2,0.25f);
-        bg.addEnemyTower(7,0,2,0.25f);
-        bg.addEnemyTower(7,1,2,0.25f);
-        bg.addEnemyTower(7,2,2,0.25f);
+        /* testing
+        bg.addEnemyTower(1,1,2,0.25f, Tower.DamageType.STANDARD);
+        bg.addEnemyTower(1,2,2,0.25f, Tower.DamageType.STANDARD);
+        bg.addEnemyTower(1,3,2,0.25f, Tower.DamageType.STANDARD);
+        */
 
     }
 
@@ -76,7 +69,13 @@ public class BattlegroundController {
             float angle = (float)Math.atan2(ydist, xdist);
             b.setX(b.getX() + (float)Math.cos(angle)*b.getSpeed());
             b.setY(b.getY() + (float)Math.sin(angle)*b.getSpeed());
-            if(Math.abs(xdist+ydist) < 0.25f){
+            // when bullet hits
+            if(Math.abs(xdist+ydist) < 0.2f){
+                if(b.getType() == Tower.DamageType.SLOW) {
+                    b.getTarget().slowDown(2, 0.5f);
+                }else if(b.getType() == Tower.DamageType.BURN){
+                    b.getTarget().burn(2, b.getDamage()/48);
+                }
                 b.getTarget().setHp(b.getTarget().getHp()-b.getDamage());
                 itBullet.remove();
             }
@@ -87,7 +86,7 @@ public class BattlegroundController {
         Iterator<Creep> it = bg.getEnemyCreeps().iterator();
         while(it.hasNext()){
             Creep c = it.next();
-            c.move();
+            c.update();
             if(!c.isAlive()){
                 player.setHp(player.getHp()-1);
                 it.remove();
@@ -100,7 +99,7 @@ public class BattlegroundController {
         it = bg.getPlayerCreeps().iterator();
         while(it.hasNext()){
             Creep c = it.next();
-            c.move();
+            c.update();
             if(!c.isAlive()){
                 it.remove();
             }

@@ -43,14 +43,9 @@ public class RecruitRenderer implements Renderer {
 
         //btn1
         paint.setColor(Color.rgb(177, 189, 29));
-        c.drawRect(0, c.getHeight()/5*4, c.getWidth()/4,c.getHeight(), paint);
+        c.drawRect(0, c.getHeight()/5*4, c.getWidth()/2,c.getHeight(), paint);
         paint.setColor(Color.BLACK);
-        c.drawText("Buy", 0, c.getHeight()/40*37, paint);
-        //btn2
-        paint.setColor(Color.rgb(73, 130, 133));
-        c.drawRect(c.getWidth()/4, c.getHeight()/5*4, c.getWidth()/2,c.getHeight(), paint);
-        paint.setColor(Color.BLACK);
-        c.drawText("Sell", c.getWidth()/4, c.getHeight()/40*37, paint);
+        c.drawText("Confirm Selection", 0, c.getHeight()/40*37, paint);
         // gold
         paint.setColor(Color.BLACK);
         c.drawRect(c.getWidth()/2, c.getHeight()/5*4, c.getWidth(),c.getHeight(), paint);

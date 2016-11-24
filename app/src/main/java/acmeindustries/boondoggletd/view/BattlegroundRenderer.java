@@ -39,35 +39,10 @@ public class BattlegroundRenderer implements Renderer{
         //bg
         c.drawRGB(100,100,100);
 
-        /* drawing player grid
-        paint.setColor(Color.GREEN);
-        paint.setStrokeWidth(5);
-        for (int i = 0; i <= 6; i++) {
-            c.drawLine(bg.getX() + TILEWIDTH*bg.getPlayerGridX()+ TILEWIDTH*i,bg.getY() + TILEHEIGHT*bg.getPlayerGridY(),
-                    bg.getX()+TILEWIDTH*bg.getPlayerGridX()+TILEWIDTH*i,bg.getY()+TILEHEIGHT*4 + TILEHEIGHT*bg.getPlayerGridY(),paint);
-        }
-        for (int i = 0; i <= 4; i++) {
-            c.drawLine(bg.getX()+ TILEWIDTH*bg.getPlayerGridX(),bg.getY() + TILEHEIGHT*i + TILEHEIGHT*bg.getPlayerGridY(),
-                    bg.getX() +TILEWIDTH*bg.getPlayerGridX()+ TILEWIDTH*6,bg.getY() + TILEHEIGHT*i + TILEHEIGHT*bg.getPlayerGridY(),paint);
-        }
-        // drawing enemy grid
-        paint.setColor(Color.CYAN);
-        for (int i = 0; i <= 6; i++) {
-            c.drawLine(bg.getX() + TILEWIDTH*bg.getEnemyGridX()+ TILEWIDTH*i,bg.getY() + TILEHEIGHT*bg.getEnemyGridY(),
-                    bg.getX()+TILEWIDTH*bg.getEnemyGridX()+TILEWIDTH*i,bg.getY()+TILEHEIGHT*4 + TILEHEIGHT*bg.getEnemyGridY(),paint);
-        }
-        for (int i = 0; i <= 4; i++) {
-            c.drawLine(bg.getX()+ TILEWIDTH*bg.getEnemyGridX(),bg.getY() + TILEHEIGHT*i + TILEHEIGHT*bg.getEnemyGridY(),
-                    bg.getX() +TILEWIDTH*bg.getEnemyGridX()+ TILEWIDTH*6,bg.getY() + TILEHEIGHT*i + TILEHEIGHT*bg.getEnemyGridY(),paint);
-        }
-        */
-
-
-
         // player towers
         for (Tower t:bg.getPlayerTowers()
              ) {
-            paint.setColor(Color.rgb(255,203,5));
+            paint.setColor(t.getColor());
             c.drawRect(t.getX()* TILEWIDTH + TILEWIDTH*bg.getPlayerGridX(), t.getY()*TILEHEIGHT + TILEHEIGHT*bg.getPlayerGridY(),
                     t.getX()* TILEWIDTH + TILEWIDTH*bg.getPlayerGridX() + TILEWIDTH, t.getY()* TILEHEIGHT+TILEHEIGHT*bg.getPlayerGridY() + TILEHEIGHT, paint);
             paint.setColor(Color.GREEN);
@@ -77,7 +52,7 @@ public class BattlegroundRenderer implements Renderer{
         // enemy towers
         for (Tower t:bg.getEnemyTowers()
                 ) {
-            paint.setColor(Color.rgb(255,203,5));
+            paint.setColor(t.getColor());
             c.drawRect(t.getX()* TILEWIDTH + TILEWIDTH*bg.getEnemyGridX(), t.getY()*TILEHEIGHT + TILEHEIGHT*bg.getEnemyGridY(),
                     t.getX()* TILEWIDTH + TILEWIDTH*bg.getEnemyGridX() + TILEWIDTH, t.getY()* TILEHEIGHT+TILEHEIGHT*bg.getEnemyGridY() + TILEHEIGHT, paint);
             paint.setColor(Color.GREEN);

@@ -112,16 +112,16 @@ public class Battleground {
         playerTowers.remove(t);
     }
 
-    public Tower createPlayerTower(int gridX, int gridY, float damage, float speed, int cost){
-        return new Tower(TPS, gridX,gridY,damage,speed,cost);
+    public Tower createPlayerTower(int gridX, int gridY, float damage, float speed, int cost, Tower.DamageType type){
+        return new Tower(TPS, gridX,gridY,damage,speed,cost, type);
     }
 
     public Tower getPlayerTower(int x, int y){
         return (Tower)playerGrid[y][x];
     }
 
-    public void addEnemyTower(int gridX, int gridY, float damage, float speed){
-        enemyGrid[gridY][gridX] = new Tower(TPS, gridX,gridY,damage,speed, 0);
+    public void addEnemyTower(int gridX, int gridY, float damage, float speed, Tower.DamageType type){
+        enemyGrid[gridY][gridX] = new Tower(TPS, gridX,gridY,damage,speed, 0, type);
         enemyTowers.add((Tower)enemyGrid[gridY][gridX]);
     }
 

@@ -12,13 +12,15 @@ public class Bullet {
     private float y;
     private float damage;
     private float speed;
+    private Tower.DamageType type;
 
-    public Bullet(Creep target, float x, float y, float damage, float speed) {
+    public Bullet(Creep target, float x, float y, float damage, Tower.DamageType type) {
         this.target = target;
         this.x = x;
         this.y = y;
         this.damage = damage;
-        this.speed = speed;
+        this.speed = 0.25f;
+        this.type = type;
     }
 
     public Creep getTarget() {
@@ -49,4 +51,7 @@ public class Bullet {
         return speed;
     }
 
+    public Tower.DamageType getType() {
+        return type;
+    }
 }

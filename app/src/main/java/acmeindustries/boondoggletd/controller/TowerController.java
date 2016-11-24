@@ -35,6 +35,13 @@ public class TowerController {
             // set target to null and find closest one
             // this is inefficient as every update every tower finds a new target
             t.setTarget(null);
+            if(!t.isLoaded()) {
+                t.setCurrentLoading(t.getCurrentLoading() - 1);
+                if (t.getCurrentLoading() <= 0) {
+                    t.setLoaded(true);
+                    System.out.println("LOADED");
+                }
+            }
             for (Creep creep :
                     creeps) {
                 // stop targeting towers that are in base
@@ -48,20 +55,11 @@ public class TowerController {
                     break;
                 }
             }
-            if(t.getTarget() != null){
-                // fire at it
-                if(t.isLoaded()){
-                    bullets.add(new Bullet(t.getTarget(),t.getX()+0.5f+gridX,
-                            t.getY()+0.5f+gridY,t.getDamage(),t.getSpeed()));
-                    t.setLoaded(false);
-                }
-            }
-            if(!t.isLoaded()){
-                t.setCurrentLoading(t.getCurrentLoading()-1);
-                if(t.getCurrentLoading()<=0){
-                    t.setLoaded(true);
-                    t.setCurrentLoading(t.getLoadTime());
-                }
+            // fire at it
+            if(t.getTarget() != null && t.isLoaded()){
+                bullets.add(new Bullet(t.getTarget(),t.getX()+0.5f+gridX,
+                        t.getY()+0.5f+gridY,t.getDamage(), t.getDamageType()));
+                t.reset();
             }
         }
     }

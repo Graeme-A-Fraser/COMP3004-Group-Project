@@ -22,7 +22,7 @@ public class BuildPlacingRenderer{
         this.player = p;
     }
 
-    public void render(Canvas c, float[][] towers) {
+    public void render(Canvas c) {
         // if this isn't here sometimes tries to write to a non-existent canvas throwing a null error
         if(c == null){
             return;
@@ -36,9 +36,9 @@ public class BuildPlacingRenderer{
         //bg
         c.drawRGB(100,100,100);
         //towers
-        paint.setColor(Color.rgb(255,203,5));
         for (Tower t:bg.getPlayerTowers()
                 ) {
+            paint.setColor(t.getColor());
             c.drawRect(t.getX()* TILEWIDTH - (2*TILEWIDTH), t.getY()*TILEHEIGHT,
                     t.getX()* TILEWIDTH + TILEWIDTH - (2*TILEWIDTH), t.getY()* TILEHEIGHT+ TILEHEIGHT, paint);
         }
