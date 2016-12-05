@@ -61,8 +61,6 @@ public class BuildController {
     }
 
     public void press(float x, float y){
-        //System.out.printf("pressed at %f, %f - gridx: %d, gridy: %d\n", x, y, (int)((x/width)*8), (int)((y/height)*6));
-        // TODO: CLEAN THIS UP AND IMPLEMENT UNDO
         currentX = (int)((x/width)*8)+2;
         currentY = (int)((y/height)*5);
         // if you click on the start / end nodes

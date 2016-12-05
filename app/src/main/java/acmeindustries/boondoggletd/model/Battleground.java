@@ -128,14 +128,12 @@ public class Battleground {
 
     //getters and setters
 
-    public void addEnemyCreep(float health){
-        enemyCreeps.add(new Creep(9.5f,4.5f,health
-                , enemyPath, getPlayerGridX()+0.5f,getPlayerGridY()+0.5f));
+    public void addEnemyCreep(Creep c){
+        enemyCreeps.add(c);
     }
 
-    public void addPlayerCreep(float health){
-        playerCreeps.add(new Creep(0.5f,3.5f,health,
-                playerPath, getEnemyGridX()+0.5f, getEnemyGridY()+0.5f));
+    public void addPlayerCreep(Creep c){
+        playerCreeps.add(c);
     }
 
     public List<Creep> getEnemyCreeps() {
@@ -193,6 +191,10 @@ public class Battleground {
         enemyPath = enemyPathfinder.getFinalPath();
         playerPath = playerPathfinder.getFinalPath();
         return true;
+    }
+
+    public float[][] getPlayerPath(){
+        return playerPath;
     }
 
 }

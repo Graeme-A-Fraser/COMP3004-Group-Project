@@ -6,6 +6,7 @@ import acmeindustries.boondoggletd.controller.BattlegroundController;
 import acmeindustries.boondoggletd.controller.BuildController;
 import acmeindustries.boondoggletd.controller.NotificationController;
 import acmeindustries.boondoggletd.controller.RecruitController;
+import acmeindustries.boondoggletd.controller.Spawner;
 import acmeindustries.boondoggletd.model.Battleground;
 import acmeindustries.boondoggletd.model.Notification;
 import acmeindustries.boondoggletd.model.Player;
@@ -15,6 +16,7 @@ import static acmeindustries.boondoggletd.model.Player.GameMode.*;
 public class GameEngine {
 
     private Player player;
+    private Spawner spawner;
     private Notification notification;
 
     private BattlegroundController battlegroundController;
@@ -40,12 +42,13 @@ public class GameEngine {
     private void init() {
         bg = new Battleground();
         player = new Player(BATTLEGROUND);
+        spawner = new Spawner(bg);
         notification = new Notification();
 
         // additional controllers for breaking out smaller tasks
-        battlegroundController = new BattlegroundController(player, bg, notification, width, height);
+        battlegroundController = new BattlegroundController(player, bg,spawner, notification, width, height);
         buildController = new BuildController(player, bg, notification, width, height);
-        recruitController = new RecruitController(player, bg, notification,  width, height);
+        recruitController = new RecruitController(player, bg, spawner, notification,  width, height);
         notificationController = new NotificationController(notification);
     }
 

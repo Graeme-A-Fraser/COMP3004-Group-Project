@@ -27,13 +27,13 @@ public class BattlegroundController {
     private BattlegroundRenderer battlegroundRenderer;
     // width values of screen
     private float width, height;
-    public BattlegroundController(Player p, Battleground bg, Notification n, float width,float height){
+    public BattlegroundController(Player p, Battleground bg, Spawner s, Notification n, float width,float height){
         this.player = p;
         this.bg = bg;
         this.width = width;
         this.height = height;
         this.battlegroundRenderer = new BattlegroundRenderer(bg, player);
-        this.spawner = new Spawner(this.bg);
+        this.spawner = s;
         this.playerTC = new TowerController(this.bg.getPlayerTowers(), this.bg.getEnemyCreeps(),
                 this.bg.getBullets(), this.bg.getPlayerGridX(), this.bg.getPlayerGridY(), true);
         this.enemyTC = new TowerController(this.bg.getEnemyTowers(), this.bg.getPlayerCreeps(),

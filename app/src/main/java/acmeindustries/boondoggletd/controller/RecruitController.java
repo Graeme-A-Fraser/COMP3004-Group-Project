@@ -2,7 +2,10 @@ package acmeindustries.boondoggletd.controller;
 
 import android.graphics.Canvas;
 
+import java.util.ArrayDeque;
+
 import acmeindustries.boondoggletd.model.Battleground;
+import acmeindustries.boondoggletd.model.Creep;
 import acmeindustries.boondoggletd.model.Notification;
 import acmeindustries.boondoggletd.model.Player;
 import acmeindustries.boondoggletd.view.RecruitRenderer;
@@ -18,12 +21,19 @@ public class RecruitController {
 
     private Player player;
     private Battleground bg;
+    private Spawner spawner;
     private RecruitRenderer recruitRenderer;
     private Notification notification;
     private float width;
     private float height;
+    private int creepSelection;
 
-    public RecruitController(Player p, Battleground bg, Notification n, float width, float height){
+    private ArrayDeque<Creep> creeps;
+
+    private float[][] path;
+    private Creep[] creepTypes;
+
+    public RecruitController(Player p, Battleground bg, Spawner s, Notification n, float width, float height){
 
         this.player = p;
         this.bg = bg;
@@ -31,24 +41,62 @@ public class RecruitController {
         this.height = height;
         this.notification = n;
         this.recruitRenderer = new RecruitRenderer(bg, p);
-
+        this.creepSelection = 0;
+        this.creeps = new ArrayDeque<Creep>();
+        this.spawner = s;
+        bg.createPath();
+        this.path = bg.getPlayerPath();
+        creepTypes = new Creep[]{
+                //3: hp, 4: speed, 5:gold cost, rest can be replaced when actually adding creep
+                new Creep(0.5f,3.5f,10,1,20,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
+                new Creep(0.5f,3.5f,20,1,40,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
+                new Creep(0.5f,3.5f,40,1.5f,80,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
+                new Creep(0.5f,3.5f,80,1.5f,160,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
+                new Creep(0.5f,3.5f,160,2,320,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
+                new Creep(0.5f,3.5f,320,2,640,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
+                new Creep(0.5f,3.5f,640,2,1280,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
+                new Creep(0.5f,3.5f,1280,3,2560,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f)
+        };
     }
+
 
     public void press(float x, float y){
         int currentX = (int)((x/width)*10);
         int currentY = (int)((y/height)*5);
         if(currentY>=4){
-            player.gm = BATTLEGROUND;
-        }else{
-            player.gm = BUILDING_PLACING;
+            if(currentX < 2){
+                // confirm / buy all towers in stack
+                player.gm = BATTLEGROUND;
+                while(!creeps.isEmpty()){
+                    // pop creep and add to spawner stack
+                    spawner.pushPlayerCreep(creeps.pop());
+                }
+            }else{
+                // undo, cancel tower in stack
+                if(!creeps.isEmpty()){
+                    Creep c = creeps.pop();
+                    player.setGold(player.getGold() - c.getCost());
+                }
+            }
+        } else {
+            this.creepSelection = currentY*2 + (currentX/5);
+            if(creeps.size() >= 5){
+                notification.newNotification("Maximum creeps purchased this round.");
+            }else {
+                if (player.getGold() > creepTypes[creepSelection].getCost()) {
+                    Creep c = new Creep(creepTypes[creepSelection]);
+                    creeps.push(c);
+                    player.setGold(player.getGold() - c.getCost());
+                } else {
+                    notification.newNotification("Don't have enough gold!");
+                }
+            }
         }
     }
 
     public void update(){}
 
     public void render(Canvas canvas){
-        this.recruitRenderer.render(canvas);
+        this.recruitRenderer.render(canvas, creepSelection, creepTypes, creeps.size());
     }
-
-
 }

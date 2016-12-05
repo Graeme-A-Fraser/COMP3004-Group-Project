@@ -10,7 +10,26 @@ public class Creep {
 
     private boolean alive;
 
-    public Creep(float x, float y, float hp, float[][] path, float gridX, float gridY){
+    public Creep(Creep c){
+        this.x = c.getX();
+        this.y = c.getY();
+        this.hp = c.getHp();
+        this.maxHP = c.getMaxHP();
+        this.path = c.path;
+        this.radius = c.getRadius();
+        this.speed = c.speed;
+        this.goldValue = c.getCost();
+        this.alive = true;
+        this.position = c.position;
+        this.gridX = c.gridX;
+        this.gridY = c.gridY;
+        this.slowed = 1;
+        this.burnDmg= 0;
+        this.slowedTimer = 0;
+        this.burnTimer = 0;
+    }
+
+    public Creep(float x, float y, float hp, float speed, int goldCost, float[][] path, float gridX, float gridY){
 
         this.x = x;
         this.y = y;
@@ -18,8 +37,8 @@ public class Creep {
         this.maxHP = hp;
         this.path = path;
         this.radius = 0.25f;
-        this.speed = 0.05f;
-        this.goldValue = 10;
+        this.speed = 0.05f*speed;
+        this.goldValue = goldCost;
         this.alive = true;
         this.position = 0;
         this.gridX = gridX;
@@ -123,5 +142,15 @@ public class Creep {
         this.burnDmg = damage;
         this.burnTimer = time*24;
     }
+
+    public int getCost(){
+        return this.goldValue;
+    }
+
+    public float getSpeed(){
+        return this.speed/0.05f;
+    }
+
+
 
 }
