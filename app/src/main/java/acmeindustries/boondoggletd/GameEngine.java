@@ -41,7 +41,7 @@ public class GameEngine {
 
     private void init() {
         bg = new Battleground();
-        player = new Player(BATTLEGROUND);
+        player = new Player();
         spawner = new Spawner(bg);
         notification = new Notification();
 

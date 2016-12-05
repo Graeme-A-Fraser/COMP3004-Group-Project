@@ -129,10 +129,12 @@ public class BattlegroundRenderer implements Renderer{
             c.drawText("Start Wave", c.getWidth() / 10 * 4, c.getHeight() / 40 * 37, paint);
         }
         // info text?
+        paint.setTextSize(c.getHeight()/30);
         paint.setColor(Color.BLACK);
         c.drawRect(c.getWidth()/10*6, c.getHeight()/10*8, c.getWidth(),c.getHeight(), paint);
         paint.setColor(Color.YELLOW);
         c.drawText(String.format("Gold: %d", player.getGold()), c.getWidth()/10*6, c.getHeight()/20*18, paint);
+        c.drawText(String.format("Enemy Lives: %d",bg.getEnemy().getHp()), c.getWidth()/10*8, c.getHeight()/20*18, paint);
         c.drawText(String.format("Lives: %d", player.getHp()), c.getWidth()/10*6, c.getHeight()/20*19, paint);
 
         //line for top of ui

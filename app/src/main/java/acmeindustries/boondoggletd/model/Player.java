@@ -15,9 +15,9 @@ public class Player {
     public GameMode gm;
 
 
-    public Player(GameMode gm){
-        this.gm = gm;
-        this.gold = 10000;
+    public Player(){
+        this.gm = GameMode.BATTLEGROUND;
+        this.gold = 1000;
         this.hp = 40;
     }
 

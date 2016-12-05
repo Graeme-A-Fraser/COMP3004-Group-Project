@@ -45,7 +45,7 @@ public class Spawner {
                 creepsRemaining--;
             }
             if(!enemyCreeps.isEmpty()){
-                bg.addPlayerCreep(enemyCreeps.pop());
+                bg.addEnemyCreep(enemyCreeps.pop());
                 creepsRemaining--;
             }
             this.spawnTimer = this.maxSpawnTimer;

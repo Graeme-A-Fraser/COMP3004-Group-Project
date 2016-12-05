@@ -3,6 +3,7 @@ package acmeindustries.boondoggletd.controller;
 import android.graphics.Canvas;
 
 import java.util.Iterator;
+import java.util.Random;
 
 import acmeindustries.boondoggletd.model.Battleground;
 import acmeindustries.boondoggletd.model.Bullet;
@@ -12,6 +13,7 @@ import acmeindustries.boondoggletd.model.Player;
 import acmeindustries.boondoggletd.model.Tower;
 import acmeindustries.boondoggletd.view.BattlegroundRenderer;
 
+import static acmeindustries.boondoggletd.model.Player.GameMode.BATTLEGROUND;
 import static acmeindustries.boondoggletd.model.Player.GameMode.BUILDING_SELECTING;
 import static acmeindustries.boondoggletd.model.Player.GameMode.RECRUITING;
 
@@ -39,13 +41,6 @@ public class BattlegroundController {
         this.enemyTC = new TowerController(this.bg.getEnemyTowers(), this.bg.getPlayerCreeps(),
                 this.bg.getBullets(), this.bg.getEnemyGridX(), this.bg.getEnemyGridY(), false);
         this.notification = n;
-
-        /* testing
-        bg.addEnemyTower(1,1,2,0.25f, Tower.DamageType.STANDARD);
-        bg.addEnemyTower(1,2,2,0.25f, Tower.DamageType.STANDARD);
-        bg.addEnemyTower(1,3,2,0.25f, Tower.DamageType.STANDARD);
-        */
-
     }
 
     public void update(){
@@ -101,6 +96,7 @@ public class BattlegroundController {
             Creep c = it.next();
             c.update();
             if(!c.isAlive()){
+                bg.getEnemy().setHp(bg.getEnemy().getHp()-1);
                 it.remove();
             }
             if(c.getHp() <= 0){
@@ -118,6 +114,16 @@ public class BattlegroundController {
             player.gm = RECRUITING;
         } else if((x/width)*10>=4){
             bg.createPath();
+            bg.setRoundNumber(bg.getRoundNumber()+1);
+            // TODO: enemy create stack of creeps and buy towers?
+            Random rand = new Random();
+            for(int i =0; i<5; i++){
+                // hp from 10 - 30 + round number
+                // speed from 1 - 2
+                int hp = (rand.nextInt(3) + 1)*10 + bg.getRoundNumber();
+                float speed = rand.nextFloat() + 1;
+                spawner.pushEnemyCreep(new Creep(hp,speed,0,bg.getEnemyPath(),bg.getPlayerGridX()+0.5f,bg.getPlayerGridY()+0.5f));
+            }
             spawner.startRound();
         }
     }

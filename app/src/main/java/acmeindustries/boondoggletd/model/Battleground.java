@@ -16,6 +16,9 @@ public class Battleground {
 
     private int x;
     private int y;
+    private int roundNumber;
+
+    private Player enemy;
 
     // where the grids are in relation to the rest of the battleground
     private int playerGridX;
@@ -51,6 +54,8 @@ public class Battleground {
         playerGridY = 4;
         enemyGridX = 0;
         enemyGridY = 0;
+        // init enemy
+        enemy = new Player();
 
         playerCastle = new Castle(0,4);
         enemyCastle = new Castle(8,0);
@@ -85,10 +90,12 @@ public class Battleground {
         bullets = new ArrayList<Bullet>();
 
         // player and enemy pathfinders
-        enemyPathfinder = new AStar(GRIDWIDTH,GRIDHEIGHT,9,0,0,0,playerGrid);
-        playerPathfinder= new AStar(GRIDWIDTH,GRIDHEIGHT,0,0,9,1,enemyGrid);
+        enemyPathfinder = new AStar(GRIDWIDTH,GRIDHEIGHT,9,0,1,0,playerGrid);
+        playerPathfinder= new AStar(GRIDWIDTH,GRIDHEIGHT,0,3,8,3,enemyGrid);
         enemyPath = enemyPathfinder.getFinalPath();
         playerPath = playerPathfinder.getFinalPath();
+
+        roundNumber = 0;
     }
 
     public boolean checkPlayerGridAvailable(int gridX, int gridY){
@@ -196,5 +203,19 @@ public class Battleground {
     public float[][] getPlayerPath(){
         return playerPath;
     }
+    public float[][] getEnemyPath(){
+        return enemyPath;
+    }
 
+    public Player getEnemy(){
+        return enemy;
+    }
+
+    public int getRoundNumber() {
+        return roundNumber;
+    }
+
+    public void setRoundNumber(int roundNumber) {
+        this.roundNumber = roundNumber;
+    }
 }

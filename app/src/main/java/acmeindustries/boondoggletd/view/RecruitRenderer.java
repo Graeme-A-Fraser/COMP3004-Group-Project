@@ -35,12 +35,10 @@ public class RecruitRenderer {
 
         //bg
         c.drawRGB(255,255,255);
-        paint.setTextSize(c.getHeight()/20);
-
-
 
 
         //btn1
+        paint.setTextSize(c.getHeight()/30);
         paint.setColor(Color.rgb(177, 189, 29));
         c.drawRect(0, c.getHeight()/5*4, c.getWidth()/4,c.getHeight(), paint);
         paint.setColor(Color.BLACK);

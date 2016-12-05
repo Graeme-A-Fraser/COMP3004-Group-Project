@@ -29,10 +29,10 @@ public class Creep {
         this.burnTimer = 0;
     }
 
-    public Creep(float x, float y, float hp, float speed, int goldCost, float[][] path, float gridX, float gridY){
+    public Creep(float hp, float speed, int goldCost, float[][] path, float gridX, float gridY){
 
-        this.x = x;
-        this.y = y;
+        this.x = path[0][0] + gridX;
+        this.y = path[0][1] + gridY;
         this.hp = hp;
         this.maxHP = hp;
         this.path = path;
@@ -65,6 +65,7 @@ public class Creep {
         }
     }
 
+    // this should technically be in some kind of controller but it makes a lot of sense to put here
     public void update(){
         // check if on correct node, then increment position if so
         if(Math.sqrt(Math.pow(this.x - this.path[position][0] - gridX, 2) + Math.pow(this.y - this.path[position][1] - gridY, 2)) < 0.1f){

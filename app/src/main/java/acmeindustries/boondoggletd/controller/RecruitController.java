@@ -48,14 +48,14 @@ public class RecruitController {
         this.path = bg.getPlayerPath();
         creepTypes = new Creep[]{
                 //3: hp, 4: speed, 5:gold cost, rest can be replaced when actually adding creep
-                new Creep(0.5f,3.5f,10,1,20,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
-                new Creep(0.5f,3.5f,20,1,40,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
-                new Creep(0.5f,3.5f,40,1.5f,80,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
-                new Creep(0.5f,3.5f,80,1.5f,160,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
-                new Creep(0.5f,3.5f,160,2,320,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
-                new Creep(0.5f,3.5f,320,2,640,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
-                new Creep(0.5f,3.5f,640,2,1280,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
-                new Creep(0.5f,3.5f,1280,3,2560,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f)
+                new Creep(10,1,20,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
+                new Creep(20,1,40,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
+                new Creep(40,1.5f,80,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
+                new Creep(80,1.5f,160,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
+                new Creep(160,2,320,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
+                new Creep(320,2,640,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
+                new Creep(640,2,1280,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f),
+                new Creep(1280,3,2560,path,bg.getEnemyGridX()+0.5f,bg.getEnemyGridY()+0.5f)
         };
     }
 
@@ -75,7 +75,7 @@ public class RecruitController {
                 // undo, cancel tower in stack
                 if(!creeps.isEmpty()){
                     Creep c = creeps.pop();
-                    player.setGold(player.getGold() - c.getCost());
+                    player.setGold(player.getGold() + c.getCost());
                 }
             }
         } else {
@@ -83,7 +83,7 @@ public class RecruitController {
             if(creeps.size() >= 5){
                 notification.newNotification("Maximum creeps purchased this round.");
             }else {
-                if (player.getGold() > creepTypes[creepSelection].getCost()) {
+                if (player.getGold() >= creepTypes[creepSelection].getCost()) {
                     Creep c = new Creep(creepTypes[creepSelection]);
                     creeps.push(c);
                     player.setGold(player.getGold() - c.getCost());
