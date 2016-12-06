@@ -124,6 +124,9 @@ public class Creep {
     public float getMaxHP() {
         return maxHP;
     }
+    public void setMaxHP(float hp) {
+        this.maxHP = maxHP + hp;
+    }
 
     public boolean isAlive() {
         return alive;

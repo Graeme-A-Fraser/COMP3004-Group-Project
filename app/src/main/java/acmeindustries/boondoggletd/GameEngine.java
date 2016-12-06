@@ -67,7 +67,7 @@ public class GameEngine {
         }else {
             switch (player.gm) {
                 case BATTLEGROUND:
-                    // bg contro
+                    // bg control
                     battlegroundController.press(x, y);
                     break;
                 case BUILDING_SELECTING:
@@ -91,7 +91,10 @@ public class GameEngine {
     public void update(){
         switch(player.gm){
             case BATTLEGROUND:
-                battlegroundController.update();
+                if(battlegroundController.update()){
+                    // game over
+                    resetGame();
+                }
                 break;
             case BUILDING_SELECTING:
             case BUILDING_PLACING:
@@ -128,5 +131,9 @@ public class GameEngine {
                 break;
         }
         notificationController.render(canvas);
+    }
+
+    private void resetGame(){
+        init();
     }
 }

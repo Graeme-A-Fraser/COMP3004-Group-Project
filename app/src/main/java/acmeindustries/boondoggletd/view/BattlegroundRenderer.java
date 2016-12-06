@@ -82,11 +82,13 @@ public class BattlegroundRenderer implements Renderer{
 
         //bullets
         paint.setColor(CustomColours.dark);
+        paint.setShadowLayer(1,0,0,Color.BLACK);
         for (Bullet b:bg.getBullets()
                 ) {
             c.drawCircle(b.getX()*TILEWIDTH,b.getY()*TILEHEIGHT,
                     0.1f*TILEHEIGHT, paint);
         }
+        paint.clearShadowLayer();
         //player castle
         paint.setColor(CustomColours.green2);
         c.drawRect(bg.getPlayerCastle().getX()*TILEWIDTH, bg.getPlayerCastle().getY()*TILEHEIGHT,

@@ -34,11 +34,19 @@ public class Spawner {
         Iterator<Creep> it = playerCreeps.iterator();
         bg.createPath();
         while(it.hasNext()){
-            it.next().setPath(bg.getPlayerPath());
+            // create path for creep and add hp based on round (so game ends!)
+            Creep c = it.next();
+            c.setPath(bg.getPlayerPath());
+            c.setMaxHP(c.getMaxHP()+bg.getRoundNumber()*10);
+            c.setHp(c.getMaxHP());
         }
         it = enemyCreeps.iterator();
         while(it.hasNext()){
-            it.next().setPath(bg.getEnemyPath());
+            // create path for creep and add hp based on round (so game ends!)
+            Creep c = it.next();
+            c.setPath(bg.getEnemyPath());
+            c.setMaxHP(c.getMaxHP()+bg.getRoundNumber()*10);
+            c.setHp(c.getMaxHP());
         }
         bg.spawning = true;
     }

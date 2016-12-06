@@ -43,7 +43,7 @@ public class BattlegroundController {
         this.notification = n;
     }
 
-    public void update(){
+    public boolean update(){
 
         // spawner
         spawner.update();
@@ -104,6 +104,16 @@ public class BattlegroundController {
             }
         }
 
+        // lives / gameover
+        if(player.getHp()<=0){
+            notification.newNotification("You lose!");
+            return true;
+        }
+        if(bg.getEnemy().getHp()<=0){
+            notification.newNotification("You win!");
+            return true;
+        }
+        return false;
     }
 
     public void press(float x, float y){
@@ -128,10 +138,10 @@ public class BattlegroundController {
 
     // temporary solution to purchase towers and creeps every round - really hacky AI
     /* idea
-    0,0,0,1,0,0,0,0,
-    0,3,0,2,0,3,0,0,
-    0,2,0,3,0,2,0,0,
-    0,1,0,0,0,1,0,0,
+    0,0,0,1,0,0,0,1,
+    0,1,0,2,0,1,0,2,
+    0,2,0,3,0,2,0,3,
+    0,3,0,0,0,3,0,0,
      */
 
     public void tempEnemySetup(){
@@ -153,7 +163,7 @@ public class BattlegroundController {
             // upgrade towers
             for(int i = 0; i < 4; i++) {
                 for(int j = 0; j < 3; j++) {
-                    bg.getEnemyTower(i+1,j + i%2).setDamage(bg.getEnemyTower(i+1,j + i%2).getDamage()+1);
+                    bg.getEnemyTower(2*i+1,2-j+((i+1)%2)).setDamage(bg.getEnemyTower(2*i+1,2-j+((i+1)%2)).getDamage()+1);
                 }
             }
         }
