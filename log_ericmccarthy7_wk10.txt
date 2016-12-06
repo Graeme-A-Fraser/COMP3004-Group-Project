@@ -1,0 +1,18 @@
+# Week 10
+__Eric McCarthy__
+__100944658__
+
+## What I worked on:
+* finished AI
+* added multiple tower types (slow, burn)
+* added bullet types to go with it
+* modified some of the visuals
+
+## Issues:
+* not everyone contributing
+* Telidy left
+
+## Working on next:
+* winning / losing
+* splash screen
+* recruiting

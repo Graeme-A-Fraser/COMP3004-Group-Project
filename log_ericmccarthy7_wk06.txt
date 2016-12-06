@@ -1,0 +1,16 @@
+# Week 6
+__Eric McCarthy__
+__100944658__
+
+## What I worked on:
+* implemented multiple towers at same time
+* worked on pathing
+* organized lots of code/refactored
+
+## Issues:
+* only one coding...
+* issues implementing pathfinding correctly
+
+## Working on next:
+* pathing
+* implement undo function

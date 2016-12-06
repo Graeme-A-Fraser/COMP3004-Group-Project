@@ -1,0 +1,18 @@
+# Week 5
+__Eric McCarthy__
+__100944658__
+
+## What I worked on:
+* turrets shooting creeps
+* hp bars for each creep
+* merged my code into master branch
+
+## Issues:
+* not all group members working on project
+* not commenting as much as I should
+* not keeping up with dev logs
+
+## Working on next:
+* multiple towers
+* pathing
+* overall organization cleanup

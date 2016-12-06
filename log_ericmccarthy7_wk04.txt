@@ -1,0 +1,19 @@
+# Week 4
+__Eric McCarthy__
+__100944658__
+
+## What I worked on:
+* ironed out most of the details of system
+* finished style guide
+* wrote contributing guide for team members
+* game loop completely finished
+* creeps implemented
+
+## Issues:
+* not all group members working on project
+* not commenting as much as I should
+
+## Working on next:
+* turrets shooting creeps
+* hp bars
+* merge into master branch

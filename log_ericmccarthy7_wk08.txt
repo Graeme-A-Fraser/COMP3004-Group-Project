@@ -1,0 +1,17 @@
+# Week 8
+__Eric McCarthy__
+__100944658__
+
+## What I worked on:
+* finished pathfinding
+* added notifications
+
+## Issues:
+* not everyone contributing
+* not keeping up with dev logs
+* lots of stuff hardcoded/hacky
+
+## Working on next:
+* abstraction
+* AI
+* win / lose screen

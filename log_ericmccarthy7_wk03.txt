@@ -1,0 +1,14 @@
+# Week 3
+__Eric McCarthy__
+__100944658__
+
+## What I worked on:
+* actually implemented basic of design, MVC
+* basics of style guide
+
+## Issues:
+* inconsistent commits & work done
+
+## Working on next:
+* basics of game
+* style guide

@@ -1,0 +1,15 @@
+# Week 7
+__Eric McCarthy__
+__100944658__
+
+## What I worked on:
+* more work on pathing
+* implemented undo function
+
+## Issues:
+* not everyone contributing
+* issues implementing pathfinding correctly
+
+## Working on next:
+* pathing
+* notifications

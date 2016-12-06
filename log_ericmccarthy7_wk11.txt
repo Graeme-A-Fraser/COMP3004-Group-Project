@@ -1,0 +1,20 @@
+# Week 11
+__Eric McCarthy__
+__100944658__
+
+## What I worked on:
+* recruiting done
+* undo implemented on recruiting
+* winning / losing done
+* splash done
+* consistent colours
+* AI done
+* bug fixes
+
+## Issues:
+* not everyone contributing
+* Ryan left
+
+## Working on next:
+* deliverable 4
+* presentation

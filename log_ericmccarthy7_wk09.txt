@@ -1,0 +1,19 @@
+# Week 9
+__Eric McCarthy__
+__100944658__
+
+## What I worked on:
+* decoupling - not very successful
+* some research on AI
+* getting ready for interview
+
+## Issues:
+* not everyone contributing
+* not keeping up with dev logs
+* problem decoupling lots of code
+
+## Working on next:
+* finishing up AI
+* winning / losing
+* splash screen
+* colours not hardcoded

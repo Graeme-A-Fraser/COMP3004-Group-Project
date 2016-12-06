@@ -1,0 +1,14 @@
+# Week 2
+__Eric McCarthy__
+__100944658__
+
+## What I worked on:
+* worked on proposal
+* started designing architecture
+
+## Issues:
+* no real issues so far, very early into project
+
+## Working on next:
+* solidifying what each team member should be working on
+* implementing a style guide for our project (commenting, functions, etc. )
