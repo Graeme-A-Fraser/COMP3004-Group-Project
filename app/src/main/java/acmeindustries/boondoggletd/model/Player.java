@@ -7,7 +7,7 @@ package acmeindustries.boondoggletd.model;
 public class Player {
 
     public enum GameMode {
-        BATTLEGROUND, RECRUITING, BUILDING_PLACING, BUILDING_SELECTING, SELLING
+        BATTLEGROUND, RECRUITING, BUILDING_PLACING, BUILDING_SELECTING, SELLING, SPLASH_INTRO, SPLASH_WIN, SPLASH_LOSE
     }
 
     private int gold;
@@ -17,9 +17,9 @@ public class Player {
 
 
     public Player(){
-        this.gm = GameMode.BATTLEGROUND;
+        this.gm = GameMode.SPLASH_INTRO;
         this.gold = 1000;
-        this.hp = 40;
+        this.hp = 5;
         this.creepCount = 0;
     }
 

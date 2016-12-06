@@ -7,6 +7,7 @@ import acmeindustries.boondoggletd.controller.BuildController;
 import acmeindustries.boondoggletd.controller.NotificationController;
 import acmeindustries.boondoggletd.controller.RecruitController;
 import acmeindustries.boondoggletd.controller.Spawner;
+import acmeindustries.boondoggletd.controller.SplashController;
 import acmeindustries.boondoggletd.model.Battleground;
 import acmeindustries.boondoggletd.model.Notification;
 import acmeindustries.boondoggletd.model.Player;
@@ -23,6 +24,7 @@ public class GameEngine {
     private BuildController buildController;
     private RecruitController recruitController;
     private NotificationController notificationController;
+    private SplashController splashController;
 
     private Battleground bg;
     private float width;
@@ -50,6 +52,7 @@ public class GameEngine {
         buildController = new BuildController(player, bg, notification, width, height);
         recruitController = new RecruitController(player, bg, spawner, notification,  width, height);
         notificationController = new NotificationController(notification);
+        splashController = new SplashController(player);
     }
 
     public void press(float x, float y){
@@ -80,6 +83,13 @@ public class GameEngine {
                     // recruit controller?
                     recruitController.press(x, y);
                     break;
+                case SPLASH_INTRO:
+                case SPLASH_LOSE:
+                case SPLASH_WIN:
+                    if(splashController.press()){
+                        resetGame();
+                    }
+                    break;
             }
         }
     }
@@ -91,10 +101,7 @@ public class GameEngine {
     public void update(){
         switch(player.gm){
             case BATTLEGROUND:
-                if(battlegroundController.update()){
-                    // game over
-                    resetGame();
-                }
+                battlegroundController.update();
                 break;
             case BUILDING_SELECTING:
             case BUILDING_PLACING:
@@ -128,6 +135,11 @@ public class GameEngine {
                 break;
             case RECRUITING:
                 recruitController.render(canvas);
+                break;
+            case SPLASH_INTRO:
+            case SPLASH_LOSE:
+            case SPLASH_WIN:
+                splashController.render(canvas);
                 break;
         }
         notificationController.render(canvas);

@@ -16,6 +16,8 @@ import acmeindustries.boondoggletd.view.BattlegroundRenderer;
 import static acmeindustries.boondoggletd.model.Player.GameMode.BATTLEGROUND;
 import static acmeindustries.boondoggletd.model.Player.GameMode.BUILDING_SELECTING;
 import static acmeindustries.boondoggletd.model.Player.GameMode.RECRUITING;
+import static acmeindustries.boondoggletd.model.Player.GameMode.SPLASH_LOSE;
+import static acmeindustries.boondoggletd.model.Player.GameMode.SPLASH_WIN;
 
 public class BattlegroundController {
 
@@ -43,7 +45,7 @@ public class BattlegroundController {
         this.notification = n;
     }
 
-    public boolean update(){
+    public void update(){
 
         // spawner
         spawner.update();
@@ -106,14 +108,11 @@ public class BattlegroundController {
 
         // lives / gameover
         if(player.getHp()<=0){
-            notification.newNotification("You lose!");
-            return true;
+            player.gm = SPLASH_LOSE;
         }
         if(bg.getEnemy().getHp()<=0){
-            notification.newNotification("You win!");
-            return true;
+            player.gm = SPLASH_WIN;
         }
-        return false;
     }
 
     public void press(float x, float y){
