@@ -85,6 +85,7 @@ public class RecruitController {
                 notification.newNotification("Maximum creeps purchased this round.");
             }else {
                 if (player.getGold() >= creepTypes[creepSelection].getCost()) {
+                    this.path = bg.getPlayerPath();
                     Creep c = new Creep(creepTypes[creepSelection]);
                     creeps.push(c);
                     player.setCreepCount(player.getCreepCount()+1);

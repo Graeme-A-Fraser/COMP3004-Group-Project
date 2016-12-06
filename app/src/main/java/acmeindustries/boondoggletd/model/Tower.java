@@ -124,4 +124,8 @@ public class Tower {
                 return "I don't know what type this is.";
         }
     }
+
+    public void setDamage(float damage){
+        this.damage = damage;
+    }
 }

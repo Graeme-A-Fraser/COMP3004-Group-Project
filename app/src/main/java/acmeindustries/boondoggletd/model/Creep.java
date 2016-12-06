@@ -148,6 +148,10 @@ public class Creep {
         return this.speed/0.05f;
     }
 
+    public void setPath(float[][] path){
+        this.path = path;
+    }
+
 
 
 }

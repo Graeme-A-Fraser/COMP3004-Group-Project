@@ -1,6 +1,7 @@
 package acmeindustries.boondoggletd.controller;
 
 import java.util.ArrayDeque;
+import java.util.Iterator;
 
 import acmeindustries.boondoggletd.model.Battleground;
 import acmeindustries.boondoggletd.model.Creep;
@@ -30,6 +31,15 @@ public class Spawner {
 
     public void startRound(){
         this.creepsRemaining= playerCreeps.size() + enemyCreeps.size();
+        Iterator<Creep> it = playerCreeps.iterator();
+        bg.createPath();
+        while(it.hasNext()){
+            it.next().setPath(bg.getPlayerPath());
+        }
+        it = enemyCreeps.iterator();
+        while(it.hasNext()){
+            it.next().setPath(bg.getEnemyPath());
+        }
         bg.spawning = true;
     }
 

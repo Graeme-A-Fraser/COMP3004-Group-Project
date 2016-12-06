@@ -85,7 +85,7 @@ public class Battleground {
 
         // player and enemy pathfinders
         enemyPathfinder = new AStar(GRIDWIDTH,GRIDHEIGHT,9,0,1,0,playerGrid);
-        playerPathfinder= new AStar(GRIDWIDTH,GRIDHEIGHT,0,3,8,3,enemyGrid);
+        playerPathfinder = new AStar(GRIDWIDTH,GRIDHEIGHT,0,3,8,3,enemyGrid);
         enemyPath = enemyPathfinder.getFinalPath();
         playerPath = playerPathfinder.getFinalPath();
 
@@ -126,6 +126,9 @@ public class Battleground {
         enemyTowers.add((Tower)enemyGrid[gridY][gridX]);
     }
 
+    public Tower getEnemyTower(int x, int y){
+        return (Tower)enemyGrid[y][x];
+    }
 
     //getters and setters
 

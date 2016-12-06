@@ -113,16 +113,9 @@ public class BattlegroundController {
         } else if((x/width)*10<4){
             player.gm = RECRUITING;
         } else if((x/width)*10>=4){
-            bg.createPath();
             bg.setRoundNumber(bg.getRoundNumber()+1);
-            // TODO: enemy create stack of creeps and buy towers?
-            Random rand = new Random();
-            for(int i =0; i<5; i++){
-                // hp from 10 - 30 + round number, speed from 0.5 - 1.5, gold 2*hp
-                int hp = (rand.nextInt(3) + 1)*10 + bg.getRoundNumber();
-                float speed = rand.nextFloat() + 0.5f;
-                spawner.pushEnemyCreep(new Creep(hp,speed,hp*2,bg.getEnemyPath(),bg.getPlayerGridX()+0.5f,bg.getPlayerGridY()+0.5f));
-            }
+            System.out.println(bg.createPath());
+            tempEnemySetup();
             // keep track of creeps purchased
             player.setCreepCount(0);
             spawner.startRound();
@@ -131,6 +124,40 @@ public class BattlegroundController {
 
     public void render(Canvas canvas){
         this.battlegroundRenderer.render(canvas);
+    }
+
+    // temporary solution to purchase towers and creeps every round - really hacky AI
+    /* idea
+    0,0,0,1,0,0,0,0,
+    0,3,0,2,0,3,0,0,
+    0,2,0,3,0,2,0,0,
+    0,1,0,0,0,1,0,0,
+     */
+
+    public void tempEnemySetup(){
+
+        Random rand = new Random();
+        for(int i =0; i<5; i++){
+            // hp from 10 - 30 + round number, speed from 0.5 - 1.5, gold 2*hp
+            int hp = (rand.nextInt(3) + 1)*10 + bg.getRoundNumber();
+            float speed = rand.nextFloat() + 0.5f;
+            spawner.pushEnemyCreep(new Creep(hp,speed,hp*2,bg.getEnemyPath(),bg.getPlayerGridX()+0.5f,bg.getPlayerGridY()+0.5f));
+        }
+
+        if(bg.getRoundNumber() <= 4){
+            // buy turrets in bursts of 3
+            for(int i = 0; i < 3; i++) {
+                bg.addEnemyTower(bg.getRoundNumber() * 2 - 1, 2 - i + (bg.getRoundNumber()%2), 5*bg.getRoundNumber(), 1, Tower.DamageType.values()[i]);
+            }
+        }else{
+            // upgrade towers
+            for(int i = 0; i < 4; i++) {
+                for(int j = 0; j < 3; j++) {
+                    bg.getEnemyTower(i+1,j + i%2).setDamage(bg.getEnemyTower(i+1,j + i%2).getDamage()+1);
+                }
+            }
+        }
+
     }
 
 }
