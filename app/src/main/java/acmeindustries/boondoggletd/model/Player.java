@@ -12,6 +12,7 @@ public class Player {
 
     private int gold;
     private int hp;
+    private int creepCount;
     public GameMode gm;
 
 
@@ -19,6 +20,7 @@ public class Player {
         this.gm = GameMode.BATTLEGROUND;
         this.gold = 1000;
         this.hp = 40;
+        this.creepCount = 0;
     }
 
     public int getGold() {
@@ -35,5 +37,14 @@ public class Player {
 
     public void setHp(int hp) {
         this.hp = hp;
+    }
+
+
+    public int getCreepCount(){
+       return creepCount;
+    }
+
+    public void setCreepCount(int creepCount) {
+        this.creepCount = creepCount;
     }
 }

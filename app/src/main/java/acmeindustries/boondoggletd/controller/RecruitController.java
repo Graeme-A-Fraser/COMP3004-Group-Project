@@ -76,16 +76,18 @@ public class RecruitController {
                 if(!creeps.isEmpty()){
                     Creep c = creeps.pop();
                     player.setGold(player.getGold() + c.getCost());
+                    player.setCreepCount(player.getCreepCount()-1);
                 }
             }
         } else {
             this.creepSelection = currentY*2 + (currentX/5);
-            if(creeps.size() >= 5){
+            if(player.getCreepCount() >= 5){
                 notification.newNotification("Maximum creeps purchased this round.");
             }else {
                 if (player.getGold() >= creepTypes[creepSelection].getCost()) {
                     Creep c = new Creep(creepTypes[creepSelection]);
                     creeps.push(c);
+                    player.setCreepCount(player.getCreepCount()+1);
                     player.setGold(player.getGold() - c.getCost());
                 } else {
                     notification.newNotification("Don't have enough gold!");

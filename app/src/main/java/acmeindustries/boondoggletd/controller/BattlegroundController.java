@@ -76,8 +76,7 @@ public class BattlegroundController {
             }
         }
 
-        // creep code - implement path finding etc here
-        // have to use iterators or else we get errors when deleting
+        // enemy creeps
         Iterator<Creep> it = bg.getEnemyCreeps().iterator();
         while(it.hasNext()){
             Creep c = it.next();
@@ -87,10 +86,11 @@ public class BattlegroundController {
                 it.remove();
             }
             if(c.getHp() <= 0){
-                player.setGold(player.getGold()+c.getGoldValue());
+                player.setGold(player.getGold() + c.getCost());
                 it.remove();
             }
         }
+        // player creeps
         it = bg.getPlayerCreeps().iterator();
         while(it.hasNext()){
             Creep c = it.next();
@@ -118,12 +118,13 @@ public class BattlegroundController {
             // TODO: enemy create stack of creeps and buy towers?
             Random rand = new Random();
             for(int i =0; i<5; i++){
-                // hp from 10 - 30 + round number
-                // speed from 1 - 2
+                // hp from 10 - 30 + round number, speed from 0.5 - 1.5, gold 2*hp
                 int hp = (rand.nextInt(3) + 1)*10 + bg.getRoundNumber();
-                float speed = rand.nextFloat() + 1;
-                spawner.pushEnemyCreep(new Creep(hp,speed,0,bg.getEnemyPath(),bg.getPlayerGridX()+0.5f,bg.getPlayerGridY()+0.5f));
+                float speed = rand.nextFloat() + 0.5f;
+                spawner.pushEnemyCreep(new Creep(hp,speed,hp*2,bg.getEnemyPath(),bg.getPlayerGridX()+0.5f,bg.getPlayerGridY()+0.5f));
             }
+            // keep track of creeps purchased
+            player.setCreepCount(0);
             spawner.startRound();
         }
     }

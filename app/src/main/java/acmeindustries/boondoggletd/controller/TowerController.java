@@ -39,7 +39,6 @@ public class TowerController {
                 t.setCurrentLoading(t.getCurrentLoading() - 1);
                 if (t.getCurrentLoading() <= 0) {
                     t.setLoaded(true);
-                    System.out.println("LOADED");
                 }
             }
             for (Creep creep :

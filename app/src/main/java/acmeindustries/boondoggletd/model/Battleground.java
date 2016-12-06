@@ -76,12 +76,6 @@ public class Battleground {
                 enemyGrid[j][i] = null;
             }
         }
-        /*fill in 2 spots with towers
-        playerGrid[1][1] = new Tower(1, 1, 0, 1, 1);
-        enemyGrid[2][4] = new Tower(4, 2, 0, 1, 1);
-        playerTowers.add((Tower)playerGrid[1][1]);
-        enemyTowers.add((Tower)enemyGrid[2][4]);
-        */
 
         //create creep list
         enemyCreeps = new ArrayList<Creep>();

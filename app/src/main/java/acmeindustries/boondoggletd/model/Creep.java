@@ -125,10 +125,6 @@ public class Creep {
         return maxHP;
     }
 
-    public int getGoldValue() {
-        return goldValue;
-    }
-
     public boolean isAlive() {
         return alive;
     }
