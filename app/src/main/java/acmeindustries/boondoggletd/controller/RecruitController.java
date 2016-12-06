@@ -100,6 +100,6 @@ public class RecruitController {
     public void update(){}
 
     public void render(Canvas canvas){
-        this.recruitRenderer.render(canvas, creepSelection, creepTypes, creeps.size());
+        this.recruitRenderer.render(canvas, creepSelection, creepTypes);
     }
 }

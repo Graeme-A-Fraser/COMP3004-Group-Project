@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import acmeindustries.boondoggletd.model.Battleground;
 import acmeindustries.boondoggletd.model.Player;
 import acmeindustries.boondoggletd.model.Tower;
+import acmeindustries.boondoggletd.util.CustomColours;
 
 /**
  * this class should only show your side of the battlefield, making it very easy to build towers at certain locations
@@ -34,23 +35,26 @@ public class BuildPlacingRenderer{
         int TILEHEIGHT = c.getHeight()/5;
 
         //bg
-        c.drawRGB(100,100,100);
+        c.drawColor(CustomColours.light);
         //towers
         for (Tower t:bg.getPlayerTowers()
                 ) {
-            paint.setColor(t.getColor());
+            paint.setColor(CustomColours.dark);
             c.drawRect(t.getX()* TILEWIDTH - (2*TILEWIDTH), t.getY()*TILEHEIGHT,
                     t.getX()* TILEWIDTH + TILEWIDTH - (2*TILEWIDTH), t.getY()* TILEHEIGHT+ TILEHEIGHT, paint);
+            paint.setColor(t.getColor());
+            c.drawCircle(TILEWIDTH/2 + t.getX()* TILEWIDTH - (2*TILEWIDTH), TILEHEIGHT/2 + t.getY()*TILEHEIGHT,
+                    TILEWIDTH/3, paint);
         }
 
         // START & END
-        paint.setColor(Color.RED);
+        paint.setColor(CustomColours.red);
         c.drawRect(7* TILEWIDTH, 0*TILEHEIGHT,
                 7* TILEWIDTH + TILEWIDTH, 0* TILEHEIGHT+ TILEHEIGHT, paint);
 
         // drawing player grid
-        paint.setColor(Color.BLACK);
-        paint.setStrokeWidth(5);
+        paint.setColor(CustomColours.dark);
+        paint.setStrokeWidth(3);
         for (int i = 0; i <= 10; i++) {
             c.drawLine(bg.getX() + TILEWIDTH*i,bg.getY(),
                     bg.getX()+TILEWIDTH*i,bg.getY()+TILEHEIGHT*4,paint);
@@ -66,34 +70,39 @@ public class BuildPlacingRenderer{
         paint.setTextSize(c.getHeight()/20);
 
         //btn1
-        paint.setColor(Color.rgb(200,255,255));
-        c.drawRect(0, c.getHeight()/5*4, c.getWidth()/5,c.getHeight(), paint);
-        paint.setColor(Color.BLACK);
-        c.drawText("Confirm", 0, c.getHeight()/40*37, paint);
+        paint.setColor(CustomColours.yellow2);
+        c.drawRect(0, c.getHeight() / 10 * 8, c.getWidth() / 10 * 2, c.getHeight(), paint);
+        paint.setColor(CustomColours.dark2);
+        c.drawText("Confirm", 10, c.getHeight() / 40 * 37, paint);
 
         //btn2
-        paint.setColor(Color.rgb(255,200,255));
-        c.drawRect(c.getWidth()/5, c.getHeight()/5*4, (c.getWidth()/5)*2,c.getHeight(), paint);
-        paint.setColor(Color.BLACK);
-        c.drawText("Undo", c.getWidth()/5, c.getHeight()/40*37, paint);
+        paint.setColor(CustomColours.yellow2);
+        c.drawRect(c.getWidth() / 10 * 2, c.getHeight() / 10 * 8, c.getWidth() / 10 * 4, c.getHeight(), paint);
+        paint.setColor(CustomColours.dark2);
+        c.drawText("Undo",10 + c.getWidth() / 10 * 2, c.getHeight() / 40 * 37, paint);
+        c.drawLine(c.getWidth()/10*2,c.getHeight()/10*8, c.getWidth()/10*2, c.getHeight(), paint);
 
         //btn3
-        paint.setColor(Color.rgb(255,255,200));
-        c.drawRect((c.getWidth()/5)*2, c.getHeight()/5*4, (c.getWidth()/5)*3,c.getHeight(), paint);
-        paint.setColor(Color.BLACK);
-        c.drawText("Back", (c.getWidth()/5)*2, c.getHeight()/40*37, paint);
+        paint.setColor(CustomColours.yellow2);
+        c.drawRect(c.getWidth() / 10 * 4, c.getHeight() / 10 * 8, c.getWidth() / 10 * 6, c.getHeight(), paint);
+        paint.setColor(CustomColours.dark2);
+        c.drawText("Back", 10 + c.getWidth() / 10 * 4, c.getHeight() / 40 * 37, paint);
+        c.drawLine(c.getWidth()/10*4,c.getHeight()/10*8, c.getWidth()/10*4, c.getHeight(), paint);
         // info text?
-        paint.setColor(Color.BLACK);
-        c.drawRect((c.getWidth()/5)*3, c.getHeight()/5*4, c.getWidth(),c.getHeight(), paint);
-        paint.setColor(Color.YELLOW);
-        c.drawText(String.format("Gold: %d", player.getGold()), (c.getWidth()/5)*3, c.getHeight()/20*18, paint);
-        c.drawText(String.format("Lives: %d", player.getHp()), (c.getWidth()/5)*3, c.getHeight()/20*19, paint);
-
+        paint.setTextSize(c.getHeight()/30);
+        paint.setColor(CustomColours.yellow2);
+        c.drawRect(c.getWidth()/10*6, c.getHeight()/10*8, c.getWidth(),c.getHeight(), paint);
+        paint.setColor(CustomColours.dark2);
+        c.drawText(String.format("Gold: %d", player.getGold()), 10+c.getWidth()/10*6, c.getHeight()/40*35, paint);
+        c.drawText(String.format("Lives: %d", player.getHp()), 10+c.getWidth()/10*6, c.getHeight()/40*37, paint);
+        c.drawText(String.format("Enemy Lives: %d",bg.getEnemy().getHp()), 10+c.getWidth()/10*6, c.getHeight()/40*39, paint);
+        c.drawLine(c.getWidth()/10*6,c.getHeight()/10*8, c.getWidth()/10*6, c.getHeight(), paint);
         //line for top of ui
-        paint.setColor(Color.BLACK);
-        paint.setStrokeWidth(5);
-        c.drawLine(0,TILEHEIGHT*4, TILEWIDTH*6,TILEHEIGHT*4, paint);
+        paint.setColor(CustomColours.dark2);
+        paint.setStrokeWidth(3);
+        c.drawLine(0,c.getHeight()/10*8, c.getWidth(),c.getHeight()/10*8, paint);
         //line for right side
-        c.drawRect(TILEWIDTH*10,0,TILEWIDTH*11,TILEHEIGHT*10, paint);
+        paint.setColor(Color.BLACK);
+        c.drawRect(TILEWIDTH*8,0,TILEWIDTH*9,TILEHEIGHT*10, paint);
     }
 }

@@ -1,8 +1,6 @@
 package acmeindustries.boondoggletd.model;
 
-import android.graphics.Color;
-
-import java.util.PriorityQueue;
+import acmeindustries.boondoggletd.util.CustomColours;
 
 /**
  * tower class - more abstract as it generally wont be used
@@ -99,11 +97,11 @@ public class Tower {
     public int getColor() {
         switch(damageType){
             case BURN:
-                return Color.RED;
+                return CustomColours.red2;
             case SLOW:
-                return Color.BLUE;
+                return CustomColours.blue;
             default:
-                return Color.BLACK;
+                return CustomColours.turquoise2;
         }
     }
 
